@@ -18,7 +18,10 @@ class StartBreak extends Component {
 					</Text>
 				</View>
 				<View style={styles.buttonsContainer}>
-					<TouchableHighlight style={styles.button} underlayColor={'red'} onPress={() => this.setState({toggle: !this.state.toggled})}>
+					<TouchableHighlight 
+						style={styles.button} 
+						underlayColor={'red'} 
+						onPress={() => this.setState({toggle: !this.state.toggled})}>
 						<Text style={styles.buttonText}>
 							Start Break
 						</Text>
