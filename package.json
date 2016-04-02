@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.22.2",
+    "react-native-sound": "^0.7.3",
     "react-native-timepicker": "^1.0.3"
   }
 }
