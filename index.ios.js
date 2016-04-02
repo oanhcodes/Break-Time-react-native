@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  */
 
-var Main = require('./views/main.ios')
+var Main = require('./views/main.ios');
 
 import React, {
   AppRegistry,
