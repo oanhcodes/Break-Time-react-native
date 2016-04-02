@@ -3,7 +3,12 @@
  * https://github.com/facebook/react-native
  */
 
+
+
+// var TimeBlock = require('./views/timeBlock.ios')
+
 var Main = require('./views/main.ios');
+
 
 import React, {
   AppRegistry,
@@ -21,7 +26,7 @@ class BreakTime extends Component {
       <NavigatorIOS 
         style={styles.container}
         initialRoute={{
-          title: 'Main page',
+          title: 'Main',
           component: Main
       }}/>
     );
