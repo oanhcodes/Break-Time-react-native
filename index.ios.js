@@ -23,7 +23,7 @@ import React, {
 class BreakTime extends Component {
   render() {
     return (
-      <NavigatorIOS 
+      <NavigatorIOS
         style={styles.container}
         initialRoute={{
           title: 'Main',
