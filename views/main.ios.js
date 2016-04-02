@@ -4,11 +4,13 @@ import React, {
   StyleSheet,
   TouchableHighlight,
   Text,
+  Image,
   View,
   NavigatorIOS,
 } from 'react-native';
 
 var aboutAppPage = require('./aboutApp.ios');
+var Swiper = require('react-native-swiper');
 
 class Main extends Component {
 
@@ -36,9 +38,20 @@ class Main extends Component {
 	render() {
     return (
 			<View style={styles.container}>
-			  <Text style={styles.mainTitle}>
-			    Break Time
-			  </Text>
+				<Swiper style={styles.wrapper} height={200} horizontal={false} autoplay={false}>
+					
+						<Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
+		  			<Text style={styles.mainTitle}>
+		    			Break Time
+		  			</Text>
+		  			</Image>
+		  		
+		  		<View style={styles.slide2}>
+		  			<Text style={styles.mainTitle}>
+		    			About Tim's Missing Kid Photo
+		  			</Text>
+		  		</View>
+		  	</Swiper>
 			  <View style={styles.buttonsContainer}>
 			    <TouchableHighlight style={styles.button} underlayColor={'red'} onPress={() => this.setState({modal: true})}>
 			      <Text style={styles.buttonText}>
@@ -72,7 +85,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#FF872E',
   },
@@ -82,11 +95,12 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   buttonsContainer: {
-  	marginTop: 300
+  	marginTop: 200
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    backgroundColor: 'white',
   },
   buttonText: {
     textAlign: 'center',
@@ -109,8 +123,27 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  picker: {
-    backgroundColor: '#E5E5E5'
+  wrapper: {
+  	// flex: 1,
+  	// justifyContent: 'center',
+  },
+  backgroundImage: {
+  	// width: 300,
+  	width: null,
+  	height: null,
+  	flex: 1,
+  	resizeMode: 'cover',
+  	justifyContent: 'center'
+  },
+  slide1: {
+  	alignItems: 'center',
+  	flex: 1,
+  	justifyContent: 'center',
+  },
+  slide2: {
+  	flex: 1,
+  	justifyContent: 'center',
+  	backgroundColor: '#29D9C2',
   }
 });
 
