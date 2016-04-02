@@ -3,8 +3,12 @@
  * https://github.com/facebook/react-native
  */
 
-var Main = require('./views/main.ios')
-var TimeBlock = require('./views/timeBlock.ios')
+
+
+// var TimeBlock = require('./views/timeBlock.ios')
+
+var Main = require('./views/main.ios');
+
 
 import React, {
   AppRegistry,
