@@ -14,6 +14,7 @@ import React, {
 var TimeBlockSet = require('./timeBlockSetSuccessPage.ios')
 
 var aboutAppPage = require('./aboutApp.ios');
+var setTimeBlockPage = require('./timeBlock.ios');
 var Swiper = require('react-native-swiper');
 
 
@@ -43,8 +44,7 @@ class Main extends Component {
 	render() {
     return (
 			<View style={styles.container}>
-				<Swiper style={styles.wrapper} height={200} horizontal={true} autoplay={false}>
-
+				<Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
 						<Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
 		  			<Text style={styles.mainTitle}>
 		    			Break Time
@@ -65,7 +65,10 @@ class Main extends Component {
 		  	</Swiper>
 
 			  <View style={styles.buttonsContainer}>
-			    <TouchableHighlight style={styles.button} underlayColor={'#9BE8FF'} onPress={() => this.setState({modal: true})}>
+			    <TouchableHighlight 
+            style={styles.button} 
+            underlayColor={'#9BE8FF'} 
+            onPress={() => this.GoToSetTimeBlock()}>
 			      <Text style={styles.buttonText}>
 			        Set Time Block
 			      </Text>
@@ -85,7 +88,7 @@ class Main extends Component {
           underlayColor={'transparent'}
 			    onPress={() =>
 			   	this.GoToAboutApp()}>
-			    <Text>
+			    <Text style={styles.aboutLink} >
 			    	About
 			    </Text>
 			  </TouchableHighlight>
@@ -107,11 +110,9 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   whiteText: {
+    paddingLeft: 10,
     fontSize: 20,
     color: 'white',
-  },
-  buttonsContainer: {
-  	marginTop: 200
   },
   backgroundImage: {
     flex: 1,
@@ -127,12 +128,18 @@ const styles = StyleSheet.create({
   	bottom: 30,
   	right: 30
   },
+  aboutLink: {
+    textAlign: 'center',
+  },
   button: {
     backgroundColor: '#05B3DD',
     margin: 15,
     borderRadius: 8.150,
     width: 300,
     height: 45,
+  },
+  buttonsContainer: {
+    marginBottom: 100,
   },
   instructions: {
     textAlign: 'center',
