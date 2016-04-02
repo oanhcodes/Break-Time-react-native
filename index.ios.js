@@ -28,7 +28,7 @@ class BreakTime extends Component {
         style={styles.container}
         initialRoute={{
           title: 'Main',
-          component: Timer
+          component: Main
       }}/>
     );
   }
