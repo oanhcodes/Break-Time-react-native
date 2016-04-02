@@ -17,7 +17,7 @@ class Timer extends Component {
       <View style={styles.container}>
         <CountDown
           onPress={this.sendAgain} //default null
-          text={"Why aren't you working"} //default ''
+          text={"Remaining Time"} //default ''
           time={5} //default 60
           buttonStyle={{padding:20}}
           textStyle={{color:'black'}} //default black
