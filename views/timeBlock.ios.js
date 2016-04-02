@@ -31,16 +31,11 @@ var TimeBlock = React.createClass({
           Set Work Time Block
         </Text>
         <TimePicker/>
-    
-    
         <Text style={styles.description}>
           Set Break Time Block
         </Text>
         <TimePicker/>
-    
-
        <Button>START</Button>
-
       </View>
     );
   }

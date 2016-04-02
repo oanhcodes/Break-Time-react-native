@@ -22,8 +22,8 @@ class BreakTime extends Component {
       <NavigatorIOS 
         style={styles.container}
         initialRoute={{
-          title: 'Time Block',
-          component: TimeBlock
+          title: 'Main',
+          component: Main
       }}/>
     );
   }
