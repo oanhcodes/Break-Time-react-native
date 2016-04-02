@@ -4,6 +4,7 @@
  */
 
 var Main = require('./views/main.ios')
+var TimeBlock = require('./views/timeBlock.ios')
 
 import React, {
   AppRegistry,
@@ -21,8 +22,8 @@ class BreakTime extends Component {
       <NavigatorIOS 
         style={styles.container}
         initialRoute={{
-          title: 'Main page',
-          component: Main
+          title: 'Time Block',
+          component: TimeBlock
       }}/>
     );
   }
