@@ -1,4 +1,5 @@
 import React, {
+  Alert,
   AppRegistry,
   Component,
   StyleSheet,
@@ -8,12 +9,22 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
+var TimeBlockSet = require('./timeBlockSetSuccessPage.ios')
+
+var alertMessage = 'Credibly reintermediate next-generation potentialities after goal-oriented ' +
+                   'catalysts for change. Dynamically revolutionize.';
+
 class Main extends Component {
 	render() {
     return (
 			<View style={styles.container}>
 			  <Text style={styles.mainTitle}>
 			    Break Time
+			  </Text>
+        <Text style={styles.mainTitle} onPress={() => this.props.navigator.push({
+      title: 'Success',
+      component: TimeBlockSet})}>
+          Go to time block set page
 			  </Text>
 			  <View style={styles.buttonsContainer}>
 			    <TouchableHighlight style={styles.button} underlayColor={'red'} onPress={() => this.setState({toggle: !this.state.toggled})}>
