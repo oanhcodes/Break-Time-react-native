@@ -8,6 +8,7 @@
 // var TimeBlock = require('./views/timeBlock.ios')
 
 var Main = require('./views/main.ios');
+var Timer = require('./views/timer.ios')
 
 import React, {
   AppRegistry,

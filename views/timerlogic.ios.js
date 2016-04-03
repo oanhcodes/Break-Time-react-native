@@ -13,7 +13,7 @@ import React, {
 } from 'react-native';
 
 var TimerMixin = require('react-timer-mixin');
-var Sound = require('react-native-sound');
+var AudioPlayer = require('react-native-audioplayer');
 
 var alertBreakMessage = 'BREAK TIME !';
 var alertWorkMessage = 'get to work!!!!';
@@ -21,8 +21,6 @@ var workTime = 5;
 var breakTime = 2;
 var countTime = workTime;
 var onBreak = false;
-
-var alertSound = new Sound('../../sound/crabhorn.mp3', Sound.MAIN_BUNDLE)
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
@@ -106,7 +104,7 @@ var CountDown = React.createClass({
             alertBreakMessage,
             [
               {text: 'Take break', onPress: () => this._countdown()},
-              {text: 'uh, ..crabhorn?', onPress: () => alertSound.play()}
+              {text: 'uh, ..crabhorn?', onPress: () => AudioPlayer.play('crabhorn.mp3')}
             ]
           );
         }

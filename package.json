@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.22.2",
+    "react-native-audioplayer": "^0.2.0",
     "react-native-scrollable-tab-view": "^0.4.0",
     "react-native-sound": "^0.7.3",
     "react-native-swiper": "^1.4.3",
