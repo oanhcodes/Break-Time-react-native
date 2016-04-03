@@ -21,6 +21,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		272E1ADE1CB09A2E00384AF6 /* libRNAudioPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 272E1ADB1CB099C800384AF6 /* libRNAudioPlayer.a */; };
+		272E1AE01CB09B2D00384AF6 /* crabhorn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 272E1ADF1CB09B2D00384AF6 /* crabhorn.mp3 */; };
 		27A98CD41CB08B4E00AFA3A6 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A98CD31CB08AEE00AFA3A6 /* libRNSound.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -89,6 +91,20 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		272E1ADA1CB099C800384AF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 272E1AD51CB099C800384AF6 /* RNAudioPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBE79C421B01EB5A00446766;
+			remoteInfo = RNAudioPlayer;
+		};
+		272E1ADC1CB099C800384AF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 272E1AD51CB099C800384AF6 /* RNAudioPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBE79C4D1B01EB5B00446766;
+			remoteInfo = RNAudioPlayerTests;
+		};
 		27A98CD21CB08AEE00AFA3A6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27A98CC41CB08AEE00AFA3A6 /* RNSound.xcodeproj */;
@@ -132,6 +148,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BreakTime/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BreakTime/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		272E1AD51CB099C800384AF6 /* RNAudioPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAudioPlayer.xcodeproj; path = "../node_modules/react-native-audioplayer/RNAudioPlayer.xcodeproj"; sourceTree = "<group>"; };
+		272E1ADF1CB09B2D00384AF6 /* crabhorn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = crabhorn.mp3; path = ../crabhorn.mp3; sourceTree = "<group>"; };
 		27A98CC41CB08AEE00AFA3A6 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -149,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272E1ADE1CB09A2E00384AF6 /* libRNAudioPlayer.a in Frameworks */,
 				27A98CD41CB08B4E00AFA3A6 /* libRNSound.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -261,6 +280,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		272E1AD61CB099C800384AF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				272E1ADB1CB099C800384AF6 /* libRNAudioPlayer.a */,
+				272E1ADD1CB099C800384AF6 /* RNAudioPlayerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		27A98CC51CB08AEE00AFA3A6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +308,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				272E1AD51CB099C800384AF6 /* RNAudioPlayer.xcodeproj */,
 				27A98CC41CB08AEE00AFA3A6 /* RNSound.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -306,6 +335,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				272E1ADF1CB09B2D00384AF6 /* crabhorn.mp3 */,
 				13B07FAE1A68108700A75B9A /* BreakTime */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BreakTimeTests */,
@@ -431,6 +461,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 272E1AD61CB099C800384AF6 /* Products */;
+					ProjectRef = 272E1AD51CB099C800384AF6 /* RNAudioPlayer.xcodeproj */;
+				},
+				{
 					ProductGroup = 27A98CC51CB08AEE00AFA3A6 /* Products */;
 					ProjectRef = 27A98CC41CB08AEE00AFA3A6 /* RNSound.xcodeproj */;
 				},
@@ -500,6 +534,20 @@
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		272E1ADB1CB099C800384AF6 /* libRNAudioPlayer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNAudioPlayer.a;
+			remoteRef = 272E1ADA1CB099C800384AF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		272E1ADD1CB099C800384AF6 /* RNAudioPlayerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNAudioPlayerTests.xctest;
+			remoteRef = 272E1ADC1CB099C800384AF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		27A98CD31CB08AEE00AFA3A6 /* libRNSound.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -535,6 +583,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272E1AE01CB09B2D00384AF6 /* crabhorn.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

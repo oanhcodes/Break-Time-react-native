@@ -8,6 +8,7 @@
 // var TimeBlock = require('./views/timeBlock.ios')
 
 var Main = require('./views/main.ios');
+var Timer = require('./views/timer.ios')
 
 import React, {
   AppRegistry,
@@ -26,7 +27,7 @@ class BreakTime extends Component {
         style={styles.container}
         initialRoute={{
           title: 'Main',
-          component: Main
+          component: Timer
       }}/>
     );
   }
