@@ -1,6 +1,5 @@
 import React, {
   ScrollView,
-  RefreshControl,
   Component,
   StyleSheet,
   Text,
@@ -63,7 +62,7 @@ var TimeBlock = React.createClass({
   render() {
     return (
 
-    <ScrollView style={styles.wrapper} refreshing={false} bounces={true} horizontal={false}>
+    <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
