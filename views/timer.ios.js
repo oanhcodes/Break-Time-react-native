@@ -17,8 +17,8 @@ class Timer extends Component {
       <View style={styles.container}>
         <CountDown
           text={"Remaining Time"}
-          breakTime={5}
-          workTime={300}
+          breakTime={3}
+          workTime={5}
         />
       </View>
     );

@@ -9,7 +9,9 @@ import React, {
     StyleSheet,
     TextInput,
     TouchableHighlight,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    NavigatorIOS, 
+    Vibration
 } from 'react-native';
 
 var TimerMixin = require('react-timer-mixin');
@@ -52,11 +54,14 @@ var CountDown = React.createClass({
           // on break going to work time
           this.setState({time: this.props.workTime});
           onBreak = false;
+          Vibration.Vibrate();
+          AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
             'worktitle',
             alertWorkMessage,
             [
-              {text: 'back to work', onPress: () => this._countdown()}
+              {text: 'Run another timeblock', onPress: () => this._countdown()},
+              // {text: 'Done working?', onPress: () => this.props.navigator.pop()}
             ]
           );
         } else {
@@ -65,12 +70,13 @@ var CountDown = React.createClass({
           // meow
           this.setState({time: this.props.breakTime});
           onBreak = true;
+          Vibration.Vibrate();
+          AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
             'breaktitle',
             alertBreakMessage,
             [
-              {text: 'Take break', onPress: () => this._countdown()},
-              {text: 'uh, ..crabhorn?', onPress: () => AudioPlayer.play('crabhorn.mp3')}
+              {text: 'Take break', onPress: () => this._countdown()}
             ]
           );
         }
