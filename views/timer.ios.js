@@ -13,19 +13,17 @@ var TimeBlock = require('./timeBlock.ios');
 
 class Timer extends Component {
 
-  updateWorktime() {
-
-  }
   render(){
-    return (
+    return(
       <View style={styles.container}>
         <CountDown
           text={"Remaining Time"}
+          breakActivity={this.props.breakActivity}
           breakTime={this.props.breaktime}
           workTime={this.props.worktime}
         />
       </View>
-    );
+    )
   }
 }
 

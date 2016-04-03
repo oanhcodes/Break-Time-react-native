@@ -1,6 +1,3 @@
-/**
- * Created by guguyanhua on 12/11/15.
- */
 import React, {
     Alert,
     Image,
@@ -32,15 +29,28 @@ var CountDown = React.createClass({
     this._countdown();
   },
   render(){
-    return (
-      <View>
-        <Text style={styles.text}>{this.props.text}: </Text>
-        <View style={[styles.wrapper,styles.buttonStyle]}>
-          <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
-          <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+    if (onBreak) {
+      return (
+        <View>
+          <Text style={styles.text}>{this.props.text}: </Text>
+          <View style={[styles.wrapper,styles.buttonStyle]}>
+            <Text style={styles.textStyle}>{this.props.breakActivity}</Text> 
+            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
+            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+          </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return (
+        <View>
+          <Text style={styles.text}>{this.props.text}: </Text>
+          <View style={[styles.wrapper,styles.buttonStyle]}>
+            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
+            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+          </View>
+        </View>
+      )
+    }
   },
 
   _countdown(){
@@ -50,27 +60,24 @@ var CountDown = React.createClass({
       if (time > 0) {
         this.setTimeout(timer, 1000);
       } else {
-        if (onBreak) {
+        if (this.onBreak === true) {
           // on break going to work time
           this.setState({time: this.props.workTime});
           onBreak = false;
-          Vibration.Vibrate();
+          Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
             'worktitle',
             alertWorkMessage,
             [
               {text: 'Run another timeblock', onPress: () => this._countdown()},
-              // {text: 'Done working?', onPress: () => this.props.navigator.pop()}
             ]
           );
         } else {
           // working, time for a break!
-          // kit kats
-          // meow
           this.setState({time: this.props.breakTime});
           onBreak = true;
-          Vibration.Vibrate();
+          Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
             'breaktitle',
