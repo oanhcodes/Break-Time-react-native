@@ -11,8 +11,8 @@ import React, {
 } from 'react-native';
 
 
-var TimeBlockSet = require('./timeBlockSetSuccessPage.ios')
-
+var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
+var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var Swiper = require('react-native-swiper');
@@ -63,8 +63,11 @@ class Main extends Component {
             </Text>
             </Image>
 		  	</Swiper>
-
+		  	<Text>
+		  		{}
+		  	</Text>
 			  <View style={styles.buttonsContainer}>
+
 			    <TouchableHighlight 
             style={styles.button} 
             underlayColor={'#9BE8FF'} 
