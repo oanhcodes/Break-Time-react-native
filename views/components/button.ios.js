@@ -1,7 +1,8 @@
 import React, {
   TouchableHighlight, 
   Text, 
-  StyleSheet
+  StyleSheet,
+  NavigatorIOS
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -18,10 +19,10 @@ const styles = StyleSheet.create({
     },
   });
 
-var Button = React.createClass({
-  onPress(){
+var MainPage = require('../main.ios')
 
-  },
+var Button = React.createClass({
+  
 
   render(){
     return(
@@ -29,7 +30,7 @@ var Button = React.createClass({
         style={styles.button} 
         underlayColor='red' 
         // not sure what should happen here when the button is pressed.
-        onPress={this.onPress}>
+        onPress={() => this.GoToMainPage()}>
         <Text
         style={styles.buttonText}>
           {this.props.children}
