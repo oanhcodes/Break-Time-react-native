@@ -92,7 +92,7 @@ class Main extends Component {
 			    onPress={() =>
 			   	this.GoToAboutApp()}>
 			    <Text style={styles.aboutLink} >
-			    	About
+			    	Learn More
 			    </Text>
 			  </TouchableHighlight>
 			</View>
@@ -116,11 +116,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 20,
     color: 'white',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    backgroundColor: 'white',
   },
   buttonText: {
     textAlign: 'center',
