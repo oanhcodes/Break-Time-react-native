@@ -14,6 +14,7 @@ import React, {
 var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
+var setTimeBlockPage = require('./timeBlock.ios');
 var Swiper = require('react-native-swiper');
 
 
@@ -43,32 +44,41 @@ class Main extends Component {
 	render() {
     return (
 			<View style={styles.container}>
-				<Swiper style={styles.wrapper} height={200} horizontal={false} autoplay={false}>
-					
+				<Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
 						<Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
 		  			<Text style={styles.mainTitle}>
 		    			Break Time
 		  			</Text>
 		  			</Image>
-		  		
-		  		<View style={styles.slide2}>
-		  			<Text style={styles.mainTitle}>
-		    			About Tim's Missing Kid Photo
-		  			</Text>
-		  		</View>
+
+            <Image source={require('../imgs/bikeride.jpeg')} style={styles.backgroundImage} >
+            <Text style={styles.whiteText}>
+              Take better breaks.
+            </Text>
+            </Image>
+
+            <Image source={require('../imgs/focus.jpeg')} style={styles.backgroundImage} >
+            <Text style={styles.whiteText}>
+              Increase your producivity.
+            </Text>
+            </Image>
 		  	</Swiper>
 		  	<Text>
 		  		{}
 		  	</Text>
 			  <View style={styles.buttonsContainer}>
-			    <TouchableHighlight style={styles.button} underlayColor={'red'} onPress={() => this.GoToSetTimeBlock()}>
+
+			    <TouchableHighlight 
+            style={styles.button} 
+            underlayColor={'#9BE8FF'} 
+            onPress={() => this.GoToSetTimeBlock()}>
 			      <Text style={styles.buttonText}>
 			        Set Time Block
 			      </Text>
 			    </TouchableHighlight>
 			    <TouchableHighlight
 			    	style={styles.button}
-			    	underlayColor={'red'}
+			    	underlayColor={'#9BE8FF'}
 			    	onPress={() => this.setState({toggle: !this.state.toggled})}>
 			      <Text style={styles.buttonText}>
 			        View Profile
@@ -78,10 +88,10 @@ class Main extends Component {
 
 			  <TouchableHighlight
 			  	style={styles.aboutButton}
-			    underlayColor={'red'}
+          underlayColor={'transparent'}
 			    onPress={() =>
 			   	this.GoToAboutApp()}>
-			    <Text>
+			    <Text style={styles.aboutLink} >
 			    	About
 			    </Text>
 			  </TouchableHighlight>
@@ -95,15 +105,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#FF872E',
+    backgroundColor: '#F2F2F2',
   },
   mainTitle: {
     fontSize: 20,
     textAlign: 'center',
     margin: 15,
   },
-  buttonsContainer: {
-  	marginTop: 200
+  whiteText: {
+    paddingLeft: 10,
+    fontSize: 20,
+    color: 'white',
   },
   backgroundImage: {
     flex: 1,
@@ -119,12 +131,18 @@ const styles = StyleSheet.create({
   	bottom: 30,
   	right: 30
   },
+  aboutLink: {
+    textAlign: 'center',
+  },
   button: {
-    backgroundColor: 'green',
+    backgroundColor: '#05B3DD',
     margin: 15,
     borderRadius: 8.150,
     width: 300,
     height: 45,
+  },
+  buttonsContainer: {
+    marginBottom: 100,
   },
   instructions: {
     textAlign: 'center',
@@ -152,7 +170,12 @@ const styles = StyleSheet.create({
   	flex: 1,
   	justifyContent: 'center',
   	backgroundColor: '#29D9C2',
-  }
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#BDF271',
+  },
 });
 
 module.exports = Main;
