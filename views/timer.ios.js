@@ -8,7 +8,7 @@ import React, {
 } from 'react-native';
 
 
-var CountDown = require('react-native-countdown');
+var CountDown = require('./timerlogic.ios');
 
 
 class Timer extends Component {
