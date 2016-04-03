@@ -43,23 +43,35 @@ var TimeBlock = React.createClass({
 
   GoToMainPage(){
     // this.props.route.callback(Picker.selectedValue);
+    // console.log(this.state.time)
     this.props.navigator.pop({
-      // Passes one picker value:
-      passProps: {dataToBePassed: console.log(this.state.time)}
+      passProps: {
+        dataToBePassed: {
+          worktime: console.log(this.state.worktime),
+          breaktime: console.log(this.state.breaktime)
+        }
+      }
     })
-  },
-
-  updateTime(time) {
-    this.setState({time: time});
   },
 
   getInitialState() {
     return {
-      time: '15'
+      worktime: '15',
+      breaktime: '15'
     };
   },
 
+  updateWorktime(time) {
+    this.setState({
+      worktime: time
+    });
+  },
 
+  updateBreaktime(time) {
+    this.setState({
+      breaktime: time
+    });
+  },
 
   render() {
     return (
@@ -70,8 +82,8 @@ var TimeBlock = React.createClass({
         </Text>
         <Picker
           style={styles.picker}
-          selectedValue={this.state.time}
-          onValueChange={this.updateTime}>
+          selectedValue={this.state.worktime}
+          onValueChange={this.updateWorktime}>
           <Picker.Item label='15 Minutes' value='15' />
           <Picker.Item label='30 Minutes' value='30' />
           <Picker.Item label='45 Minutes' value='45' />
@@ -82,8 +94,8 @@ var TimeBlock = React.createClass({
         </Text>
         <Picker
           style={styles.picker}
-          selectedValue={this.state.time}
-          onValueChange={this.updateTime}>
+          selectedValue={this.state.breaktime}
+          onValueChange={this.updateBreaktime}>
           <Picker.Item label='15 Minutes' value='15' />
           <Picker.Item label='30 Minutes' value='30' />
           <Picker.Item label='45 Minutes' value='45' />
