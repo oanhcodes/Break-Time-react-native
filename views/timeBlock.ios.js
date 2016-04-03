@@ -1,6 +1,5 @@
 import React, {
   ScrollView,
-  RefreshControl,
   Component,
   StyleSheet,
   Text,
@@ -13,30 +12,37 @@ import React, {
 var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
-var TimerPage = require('./timer.ios')
+var TimerPage = require('./timer.ios');
+var TimerLogicPage = require('./timerlogic.ios')
 
 var TimeBlock = React.createClass({
 
-  GoToMainPage(){
-    // this.props.route.callback(Picker.selectedValue);
-    // console.log(this.state.time)
+  GoToTimerPage() {
     this.props.navigator.push({
       title: "Timer",
       component: TimerPage,
       passProps: {
-        // dataToBePassed: {
-          worktime: parseInt(this.state.worktime),
-          breaktime: parseInt(this.state.breaktime),
-          breakActivity: this.state.breakActivity
-        // }
+        worktime: parseInt(this.state.worktime),
+        breaktime: parseInt(this.state.breaktime),
+        breakActivity: this.state.breakActivity
+      }
+    })
+  },
+
+  GoToTimerLogicPage() {
+    this.props.navigator.push({
+      title: "Timer Logic",
+      component: TimerLogicPage,
+      passProps: {
+      breakActivity: this.state.breakActivity
       }
     })
   },
 
   getInitialState() {
     return {
-      worktime: '900',
-      breaktime: '300',
+      worktime: '3',
+      breaktime: '3',
       breakActivity: 'run'
     };
   },
@@ -49,7 +55,6 @@ var TimeBlock = React.createClass({
 
   updateBreaktime(time) {
     this.setState({
-      // isRefreshing: false,
       breaktime: time
     });
   },
@@ -139,7 +144,7 @@ var TimeBlock = React.createClass({
         <TouchableHighlight 
           style={styles.button} 
           underlayColor='#9BE8FF' 
-          onPress={() => this.GoToMainPage()}>
+          onPress={() => this.GoToTimerPage()}>
           <Text
             style={styles.buttonText}>
             Start
