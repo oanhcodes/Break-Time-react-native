@@ -9,16 +9,20 @@ import React, {
 
 
 var CountDown = require('./timerlogic.ios');
-
+var TimeBlock = require('./timeBlock.ios');
 
 class Timer extends Component {
+
+  updateWorktime() {
+
+  }
   render(){
     return (
       <View style={styles.container}>
         <CountDown
           text={"Remaining Time"}
-          breakTime={3}
-          workTime={5}
+          breakTime={this.props.breaktime}
+          workTime={this.props.worktime}
         />
       </View>
     );

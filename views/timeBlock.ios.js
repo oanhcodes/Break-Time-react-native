@@ -9,29 +9,34 @@ import React, {
   Image,
 } from 'react-native';
 
-var TimePicker = require('./components/timePicker.ios')
-var Button = require('./components/button.ios')
+var TimePicker = require('./components/timePicker.ios');
+var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
+var TimerPage = require('./timer.ios')
 
 var TimeBlock = React.createClass({
 
   GoToMainPage(){
     // this.props.route.callback(Picker.selectedValue);
     // console.log(this.state.time)
-    this.props.navigator.pop({
+    this.props.navigator.push({
+      title: "Timer",
+      component: TimerPage,
       passProps: {
-        dataToBePassed: {
-          worktime: console.log(this.state.worktime),
-          breaktime: console.log(this.state.breaktime)
-        }
+        // dataToBePassed: {
+          worktime: parseInt(this.state.worktime),
+          breaktime: parseInt(this.state.breaktime),
+          breakActivity: this.state.breakActivity
+        // }
       }
     })
   },
 
   getInitialState() {
     return {
-      worktime: '15',
-      breaktime: '15'
+      worktime: '900',
+      breaktime: '300',
+      breakActivity: 'run'
     };
   },
 
@@ -43,8 +48,15 @@ var TimeBlock = React.createClass({
 
   updateBreaktime(time) {
     this.setState({
+      // isRefreshing: false,
       breaktime: time
     });
+  },
+
+  updateBreakActivity(activity) {
+    this.setState({
+      breakActivity: activity
+    })
   },
 
   render() {
@@ -80,12 +92,12 @@ var TimeBlock = React.createClass({
           </Text>
         <Picker
           style={styles.picker}
-          selectedValue={this.state.breaktime}
-          onValueChange={this.updateBreaktime}>
-          <Picker.Item label='15 Minutes' value='15' />
-          <Picker.Item label='30 Minutes' value='30' />
-          <Picker.Item label='45 Minutes' value='45' />
-          <Picker.Item label='60 Minutes' value='60' />
+          selectedValue={this.state.worktime}
+          onValueChange={this.updateWorktime}>
+          <Picker.Item label='15 Minutes' value='900' />
+          <Picker.Item label='30 Minutes' value='1800' />
+          <Picker.Item label='45 Minutes' value='2700' />
+          <Picker.Item label='60 Minutes' value='3600' />
         </Picker>
         </View>
         <View style={styles.container}>
@@ -94,12 +106,12 @@ var TimeBlock = React.createClass({
         </Text>
         <Picker
           style={styles.picker}
-          selectedValue={this.state.worktime}
-          onValueChange={this.updateWorktime}>
-          <Picker.Item label='15 Minutes' value='15' />
-          <Picker.Item label='30 Minutes' value='30' />
-          <Picker.Item label='45 Minutes' value='45' />
-          <Picker.Item label='60 Minutes' value='60' />
+          selectedValue={this.state.breaktime}
+          onValueChange={this.updateBreaktime}>
+          <Picker.Item label='5 Minutes' value='300' />
+          <Picker.Item label='10 Minutes' value='600' />
+          <Picker.Item label='15 Minutes' value='900' />
+          <Picker.Item label='20 Minutes' value='1200' />
         </Picker>
         </View>
         <View style={styles.container}>
@@ -107,7 +119,9 @@ var TimeBlock = React.createClass({
           Choose a break activity.
         </Text>
         <Picker
-          style={styles.picker}>
+          style={styles.picker}
+          selectedValue={this.state.breakActivity}
+          onValueChange={this.updateBreakActivity}>
           <Picker.Item label='run' value='run' />
           <Picker.Item label='walk' value='walk' />
           <Picker.Item label='bike' value='bike' />
