@@ -36,26 +36,30 @@ var TimeBlock = React.createClass({
     return {
       worktime: '900',
       breaktime: '300',
-      breakActivity: 'run'
+      breakActivity: 'run',
+      index: 0
     };
   },
 
   updateWorktime(time) {
     this.setState({
-      worktime: time
+      worktime: time,
+      index: 0
     });
   },
 
   updateBreaktime(time) {
     this.setState({
       // isRefreshing: false,
-      breaktime: time
+      breaktime: time,
+      index: 1
     });
   },
 
   updateBreakActivity(activity) {
     this.setState({
-      breakActivity: activity
+      breakActivity: activity,
+      index: 2
     })
   },
 
@@ -64,7 +68,7 @@ var TimeBlock = React.createClass({
 
     <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
               run.
@@ -85,7 +89,7 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={300} horizontal={true}>
+        <Swiper style={styles.wrapper} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
             Set Work Time Block
