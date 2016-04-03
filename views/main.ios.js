@@ -57,7 +57,9 @@ class Main extends Component {
 		  			</Text>
 		  		</View>
 		  	</Swiper>
-
+		  	<Text>
+		  		{}
+		  	</Text>
 			  <View style={styles.buttonsContainer}>
 			    <TouchableHighlight style={styles.button} underlayColor={'red'} onPress={() => this.GoToSetTimeBlock()}>
 			      <Text style={styles.buttonText}>
