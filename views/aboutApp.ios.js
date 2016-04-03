@@ -4,7 +4,8 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
 } from 'react-native';
 
 var Swiper = require('react-native-swiper');
@@ -39,6 +40,18 @@ class AboutApp extends Component {
           <Text styles={styles.content}>
           Meet our Team
           </Text>
+          <View style={styles.teamPhoto}>
+             <Image source={require('../imgs/Linda.jpeg')} style={styles.image}>
+            </Image>
+             <Image source={require('../imgs/Kathryn.jpeg')} style={styles.image}>
+            </Image>
+             <Image source={require('../imgs/Leanne.jpeg')} style={styles.image}>
+            </Image>
+             <Image source={require('../imgs/Aaron.jpeg')} style={styles.image}>
+            </Image>
+             <Image source={require('../imgs/Tim.jpeg')} style={styles.image}>
+            </Image>
+          </View>
         </View>
       </ScrollView>
 			</View>
@@ -70,8 +83,24 @@ const styles = StyleSheet.create({
   },
   team: {
     flex: 1,
-    padding: 50,
-    backgroundColor: '#FF872E',
+    backgroundColor: '#F5FCFF',
+    alignItems: 'center',
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  teamPhoto: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 20,
+  },
+  image: {
+    height: 75,
+    width: 75,
+    padding: 10,
+    resizeMode: 'contain',
   },
 });
 
