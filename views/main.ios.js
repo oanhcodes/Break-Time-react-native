@@ -15,6 +15,7 @@ var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
+var profilePage = require('./profilePage.ios');
 var Swiper = require('react-native-swiper');
 
 
@@ -67,7 +68,6 @@ class Main extends Component {
 		  		{}
 		  	</Text>
 			  <View style={styles.buttonsContainer}>
-
 			    <TouchableHighlight 
             style={styles.button} 
             underlayColor={'#9BE8FF'} 
@@ -79,12 +79,12 @@ class Main extends Component {
 			    <TouchableHighlight
 			    	style={styles.button}
 			    	underlayColor={'#9BE8FF'}
-			    	onPress={() => this.setState({toggle: !this.state.toggled})}>
+			    	onPress={() => this.GoToProfile()}>
 			      <Text style={styles.buttonText}>
 			        View Profile
 			      </Text>
 			    </TouchableHighlight>
-			  </View>
+        </View>
 
 			  <TouchableHighlight
 			  	style={styles.aboutButton}
@@ -92,7 +92,7 @@ class Main extends Component {
 			    onPress={() =>
 			   	this.GoToAboutApp()}>
 			    <Text style={styles.aboutLink} >
-			    	About
+			    	Learn More
 			    </Text>
 			  </TouchableHighlight>
 			</View>
@@ -117,11 +117,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    backgroundColor: 'white',
-  },
   buttonText: {
     textAlign: 'center',
     margin: 15
@@ -142,7 +137,7 @@ const styles = StyleSheet.create({
     height: 45,
   },
   buttonsContainer: {
-    marginBottom: 100,
+    position: 'relative',
   },
   instructions: {
     textAlign: 'center',
