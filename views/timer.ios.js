@@ -16,12 +16,9 @@ class Timer extends Component {
     return (
       <View style={styles.container}>
         <CountDown
-          onPress={this.sendAgain} //default null
-          text={"Remaining Time"} //default ''
-          time={5} //default 60
-          buttonStyle={{padding:20}}
-          textStyle={{color:'black'}} //default black
-          disabledTextStyle={{color:'gray'}} //default gray
+          text={"Remaining Time"}
+          breakTime={5}
+          workTime={300}
         />
       </View>
     );
@@ -33,9 +30,11 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop:60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
   },
 });
 
-// reactMixin(Timer.prototype, TimerMixin);
 
 module.exports = Timer;

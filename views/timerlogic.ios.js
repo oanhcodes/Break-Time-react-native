@@ -17,60 +17,28 @@ var AudioPlayer = require('react-native-audioplayer');
 
 var alertBreakMessage = 'BREAK TIME !';
 var alertWorkMessage = 'get to work!!!!';
-var workTime = 5;
-var breakTime = 2;
-var countTime = workTime;
 var onBreak = false;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.time ? this.props.time : 60,
-      disabled: true
+      time: this.props.workTime,
     };
   },
   componentDidMount(){
     this._countdown();
   },
   render(){
-    var style = [styles.text];
-    var component;
-    if (this.state.disabled) {
-      style.push({color: 'gray'});
-      style.push(this.props.disabledTextStyle);
-      component =
-          <View
-              style={[styles.wrapper,this.props.buttonStyle]}
-              >
-            <TouchableWithoutFeedback
-                >
-              <Text style={[style]}>{this.props.text}({this.state.time})</Text>
-            </TouchableWithoutFeedback>
-          </View>
-    } else {
-      component =
-          <TouchableHighlight
-              style={[styles.wrapper,this.props.buttonStyle]}
-              onPress={this._onPress}
-              >
-            <Text style={[style,this.props.textStyle]}>{this.props.text}({this.state.time})</Text>
-          </TouchableHighlight>
-    }
     return (
-        component
+      <View>
+        <Text style={styles.text}>{this.props.text}: </Text>
+        <View style={[styles.wrapper,styles.buttonStyle]}>
+          <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
+          <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+        </View>
+      </View>
     )
-  },
-  _onPress(){
-    if (this.state.disabled) {
-      //nothing
-    } else {
-      this.setState({disabled: true});
-      this._countdown();
-      if(this.props.onPress){
-          this.props.onPress();
-      }
-    }
   },
 
   _countdown(){
@@ -82,8 +50,7 @@ var CountDown = React.createClass({
       } else {
         if (onBreak) {
           // on break going to work time
-          this.setState({disabled: false});
-          this.setState({time: workTime});
+          this.setState({time: this.props.workTime});
           onBreak = false;
           Alert.alert(
             'worktitle',
@@ -96,11 +63,10 @@ var CountDown = React.createClass({
           // working, time for a break!
           // kit kats
           // meow
-          this.setState({disabled: false});
-          this.setState({time: breakTime});
+          this.setState({time: this.props.breakTime});
           onBreak = true;
           Alert.alert(
-            'breaktitle',            
+            'breaktitle',
             alertBreakMessage,
             [
               {text: 'Take break', onPress: () => this._countdown()},
@@ -116,12 +82,24 @@ var CountDown = React.createClass({
 
 var styles = StyleSheet.create({
   text: {
-    color: 'black'
+    color: 'black',
+    fontSize: 24,
+    paddingBottom: 5
+  },
+  textStyle: {
+    color:'white',
+    fontSize: 55
   },
   wrapper: {
     padding: 10,
     marginRight:10,
+    width: 350,
     backgroundColor: '#e5e5e5',
+  },
+  buttonStyle: {
+    padding:20,
+    backgroundColor: '#05B3DD',
+    borderRadius: 8
   }
 });
 
