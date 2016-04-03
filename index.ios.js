@@ -9,7 +9,6 @@
 
 var Main = require('./views/main.ios');
 
-
 import React, {
   AppRegistry,
   Component,
