@@ -41,36 +41,40 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '3',
-      breaktime: '3',
-      breakActivity: 'run'
+      worktime: '900',
+      breaktime: '300',
+      breakActivity: 'run',
+      index: 0
     };
   },
 
   updateWorktime(time) {
     this.setState({
-      worktime: time
+      worktime: time,
+      index: 0
     });
   },
 
   updateBreaktime(time) {
     this.setState({
-      breaktime: time
+      breaktime: time,
+      index: 1
     });
   },
 
   updateBreakActivity(activity) {
     this.setState({
-      breakActivity: activity
+      breakActivity: activity,
+      index: 2
     })
   },
 
   render() {
     return (
 
-    <ScrollView style={styles.wrapper} refreshing={false} bounces={true} horizontal={false}>
+    <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
               run.
@@ -91,7 +95,7 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={300} horizontal={true}>
+        <Swiper style={styles.wrapper} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
             Set Work Time Block
@@ -183,7 +187,6 @@ const styles = StyleSheet.create({
     width: 300
   },
   backgroundImage: {
-    // width: 300,
     width: null,
     height: null,
     flex: 1,
