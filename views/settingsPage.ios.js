@@ -1,5 +1,4 @@
 import React, {
-  Alert,
   AppRegistry,
   AsyncStorage,
   Component,
@@ -12,34 +11,65 @@ import React, {
   TextInput
 } from 'react-native';
 
-
+var store = require('react-native-simple-store');
 
 var Settings = React.createClass ({
+	componentDidMount() {
+		store.get('activities').then((data) => {
+			this.setState({activities: data})
+		})
+	},
 
 	getInitialState() {
 		return {
+			activities: [],
 			text: "Enter an activity"
 		};
 	},
 
+	saveData(value) {
+		if (this.state.activities === null) {
+			this.setState({activities: [value]})
+		} else {
+			this.state.activities.push(value);
+			this.setState({activities: this.state.activities});
+		}
+		store.save('activities', this.state.activities)
+	},
+
 	render(){
+		var that = this;
+		var activities = that.state.activities.map(function(activity){
+			return(
+				<Text style={styles.saved}>{activity}</Text>
+			)
+		});
+		console.log(activities);
 		return(
 			<View style={styles.container}>
 				<Text style={styles.title}>
 					Edit Your Activities
 				</Text>
 				<View style={styles.activityListWrapper}>
-
+					{activities}
 				</View>
 				<Text style={styles.addActivityTitle}>
-						Add a new activity to your activities list:
+					Add a new activity to your activities list:
 				</Text>
 				<View style={styles.textInputWrapper}>
 					<TextInput 
 						style={styles.textInput} 
 						onChangeText={(text) => this.setState({text})} 
 						placeholder={this.state.text}/>
-					</View>
+				</View>
+				<TouchableHighlight 
+            style={styles.button} 
+            underlayColor={'#9BE8FF'} 
+            onPress={() => this.saveData(this.state.text)}>
+			      <Text style={styles.buttonText}>
+			        Add Activity
+			      </Text>
+			    </TouchableHighlight>
 			</View>
 		)
 	}
@@ -67,19 +97,29 @@ const styles = StyleSheet.create({
 	textInputWrapper: {
 		backgroundColor: '#2E6BFF',
 		height: 100,
-		// width: 400,
 		justifyContent: 'center',
 		alignItems: 'center',
-		alignSelf: 'stretch'
+		alignSelf: 'stretch',
+		marginBottom: 10
 	},
 	textInput: {
-		// flex: 1,
 		backgroundColor: 'white',
 		height: 50,
-		width: 300,
-		marginLeft: 30
+		width: 335,
+		marginLeft: 30,
+		paddingLeft: 10
 	},
-
+	button: {
+		backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 50,
+    justifyContent: 'center'
+  },
+  buttonText: {
+  	textAlign: 'center'
+  }
 })
 
 module.exports = Settings;

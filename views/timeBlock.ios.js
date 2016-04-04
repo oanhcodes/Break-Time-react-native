@@ -154,8 +154,7 @@ var TimeBlock = React.createClass({
           style={styles.button} 
           underlayColor='#9BE8FF' 
           onPress={() => this.GoToTimerPage()}>
-          <Text
-            style={styles.buttonText}>
+          <Text style={styles.buttonText}>
             Start
           </Text>
         </TouchableHighlight>
