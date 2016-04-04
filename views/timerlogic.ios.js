@@ -24,7 +24,8 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.workTime,
+      // time: this.props.workTime,
+      time: '9000',
     };
   },
   GoToStatsPage() {
@@ -48,7 +49,7 @@ var CountDown = React.createClass({
         <View>
           <Text style={styles.text}>{this.props.text}: </Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle}>{this.props.breakActivity}</Text> 
+            <Text style={styles.textStyle}>{this.props.breakActivity}</Text>
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
           </View>
@@ -57,7 +58,7 @@ var CountDown = React.createClass({
     } else {
       return (
         <View>
-          <Text style={styles.text}>{this.props.text}: </Text>
+          <Text style={styles.text}>{this.props.text}</Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
@@ -115,7 +116,7 @@ var styles = StyleSheet.create({
     paddingBottom: 5
   },
   textStyle: {
-    color:'white',
+    color:'black',
     fontSize: 55
   },
   wrapper: {
@@ -126,9 +127,19 @@ var styles = StyleSheet.create({
   },
   buttonStyle: {
     padding:20,
-    backgroundColor: '#05B3DD',
+    opacity: .75,
+    backgroundColor: 'white',
     borderRadius: 8
-  }
+  },
+  timerBackground: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'contain',
+  },
 });
 
 module.exports = CountDown;

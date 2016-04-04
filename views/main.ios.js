@@ -8,6 +8,7 @@ import React, {
   Image,
   View,
   NavigatorIOS,
+  ScrollView,
 } from 'react-native';
 
 
@@ -45,6 +46,7 @@ class Main extends Component {
 	render() {
     return (
 			<View style={styles.container}>
+        <View style={styles.header}>
 				<Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
 						<Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
 		  			<Text style={styles.mainTitle}>
@@ -64,18 +66,28 @@ class Main extends Component {
             </Text>
             </Image>
 		  	</Swiper>
-		  	<Text>
-		  		{}
-		  	</Text>
+        </View>
+          <View style={styles.buttonsContainer}>
+    		  	<TouchableHighlight
+              style={styles.aboutButton}
+              underlayColor={'none'}
+              onPress={() =>
+              this.GoToAboutApp()}>
+              <Text style={styles.aboutButtonText} >
+                Learn More
+              </Text>
+            </TouchableHighlight>
+          </View>
 			  <View style={styles.buttonsContainer}>
-			    <TouchableHighlight 
-            style={styles.button} 
-            underlayColor={'#9BE8FF'} 
+			    <TouchableHighlight
+            style={styles.button}
+            underlayColor={'#9BE8FF'}
             onPress={() => this.GoToSetTimeBlock()}>
 			      <Text style={styles.buttonText}>
 			        Set Time Block
 			      </Text>
 			    </TouchableHighlight>
+
 			    <TouchableHighlight
 			    	style={styles.button}
 			    	underlayColor={'#9BE8FF'}
@@ -85,16 +97,6 @@ class Main extends Component {
 			      </Text>
 			    </TouchableHighlight>
         </View>
-
-			  <TouchableHighlight
-			  	style={styles.aboutButton}
-          underlayColor={'transparent'}
-			    onPress={() =>
-			   	this.GoToAboutApp()}>
-			    <Text style={styles.aboutLink} >
-			    	Learn More
-			    </Text>
-			  </TouchableHighlight>
 			</View>
 		);
   }
@@ -106,6 +108,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
+  },
+   header: {
+    marginTop: 10,
   },
   mainTitle: {
     fontSize: 20,
@@ -120,11 +125,6 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     margin: 15
-  },
-  aboutButton: {
-  	position: 'absolute',
-  	bottom: 30,
-  	right: 30
   },
   aboutLink: {
     textAlign: 'center',
@@ -144,10 +144,6 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  wrapper: {
-  	// flex: 1,
-  	// justifyContent: 'center',
-  },
   backgroundImage: {
   	// width: 300,
   	width: null,
@@ -156,20 +152,8 @@ const styles = StyleSheet.create({
   	resizeMode: 'cover',
   	justifyContent: 'center'
   },
-  slide1: {
-  	alignItems: 'center',
-  	flex: 1,
-  	justifyContent: 'center',
-  },
-  slide2: {
-  	flex: 1,
-  	justifyContent: 'center',
-  	backgroundColor: '#29D9C2',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#BDF271',
+  aboutButtonText: {
+    fontSize: 15,
   },
 });
 
