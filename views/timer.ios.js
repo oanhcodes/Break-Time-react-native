@@ -14,6 +14,10 @@ var TimeBlock = require('./timeBlock.ios');
 
 class Timer extends Component {
 
+  GoToMainPage() {
+    this.props.navigator.popToTop()
+  }
+
   render(){
     return(
       <View style={styles.container}>
@@ -24,6 +28,14 @@ class Timer extends Component {
           workTime={this.props.worktime}
           navigator = {this.props.navigator}
         />
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="#9BE8FF"
+          onPress={() => this.GoToMainPage()}>
+          <Text style={styles.buttonText}>
+            Stop
+          </Text>
+        </TouchableHighlight>
       </View>
     )
   }
@@ -38,6 +50,17 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
+  button: {
+    backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45
+  },
+  buttonText: {
+    textAlign: 'center',
+    margin: 15
+  }
 });
 
 
