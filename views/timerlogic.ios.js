@@ -7,16 +7,18 @@ import React, {
     TextInput,
     TouchableHighlight,
     TouchableWithoutFeedback,
-    NavigatorIOS, 
+    NavigatorIOS,
     Vibration
 } from 'react-native';
 
 var TimerMixin = require('react-timer-mixin');
 var AudioPlayer = require('react-native-audioplayer');
+var StatsPage = require('./stats.ios');
 
 var alertBreakMessage = 'BREAK TIME !';
 var alertWorkMessage = 'get to work!!!!';
 var onBreak = false;
+var cycles = 0;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
@@ -24,6 +26,18 @@ var CountDown = React.createClass({
     return {
       time: this.props.workTime,
     };
+  },
+  GoToStatsPage() {
+    this.props.navigator.push({
+      title: "Stats",
+      component: StatsPage,
+      passProps: {
+        worktime: this.props.workTime,
+        breaktime: this.props.breakTime,
+        breakActivity: this.props.breakActivity,
+        cycles: cycles
+      }
+    })
   },
   componentDidMount(){
     this._countdown();
@@ -52,7 +66,6 @@ var CountDown = React.createClass({
       )
     }
   },
-
   _countdown(){
     var timer = function () {
       var time = this.state.time - 1;
@@ -60,7 +73,7 @@ var CountDown = React.createClass({
       if (time > 0) {
         this.setTimeout(timer, 1000);
       } else {
-        if (this.onBreak === true) {
+        if (onBreak) {
           // on break going to work time
           this.setState({time: this.props.workTime});
           onBreak = false;
@@ -71,12 +84,14 @@ var CountDown = React.createClass({
             alertWorkMessage,
             [
               {text: 'Run another timeblock', onPress: () => this._countdown()},
+              {text: 'Finished', onPress: () => this.GoToStatsPage()}
             ]
           );
         } else {
           // working, time for a break!
           this.setState({time: this.props.breakTime});
           onBreak = true;
+          cycles++;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(

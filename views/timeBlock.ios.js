@@ -7,6 +7,7 @@ import React, {
   TouchableHighlight, 
   Picker,
   Image,
+  NavigatorIOS
 } from 'react-native';
 
 var TimePicker = require('./components/timePicker.ios');
@@ -41,8 +42,8 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '900',
-      breaktime: '300',
+      worktime: '60',
+      breaktime: '60',
       breakActivity: 'run',
       index: 0
     };

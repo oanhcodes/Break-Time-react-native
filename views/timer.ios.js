@@ -4,6 +4,7 @@ import React, {
   StyleSheet,
   TouchableHighlight,
   Text,
+  NavigatorIOS,
   View
 } from 'react-native';
 
@@ -21,6 +22,7 @@ class Timer extends Component {
           breakActivity={this.props.breakActivity}
           breakTime={this.props.breaktime}
           workTime={this.props.worktime}
+          navigator = {this.props.navigator}
         />
       </View>
     )
