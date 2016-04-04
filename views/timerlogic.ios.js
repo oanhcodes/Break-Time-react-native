@@ -28,15 +28,15 @@ var CountDown = React.createClass({
     };
   },
   GoToStatsPage() {
-    console.log(this.props);
     this.props.navigator.push({
       title: "Stats",
       component: StatsPage,
-      // passProps: {
-      //   worktime: parseInt(this.props.worktime),
-      //   breaktime: parseInt(this.props.breaktime),
-      //   breakActivity: this.props.breakActivity
-      // }
+      passProps: {
+        worktime: this.props.workTime,
+        breaktime: this.props.breakTime,
+        breakActivity: this.props.breakActivity,
+        cycles: cycles
+      }
     })
   },
   componentDidMount(){

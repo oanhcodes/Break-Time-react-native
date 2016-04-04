@@ -8,18 +8,24 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
-class Stats extends Component {
+var timeworked;
+var breakedtime;
 
+class Stats extends Component {
+  timeworked = Math.floor((this.props.worktime * this.props.cycles) / 60);
+  breakedtime = Math.floor((this.props.breaktime * this.props.cycles) / 60);
   render(){
     return(
       <View style={styles.container}>
         <Text>Finished!</Text>
-
+        <Text>You had {this.props.cycles} timebox cycles</Text>
+        <Text>You worked for {this.timeworked} minutes!</Text>
+        <Text>You breaked for {this.breakedtime} minutes!</Text>
+        <Text>Your activity was: {this.props.breakActivity}</Text>
       </View>
     )
   }
 }
-
 
 var styles = StyleSheet.create({
   container: {
@@ -30,6 +36,5 @@ var styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
 });
-
 
 module.exports = Stats;
