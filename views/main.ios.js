@@ -15,7 +15,7 @@ var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
-var profilePage = require('./profilePage.ios');
+var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
 
 
@@ -35,10 +35,10 @@ class Main extends Component {
 		})
 	}
 
-	GoToProfile() {
+	GoToSettings() {
 		this.props.navigator.push({
-			title: 'Profile',
-			component: profilePage
+			title: 'Settings',
+			component: settingsPage
 		})
 	}
 
@@ -64,9 +64,6 @@ class Main extends Component {
             </Text>
             </Image>
 		  	</Swiper>
-		  	<Text>
-		  		{}
-		  	</Text>
 			  <View style={styles.buttonsContainer}>
 			    <TouchableHighlight 
             style={styles.button} 
@@ -79,9 +76,9 @@ class Main extends Component {
 			    <TouchableHighlight
 			    	style={styles.button}
 			    	underlayColor={'#9BE8FF'}
-			    	onPress={() => this.GoToProfile()}>
+			    	onPress={() => this.GoToSettings()}>
 			      <Text style={styles.buttonText}>
-			        View Profile
+			        Settings
 			      </Text>
 			    </TouchableHighlight>
         </View>
