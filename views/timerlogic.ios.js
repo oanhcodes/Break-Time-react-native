@@ -24,8 +24,7 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      // time: this.props.workTime,
-      time: '9000',
+      time: this.props.workTime,
     };
   },
   GoToStatsPage() {

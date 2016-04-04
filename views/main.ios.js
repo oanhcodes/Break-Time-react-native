@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F2',
   },
    header: {
-    marginTop: 10,
+    marginTop: 5,
   },
   mainTitle: {
     fontSize: 20,
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
   },
   aboutButtonText: {
     fontSize: 15,
+    textDecorationLine: 'underline',
   },
 });
 

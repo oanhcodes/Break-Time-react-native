@@ -96,7 +96,7 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={300} horizontal={true} index={this.state.index} loop={false}>
+        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
             Set Work Time Block
