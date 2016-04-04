@@ -4,7 +4,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight, 
+  TouchableHighlight,
   Picker,
   Image,
   NavigatorIOS
@@ -96,7 +96,7 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={300} horizontal={true} index={this.state.index} loop={false}>
+        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
             Set Work Time Block
@@ -146,9 +146,9 @@ var TimeBlock = React.createClass({
 
       </View>
       <View style={styles.container}>
-        <TouchableHighlight 
-          style={styles.button} 
-          underlayColor='#9BE8FF' 
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
           <Text
             style={styles.buttonText}>
@@ -171,14 +171,14 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'center',
-    fontSize: 20 
+    fontSize: 20
   },
   button: {
      backgroundColor: '#05B3DD',
       margin: 15,
       borderRadius: 8.150,
       width: 300,
-      height: 45 
+      height: 45
     },
       buttonText: {
         textAlign: 'center',
@@ -197,8 +197,9 @@ const styles = StyleSheet.create({
    whiteText: {
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
-  },
+  }
 });
 
 
