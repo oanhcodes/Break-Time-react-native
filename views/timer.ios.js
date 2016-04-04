@@ -1,4 +1,5 @@
 import React, {
+  Alert,
   AppRegistry,
   Component,
   StyleSheet,
@@ -11,7 +12,7 @@ import React, {
 
 var CountDown = require('./timerlogic.ios');
 var TimeBlock = require('./timeBlock.ios');
-
+var alertMessage = 'Confirm exit'
 class Timer extends Component {
 
   GoToMainPage() {
@@ -31,7 +32,14 @@ class Timer extends Component {
         <TouchableHighlight
           style={styles.button}
           underlayColor="#9BE8FF"
-          onPress={() => this.GoToMainPage()}>
+          onPress={() => Alert.alert(
+            'Exit',
+            alertMessage,
+            [
+              {text: 'Yes', onPress: () => this.GoToMainPage()},
+              {text: 'No', onPress: () => console.log('no')}
+            ]
+            )}>
           <Text style={styles.buttonText}>
             Stop
           </Text>
@@ -40,6 +48,7 @@ class Timer extends Component {
     )
   }
 }
+
 
 
 var styles = StyleSheet.create({
