@@ -18,14 +18,14 @@ class Stats extends Component {
   render(){
     return(
     <View style={styles.statsBackground}>
-    <Image source={require('../imgs/flowers.jpg')} style={styles.backgroundImage}>
+    <Image source={require('../imgs/desk.jpeg')} style={styles.backgroundImage}>
       <View style={styles.container}>
         <View style={[styles.wrapper,styles.statsContainer]}>
           <Text style={styles.statText1}>Finished!</Text>
           <Text style={styles.statText}>You had {this.props.cycles} timebox cycles</Text>
           <Text style={styles.statText}>You worked for {this.timeworked} minutes!</Text>
           <Text style={styles.statText}>You breaked for {this.breakedtime} minutes!</Text>
-          <Text style={styles.statText}>Your activity was: {this.props.breakActivity}</Text>
+          <Text style={styles.statText}>Your break activity was: {this.props.breakActivity}</Text>
         </View>
       </View>
     </Image>

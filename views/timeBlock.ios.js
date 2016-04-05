@@ -140,14 +140,14 @@ var TimeBlock = React.createClass({
           style={styles.picker}
           selectedValue={this.state.breakActivity}
           onValueChange={this.updateBreakActivity}>
-          <Picker.Item label='run' value='Go for a run' />
-          <Picker.Item label='walk' value='Go for a walk' />
-          <Picker.Item label='bike' value='Ride a bike' />
-          <Picker.Item label='yoga' value='Do yoga' />
-          <Picker.Item label='snack break' value='Have a snack' />
-          <Picker.Item label='coffee break' value='Coffee break' />
-          <Picker.Item label='play music' value='Play music' />
-          <Picker.Item label='sashay away' value='Sashay away' />
+          <Picker.Item label='Run' value='Go for a run' />
+          <Picker.Item label='Walk' value='Go for a walk' />
+          <Picker.Item label='Bike' value='Ride a bike' />
+          <Picker.Item label='Yoga' value='Do yoga' />
+          <Picker.Item label='Snack break' value='Have a snack' />
+          <Picker.Item label='Coffee break' value='Coffee break' />
+          <Picker.Item label='Play music' value='Play music' />
+          <Picker.Item label='Sashay away' value='Sashay away' />
         </Picker>
         </View>
         </Swiper>

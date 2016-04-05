@@ -31,23 +31,6 @@ class AboutApp extends Component {
             Porgy stoneroller minnow white marlin; unicorn fish platy snook ghoul, suckermouth armored catfish, deepwater cardinalfish zebra shark. Sixgill ray labyrinth fish, barramundi tilefish ribbonbearer Reef triggerfish whitefish piranha ghoul, goosefish butterflyfish pike.
           </Text>
         </View>
-        <View style={styles.team}>
-          <Text styles={styles.content}>
-          Meet our Team
-          </Text>
-          <View style={styles.teamPhoto}>
-             <Image source={require('../imgs/Linda.jpeg')} style={styles.image}>
-            </Image>
-             <Image source={require('../imgs/Kathryn.jpeg')} style={styles.image}>
-            </Image>
-             <Image source={require('../imgs/Leanne.jpeg')} style={styles.image}>
-            </Image>
-             <Image source={require('../imgs/Aaron.jpeg')} style={styles.image}>
-            </Image>
-             <Image source={require('../imgs/Tim.jpeg')} style={styles.image}>
-            </Image>
-          </View>
-        </View>
       </ScrollView>
 			</View>
 		);
@@ -74,7 +57,7 @@ const styles = StyleSheet.create({
   timeboxing: {
     flex: 1,
     padding: 50,
-    backgroundColor: '#BDF271',
+    backgroundColor: '#05B3DD',
   },
   team: {
     flex: 1,
