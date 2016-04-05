@@ -44,9 +44,9 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '60',
-      breaktime: '60',
-      breakActivity: 'run',
+      worktime: '5',
+      breaktime: '5',
+      breakActivity: 'Go for a run',
       index: 0
     };
   },
@@ -74,10 +74,9 @@ var TimeBlock = React.createClass({
 
   render() {
     return (
-
     <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} >
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -103,11 +102,11 @@ var TimeBlock = React.createClass({
             </Image>
         </Swiper>
       </View>
-      <View style={styles.container}>
+      <View style={styles.timeContainer}>
         <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
-            Set Work Time Block
+            1. Set Work Time Block
           </Text>
         <Picker
           style={styles.picker}
@@ -122,7 +121,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          Set Break Time Block
+          2. Set Break Time Block
         </Text>
         <Picker
           style={styles.picker}
@@ -136,7 +135,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          Choose a break activity.
+          3. Choose a break activity.
         </Text>
         <Picker
           style={styles.picker}
@@ -154,7 +153,7 @@ var TimeBlock = React.createClass({
         </View>
         </Swiper>
       </View>
-      <View style={styles.container}>
+      <View style={styles.buttonContainer}>
         <TouchableHighlight
           style={styles.button}
           underlayColor='#9BE8FF'
@@ -165,7 +164,6 @@ var TimeBlock = React.createClass({
         </TouchableHighlight>
       </View>
     </ScrollView>
-
     );
   }
 })
@@ -177,6 +175,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  buttonContainer: {
+    padding: 30,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  timeContainer: {
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+
   description: {
     textAlign: 'center',
     fontSize: 20
@@ -186,11 +199,14 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45 
-  },
-    buttonText: {
+    height: 45
+    },
+  buttonText: {
     textAlign: 'center',
-    margin: 15
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
   picker: {
     width: 300
@@ -204,17 +220,10 @@ const styles = StyleSheet.create({
   },
   whiteText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-  },
-  swipeText: {
-    fontWeight: 'bold',
-    color: '#FF9235'
-  },
-  buttonWrapper: {
-    backgroundColor: 'transparent'
-  }
+  }, 
 });
 
 

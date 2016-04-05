@@ -407,7 +407,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = T7Q3S97US3;
+						DevelopmentTeam = VZ6X4C746Z;
 					};
 				};
 			};
@@ -706,7 +706,7 @@
 				INFOPLIST_FILE = BreakTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.BreakTime65421;
 				PRODUCT_NAME = BreakTime;
 				PROVISIONING_PROFILE = "";
 			};
@@ -726,7 +726,7 @@
 				INFOPLIST_FILE = BreakTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.BreakTime65421;
 				PRODUCT_NAME = BreakTime;
 				PROVISIONING_PROFILE = "";
 			};
