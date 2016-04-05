@@ -28,7 +28,7 @@ var Settings = React.createClass ({
 	getInitialState() {
 		return {
 			activities: [],
-			text: "Enter an activity"
+			text: "Enter an activity here"
 		};
 	},
 
@@ -72,15 +72,14 @@ var Settings = React.createClass ({
 		});
 		return(
 			<View style={styles.container}>
+        <View style={styles.header}>
 				<Text style={styles.title}>
-					Customize Your Activities
+					Customize Your Breaks
 				</Text>
+        </View>
 				<View style={styles.activityListWrapper}>
 					{activities}
 				</View>
-				<Text style={styles.addActivityTitle}>
-					Add a new activity to your activities list:
-				</Text>
 				<View style={styles.textInputWrapper}>
 					<TextInput 
 						style={styles.textInput} 
@@ -111,9 +110,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 30
 	},
+  wrapper: {
+    alignSelf: 'stretch',
+  },
 	activityListWrapper: {
 		alignSelf: 'stretch',
-		backgroundColor: 'pink'
 	},
 	addActivityTitle: {
 
@@ -134,15 +135,18 @@ const styles = StyleSheet.create({
 		paddingLeft: 10
 	},
 	button: {
-		backgroundColor: '#05B3DD',
+    backgroundColor: '#05B3DD',
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 50,
-    justifyContent: 'center'
+    height: 45
   },
   buttonText: {
-  	textAlign: 'center'
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
   deleteActivity: {
   	backgroundColor: 'red',
@@ -165,8 +169,9 @@ liContainer: {
   flex: 2,
 },
 liText: {
-  color: '#333',
-  fontSize: 16,
+  textAlign: 'center',
+  color: 'black',
+  fontSize: 20,
 },
 })
 

@@ -164,7 +164,6 @@ var TimeBlock = React.createClass({
           onValueChange={this.updateBreakActivity}>
           {activitiesList}
         </Picker>
-         <Text style={styles.customOptions}>Customize your options in Settings</Text>
         </View>
         </Swiper>
       </View>
