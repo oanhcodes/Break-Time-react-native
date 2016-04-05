@@ -1,5 +1,6 @@
 import React, {
   Alert,
+  AppStateIOS,
   AppRegistry,
   Component,
   StyleSheet,
@@ -13,47 +14,37 @@ import React, {
 
 var CountDown = require('./timerlogic.ios');
 var TimeBlock = require('./timeBlock.ios');
-var alertMessage = 'Confirm exit'
+
+var exitTime;
 class Timer extends Component {
 
-  GoToMainPage() {
-    this.props.navigator.popToTop()
+  componentDidMount() {
+    AppStateIOS.addEventListener('change', this.SaveTime);
   }
+  
+  // ListenForStatusChange() {
+  //   AppStateIOS.addEventListener('change', SaveTime());
+  // }
 
   render(){
+    console.log(this.componentDidMount());
+    console.log(exitTime);
     return(
       <View style={styles.timerBackground}>
-      <Image source={require('../imgs/coffeebreak.jpg')} style={styles.backgroundImage}>
-        <View style={styles.container}>
-          <CountDown
-            // text={"Remaining Time"}
-            breakActivity={this.props.breakActivity}
-            breakTime={this.props.breaktime}
-            workTime={this.props.worktime}
-            navigator = {this.props.navigator}/>
-        </View>
-      </Image>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor="#9BE8FF"
-          onPress={() => Alert.alert(
-            'Exit',
-            alertMessage,
-            [
-              {text: 'Yes', onPress: () => this.GoToMainPage()},
-              {text: 'No', onPress: () => console.log('no')}
-            ]
-            )}>
-          <Text style={styles.buttonText}>
-            Stop
-          </Text>
-        </TouchableHighlight>
+        <Image source={require('../imgs/coffeebreak.jpg')} style={styles.backgroundImage}>
+          <View style={styles.container}>
+            <CountDown
+              // text={"Remaining Time"}
+              breakActivity={this.props.breakActivity}
+              breakTime={this.props.breaktime}
+              workTime={this.props.worktime}
+              navigator = {this.props.navigator}/>
+          </View>
+        </Image>
       </View>
     )
   }
 }
-
-
 
 var styles = StyleSheet.create({
   timerBackground: {
@@ -70,19 +61,7 @@ var styles = StyleSheet.create({
     marginTop:60,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  button: {
-    backgroundColor: '#05B3DD',
-    margin: 15,
-    borderRadius: 8.150,
-    width: 300,
-    height: 45
-  },
-  buttonText: {
-    textAlign: 'center',
-    margin: 15
   }
 });
-
 
 module.exports = Timer;
