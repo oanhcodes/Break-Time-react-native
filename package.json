@@ -11,6 +11,7 @@
     "react-native-audioplayer": "^0.2.0",
     "react-native-scrollable-tab-view": "^0.4.0",
     "react-native-sound": "^0.7.3",
+    "react-native-swipeout": "^2.0.12",
     "react-native-swiper": "^1.4.3",
     "react-native-timepicker": "^1.0.3"
   }
