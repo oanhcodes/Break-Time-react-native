@@ -11,12 +11,9 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
-<<<<<<< HEAD
-var moment = require('moment');
-=======
-var store = require('react-native-simple-store');
 
->>>>>>> master
+var moment = require('moment');
+var store = require('react-native-simple-store');
 var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
