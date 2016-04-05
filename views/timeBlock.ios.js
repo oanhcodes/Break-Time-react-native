@@ -42,8 +42,8 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '4',
-      breaktime: '60',
+      worktime: '1',
+      breaktime: '1',
       breakActivity: 'run',
       index: 0
     };
@@ -111,11 +111,11 @@ var TimeBlock = React.createClass({
           style={styles.picker}
           selectedValue={this.state.worktime}
           onValueChange={this.updateWorktime}>
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='25 Minutes' value='1500' />
-          <Picker.Item label='30 Minutes' value='1800' />
-          <Picker.Item label='45 Minutes' value='2700' />
-          <Picker.Item label='60 Minutes' value='3600' />
+          <Picker.Item label='15 Minutes' value='15' />
+          <Picker.Item label='25 Minutes' value='25' />
+          <Picker.Item label='30 Minutes' value='30' />
+          <Picker.Item label='45 Minutes' value='45' />
+          <Picker.Item label='60 Minutes' value='60' />
         </Picker>
         </View>
         <View style={styles.container}>
@@ -126,10 +126,10 @@ var TimeBlock = React.createClass({
           style={styles.picker}
           selectedValue={this.state.breaktime}
           onValueChange={this.updateBreaktime}>
-          <Picker.Item label='5 Minutes' value='300' />
-          <Picker.Item label='10 Minutes' value='600' />
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='20 Minutes' value='1200' />
+          <Picker.Item label='5 Minutes' value='5' />
+          <Picker.Item label='10 Minutes' value='10' />
+          <Picker.Item label='15 Minutes' value='15' />
+          <Picker.Item label='20 Minutes' value='20' />
         </Picker>
         </View>
         <View style={styles.container}>

@@ -11,6 +11,7 @@ import React, {
     Vibration
 } from 'react-native';
 
+var moment = require('moment');
 var TimerMixin = require('react-timer-mixin');
 var AudioPlayer = require('react-native-audioplayer');
 var StatsPage = require('./stats.ios');
@@ -26,8 +27,9 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      // time: this.props.workTime,
-      time: 10,
+      time: this.props.workTime,
+      workExpiry: moment(),
+      breakExpiry: moment()
     };
   },
   GoToMainPage() {
@@ -46,10 +48,37 @@ var CountDown = React.createClass({
     })
   },
   componentDidMount() {
-    this._countdown();
+    var workMin = this.props.workTime,
+        breakMin = this.props.breakTime,
+        currentTime = moment();
+        workExpiry = moment().add(workMin, 'minutes'),
+        breakExpiry = moment().add(breakMin, 'minutes');
+
+    this.setState({
+      workExpiry: workExpiry,
+      breakExpiry: breakExpiry
+    })
+
+    this._update = function() {
+      this.forceUpdate();
+    }.bind(this);
+
+    setInterval(this._update, 1000);
+    // this._countdown();
   },
   componentWillUnmount() {
+    clearInterval(this._update);
     onBreak = false;
+  },
+  getTimeLeft: function(expiry) {
+    var milliseconds = expiry.diff(moment())
+    return moment.duration(milliseconds);
+  },
+  getTimeToWorkExpiry: function() {
+    return this.getTimeLeft(this.state.workExpiry);
+  },
+  getTimeToBreakExpiry: function() {
+    return this.getTimeLeft(this.state.breakExpiry);
   },
   renderStop() {
     return (
@@ -71,14 +100,16 @@ var CountDown = React.createClass({
     ) 
   },
   render(){
-    <TouchableHighlight><Text> hello</Text></TouchableHighlight>
+
+    console.log(Math.floor(this.getTimeToBreakExpiry().asSeconds() % 60));
+
     if (onBreak) {
       return (
         <View>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text> 
-            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
-            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+            <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asMinutes())} minutes </Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asSeconds() % 60)} seconds</Text>
           </View>
           {this.renderStop()} 
         </View>
@@ -87,8 +118,8 @@ var CountDown = React.createClass({
       return (
         <View>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
-            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToWorkExpiry().asMinutes())} minutes </Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToWorkExpiry().asSeconds() % 60)} seconds</Text>
           </View>
           {this.renderStop()}
         </View>
