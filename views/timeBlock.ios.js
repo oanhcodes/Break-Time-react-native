@@ -95,7 +95,7 @@ var TimeBlock = React.createClass({
       var activitiesList = []
     }
     return (
-    <ScrollView style={styles.wrapper1} bounces={false} horizontal={false}>
+    <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
@@ -164,6 +164,7 @@ var TimeBlock = React.createClass({
           onValueChange={this.updateBreakActivity}>
           {activitiesList}
         </Picker>
+         <Text style={styles.customOptions}>Customize your options in Settings</Text>
         </View>
         </Swiper>
       </View>
@@ -241,6 +242,9 @@ const styles = StyleSheet.create({
   }, 
   background: {
     backgroundColor: '#F5FCFF',
+  },
+  customOptions: {
+    marginTop: 30,
   },
 });
 

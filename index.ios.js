@@ -10,6 +10,7 @@
 var Main = require('./views/main.ios');
 var Timer = require('./views/timer.ios')
 var Stats = require('./views/stats.ios')
+var Settings = require('./views/settingsPage.ios')
 import React, {
   AppRegistry,
   Component,

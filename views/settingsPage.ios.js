@@ -7,12 +7,14 @@ import React, {
   Text,
   Image,
   View,
+  ListView,
   NavigatorIOS,
-  TextInput
+  TextInput,
+  ScrollView,
 } from 'react-native';
 
 var store = require('react-native-simple-store');
-
+var Swipeout = require('react-native-swipeout');
 
 var Settings = React.createClass ({
 
@@ -45,27 +47,33 @@ var Settings = React.createClass ({
 		this.setState({activities: this.state.activities});
 	},
 
+
+
 	render(){
 		var that = this;
 		var activities = this.state.activities.map(function(activity, i){
-			return(
-				<View key={i} style={styles.activityListWrapper}>
-					<Text style={styles.saved}>{activity}</Text>
-					<TouchableHighlight 
-						style={styles.deleteActivity} 
-						underlayColor={'#9BE8FF'}
-						onPress={() => that.deleteData(i)}>
-						<Text style={styles.deleteButtonText}>
-							Delete
-						</Text>
-					</TouchableHighlight>
-				</View>
-			)
+      {var swipeoutBtns = [
+      {
+        backgroundColor: 'red',
+        underlayColor: 'orange',
+        text: 'Delete',
+        onPress: ()=>that.deleteData(i),
+      }
+    ]};
+		return(
+			<View key={i} style={styles.liContainer} >
+        <Swipeout right={swipeoutBtns} height={50}>
+          <View style={styles.li}>
+				   <Text style={styles.liText}>{activity}</Text>
+          </View>
+        </Swipeout>
+			</View>
+		)
 		});
 		return(
 			<View style={styles.container}>
 				<Text style={styles.title}>
-					Edit Your Activities
+					Customize Your Activities
 				</Text>
 				<View style={styles.activityListWrapper}>
 					{activities}
@@ -105,7 +113,6 @@ const styles = StyleSheet.create({
 	},
 	activityListWrapper: {
 		alignSelf: 'stretch',
-		height: 200,
 		backgroundColor: 'pink'
 	},
 	addActivityTitle: {
@@ -141,7 +148,26 @@ const styles = StyleSheet.create({
   	backgroundColor: 'red',
   	width: 50,
   	height: 50
-  }
+  },
+  listItem: {
+    backgroundColor: 'pink',
+  },
+ li: {
+  backgroundColor: '#fff',
+  borderBottomColor: '#eee',
+  borderColor: 'transparent',
+  borderWidth: 1,
+  paddingLeft: 16,
+  paddingTop: 14,
+  paddingBottom: 16,
+},
+liContainer: {
+  flex: 2,
+},
+liText: {
+  color: '#333',
+  fontSize: 16,
+},
 })
 
 module.exports = Settings;
