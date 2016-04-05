@@ -20,16 +20,14 @@ var TimerPage = require('./timer.ios');
 var TimerLogicPage = require('./timerlogic.ios');
 
 var indexContainer = [];
+var activityData;
 
 var TimeBlock = React.createClass({
 
   componentDidMount() {
     store.get('activities').then((data) => {
-      if (Object.keys(data).length > 0 || data.length > 0 ){
-        this.setState({activities: data})
-      } else {
-        this.setState({activities: []})
-      }
+      this.setState({activities: data})
+      activityData = data;
     })
   },
 
@@ -60,7 +58,7 @@ var TimeBlock = React.createClass({
       worktime: '5',
       breaktime: '5',
       breakActivity: 'Go for a run',
-      activities: ["LOL"],
+      activities: activityData,
       index: 0
     };
   },
@@ -87,11 +85,15 @@ var TimeBlock = React.createClass({
   },
 
   render() {
-    var activitiesList = this.state.activities.map(function(activity, i) {
-      return(
-        <Picker.Item key={i} label={activity} value={activity} />
-      )
-    })
+    if (this.state.activities !== undefined) {
+      var activitiesList = this.state.activities.map(function(activity, i) {
+        return(
+          <Picker.Item key={i} label={activity} value={activity} />
+        )
+      })
+    } else {
+      var activitiesList = []
+    }
     return (
     <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
