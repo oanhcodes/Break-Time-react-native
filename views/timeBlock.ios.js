@@ -72,9 +72,9 @@ var TimeBlock = React.createClass({
 
   render() {
     return (
-    <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
+    <ScrollView style={styles.wrapper1} bounces={false} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
               run.
@@ -150,8 +150,8 @@ var TimeBlock = React.createClass({
         </Picker>
         </View>
         </Swiper>
-
       </View>
+
       <View style={styles.buttonContainer}>
         <TouchableHighlight
           style={styles.button}
@@ -163,6 +163,7 @@ var TimeBlock = React.createClass({
           </Text>
         </TouchableHighlight>
       </View>
+
     </ScrollView>
     );
   }
@@ -176,7 +177,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   buttonContainer: {
-    padding: 30,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -224,6 +224,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   }, 
+  background: {
+    backgroundColor: '#F5FCFF',
+  },
 });
 
 
