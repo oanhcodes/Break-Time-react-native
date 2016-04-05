@@ -60,9 +60,9 @@ class Main extends Component {
             </Text>
             </Image>
 
-            <Image source={require('../imgs/focus.jpeg')} style={styles.backgroundImage} >
+            <Image source={require('../imgs/productivity.jpg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
-              Increase your productivity.
+              Increase productivity.
             </Text>
             </Image>
         </Swiper>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   whiteText: {
-    paddingLeft: 10,
+    textAlign: 'center',
     fontSize: 20,
     color: 'white',
     fontWeight: 'bold',

@@ -88,15 +88,15 @@ var TimeBlock = React.createClass({
             </Text>
             </Image>
 
-            <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
+            <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
-              snack break.
+              play music.
             </Text>
             </Image>
 
-            <Image source={require('../imgs/weights.jpg')} style={styles.backgroundImage} >
+            <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
-              lift weights.
+              eat snacks.
             </Text>
             </Image>
         </Swiper>
@@ -146,6 +146,7 @@ var TimeBlock = React.createClass({
           <Picker.Item label='yoga' value='Do yoga' />
           <Picker.Item label='snack break' value='Have a snack' />
           <Picker.Item label='coffee break' value='Coffee break' />
+          <Picker.Item label='play music' value='Play music' />
           <Picker.Item label='sashay away' value='Sashay away' />
         </Picker>
         </View>
