@@ -24,7 +24,8 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.workTime,
+      // time: this.props.workTime,
+      time: 10,
     };
   },
   GoToStatsPage() {
@@ -46,7 +47,6 @@ var CountDown = React.createClass({
     if (onBreak) {
       return (
         <View>
-          <Text style={styles.text}>{this.props.text}: </Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
             <Text style={styles.textStyle}>{this.props.breakActivity}</Text> 
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
@@ -57,7 +57,6 @@ var CountDown = React.createClass({
     } else {
       return (
         <View>
-          <Text style={styles.text}>{this.props.text}: </Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
@@ -115,7 +114,7 @@ var styles = StyleSheet.create({
     paddingBottom: 5
   },
   textStyle: {
-    color:'white',
+    color:'black',
     fontSize: 55
   },
   wrapper: {
@@ -126,9 +125,10 @@ var styles = StyleSheet.create({
   },
   buttonStyle: {
     padding:20,
-    backgroundColor: '#05B3DD',
-    borderRadius: 8
-  }
+    backgroundColor: 'white',
+    opacity: 0.75,
+    borderRadius: 8,
+  },
 });
 
 module.exports = CountDown;

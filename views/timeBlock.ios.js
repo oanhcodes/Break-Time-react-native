@@ -4,7 +4,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight, 
+  TouchableHighlight,
   Picker,
   Image,
   NavigatorIOS
@@ -88,6 +88,12 @@ var TimeBlock = React.createClass({
             </Text>
             </Image>
 
+            <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
+            <Text style={styles.whiteText}>
+              snack break.
+            </Text>
+            </Image>
+
             <Image source={require('../imgs/weights.jpg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
               lift weights.
@@ -96,7 +102,7 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={300} horizontal={true} index={this.state.index} loop={false}>
+        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
             Set Work Time Block
@@ -106,6 +112,7 @@ var TimeBlock = React.createClass({
           selectedValue={this.state.worktime}
           onValueChange={this.updateWorktime}>
           <Picker.Item label='15 Minutes' value='900' />
+          <Picker.Item label='25 Minutes' value='1500' />
           <Picker.Item label='30 Minutes' value='1800' />
           <Picker.Item label='45 Minutes' value='2700' />
           <Picker.Item label='60 Minutes' value='3600' />
@@ -133,22 +140,22 @@ var TimeBlock = React.createClass({
           style={styles.picker}
           selectedValue={this.state.breakActivity}
           onValueChange={this.updateBreakActivity}>
-          <Picker.Item label='run' value='run' />
-          <Picker.Item label='walk' value='walk' />
-          <Picker.Item label='bike' value='bike' />
-          <Picker.Item label='yoga' value='yoga' />
-          <Picker.Item label='weights' value='liftWeights' />
-          <Picker.Item label='push ups' value='pushUps' />
-          <Picker.Item label='sashay away' value='sashayAway' />
+          <Picker.Item label='run' value='Go for a run' />
+          <Picker.Item label='walk' value='Go for a walk' />
+          <Picker.Item label='bike' value='Ride a bike' />
+          <Picker.Item label='yoga' value='Do yoga' />
+          <Picker.Item label='snack break' value='Have a snack' />
+          <Picker.Item label='coffee break' value='Coffee break' />
+          <Picker.Item label='sashay away' value='Sashay away' />
         </Picker>
         </View>
         </Swiper>
 
       </View>
       <View style={styles.container}>
-        <TouchableHighlight 
-          style={styles.button} 
-          underlayColor='#9BE8FF' 
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
           <Text
             style={styles.buttonText}>
@@ -171,14 +178,14 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'center',
-    fontSize: 20 
+    fontSize: 20
   },
   button: {
      backgroundColor: '#05B3DD',
       margin: 15,
       borderRadius: 8.150,
       width: 300,
-      height: 45 
+      height: 45
     },
       buttonText: {
         textAlign: 'center',
@@ -197,8 +204,9 @@ const styles = StyleSheet.create({
    whiteText: {
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
-  },
+  }
 });
 
 
