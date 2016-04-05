@@ -15,8 +15,8 @@ var TimerMixin = require('react-timer-mixin');
 var AudioPlayer = require('react-native-audioplayer');
 var StatsPage = require('./stats.ios');
 
-var alertBreakMessage = 'BREAK TIME !';
-var alertWorkMessage = 'get to work!!!!';
+var alertBreakMessage = 'Now take a well deserved break.';
+var alertWorkMessage = 'Want to start another timeblock?';
 var onBreak = false;
 var cycles = 0;
 
@@ -24,7 +24,8 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.workTime,
+      // time: this.props.workTime,
+      time: 10,
     };
   },
   GoToStatsPage() {
@@ -46,9 +47,8 @@ var CountDown = React.createClass({
     if (onBreak) {
       return (
         <View>
-          <Text style={styles.text}>{this.props.text}: </Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle}>{this.props.breakActivity}</Text> 
+            <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text> 
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
           </View>
@@ -57,7 +57,6 @@ var CountDown = React.createClass({
     } else {
       return (
         <View>
-          <Text style={styles.text}>{this.props.text}: </Text>
           <View style={[styles.wrapper,styles.buttonStyle]}>
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
@@ -80,7 +79,7 @@ var CountDown = React.createClass({
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
-            'worktitle',
+            'You look refreshed!',
             alertWorkMessage,
             [
               {text: 'Run another timeblock', onPress: () => this._countdown()},
@@ -95,7 +94,7 @@ var CountDown = React.createClass({
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
-            'breaktitle',
+            'Great job staying on task!',
             alertBreakMessage,
             [
               {text: 'Take break', onPress: () => this._countdown()}
@@ -115,8 +114,12 @@ var styles = StyleSheet.create({
     paddingBottom: 5
   },
   textStyle: {
-    color:'white',
+    color:'black',
     fontSize: 55
+  },
+   textStyle2: {
+    color:'black',
+    fontSize: 14,
   },
   wrapper: {
     padding: 10,
@@ -126,9 +129,10 @@ var styles = StyleSheet.create({
   },
   buttonStyle: {
     padding:20,
-    backgroundColor: '#05B3DD',
-    borderRadius: 8
-  }
+    backgroundColor: 'white',
+    opacity: 0.75,
+    borderRadius: 8,
+  },
 });
 
 module.exports = CountDown;
