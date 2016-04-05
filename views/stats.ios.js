@@ -70,6 +70,7 @@ var styles = StyleSheet.create({
   },
   statText: {
     fontWeight: 'bold',
+    fontSize: 18,
   }
 });
 

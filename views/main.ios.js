@@ -47,7 +47,7 @@ class Main extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -67,17 +67,6 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableHighlight
-              style={styles.aboutButton}
-              underlayColor={'transparent'}
-              onPress={() =>
-              this.GoToAboutApp()}>
-              <Text style={styles.aboutButtonText} >
-                Learn More
-              </Text>
-            </TouchableHighlight>
-          </View>
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
@@ -97,6 +86,17 @@ class Main extends Component {
             </Text>
           </TouchableHighlight>
         </View>
+         <View style={styles.buttonsContainer}>
+            <TouchableHighlight
+              style={styles.aboutButton}
+              underlayColor={'transparent'}
+              onPress={() =>
+              this.GoToAboutApp()}>
+              <Text style={styles.aboutButtonText} >
+                Learn More
+              </Text>
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }
@@ -113,20 +113,23 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   mainTitle: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     margin: 15,
     fontWeight: 'bold',
   },
   whiteText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     color: 'white',
     fontWeight: 'bold',
   },
   buttonText: {
     textAlign: 'center',
-    margin: 15
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
   aboutLink: {
     textAlign: 'center',
@@ -155,7 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   aboutButtonText: {
-    fontSize: 15,
+    fontSize: 20,
     textDecorationLine: 'underline',
   },
 });

@@ -80,7 +80,10 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    margin: 15
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   }
 });
 
