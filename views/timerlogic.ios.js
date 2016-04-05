@@ -11,17 +11,19 @@ import React, {
     Vibration
 } from 'react-native';
 
-var moment = require('moment');
-var TimerMixin = require('react-timer-mixin');
-var AudioPlayer = require('react-native-audioplayer');
-var StatsPage = require('./stats.ios');
+var moment = require('moment'),
+    TimerMixin = require('react-timer-mixin'),
+    AudioPlayer = require('react-native-audioplayer'),
+    StatsPage = require('./stats.ios');
 
-var alertBreakMessage = 'Now take a well deserved break.';
-var alertWorkMessage = 'Want to start another timeblock?';
-var alertMessage = 'Confirm exit'
+var alertBreakMessage = 'Now take a well deserved break.',
+    alertWorkMessage = 'Want to start another timeblock?',
+    alertMessage = 'Confirm exit';
 
-var onBreak = false;
-var cycles = 0;
+var onBreak = false,
+    cycles = 0,
+    done = false,
+    first = true;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
@@ -48,6 +50,14 @@ var CountDown = React.createClass({
     })
   },
 
+  setNewBlockCycle() {
+    workExpiry = moment().add(this.state.workMin, 'minutes');
+    breakExpiry = moment().add(this.state.workMin, 'minutes').add(this.state.breakMin, 'minutes');
+    console.log(workExpiry);
+    console.log(breakExpiry);
+    this.checkTimer(workExpiry, breakExpiry);
+  },
+
   checkTimer(workExpireTime, breakExpireTime) {
       // how to we test seconds? imports number as minutes. where?
       // do alerts happen while out of application?
@@ -56,6 +66,8 @@ var CountDown = React.createClass({
       case true:
         if (moment().format() == breakExpireTime.format()) {
           onBreak = false;
+          // done = true;
+          first = false;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
@@ -66,7 +78,6 @@ var CountDown = React.createClass({
               {text: 'Finished', onPress: () => this.GoToStatsPage()}
             ]
           );
-          clearInterval();
         } else {
           this.forceUpdate();
         }
@@ -75,6 +86,7 @@ var CountDown = React.createClass({
         if (moment().format() == workExpireTime.format()) {
           cycles++;
           onBreak = true;
+          // done = true;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
@@ -84,7 +96,6 @@ var CountDown = React.createClass({
               {text: 'Take Break', onPress: () => this.forceUpdate()}
             ]
           );
-         clearInterval();
         } else {
           this.forceUpdate();
         }
@@ -95,28 +106,37 @@ var CountDown = React.createClass({
   componentDidMount() {
     var workMin = this.props.workTime,
         breakMin = this.props.breakTime,
-        currentTime = moment(),
-        breakExpiry = moment().add(breakMin, 'minutes'),
-        workExpiry = moment().add(workMin, 'minutes');
+        workExpiry = moment().add(workMin, 'minutes'),
+        breakExpiry = moment().add(workMin, 'minutes').add(breakMin, 'minutes'),
+        toggleTimer;
        
-    // if (onBreak) {
-    //   breakExpiry = moment().add(breakMin, 'minutes')  // moments are the same.
-    // } else {
-    //   workExpiry = moment().add(workMin, 'minutes')
-    // };
+    console.log(workExpiry);
+    console.log(breakExpiry);
 
-       
     this.setState({
+      workMin: workMin,
+      breakMin: breakMin,
       workExpiry: workExpiry,
       breakExpiry: breakExpiry
     })
 
     this._update = function() {
-      this.checkTimer(workExpiry, breakExpiry)
+      if (first) {
+        this.checkTimer(workExpiry, breakExpiry);
+      } else {
+        this.setNewBlockCycle();
+      }
+      
+      // if (done) {
+      //   clearInterval(toggleTimer);
+      //   done = false;
+      //   this.setNewBlockCycle();
+      //   setInterval(this._update, 1000);
+      // }
       // this.forceUpdate();
     }.bind(this);
 
-    setInterval(this._update, 1000);
+    toggleTimer = setInterval(this._update, 1000);
     // this._countdown();
   },
   componentWillUnmount() {
