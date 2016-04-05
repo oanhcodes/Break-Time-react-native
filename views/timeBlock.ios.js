@@ -1,5 +1,6 @@
 import React, {
   ScrollView,
+  AsyncStorage,
   Component,
   StyleSheet,
   Text,
@@ -10,6 +11,8 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
+var store = require('react-native-simple-store');
+
 var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
@@ -17,8 +20,16 @@ var TimerPage = require('./timer.ios');
 var TimerLogicPage = require('./timerlogic.ios');
 
 var indexContainer = [];
+var activityData;
 
 var TimeBlock = React.createClass({
+
+  componentDidMount() {
+    store.get('activities').then((data) => {
+      this.setState({activities: data})
+      activityData = data;
+    })
+  },
 
   GoToTimerPage() {
     this.props.navigator.push({
@@ -47,6 +58,7 @@ var TimeBlock = React.createClass({
       worktime: '5',
       breaktime: '5',
       breakActivity: 'Go for a run',
+      activities: activityData,
       index: 0
     };
   },
@@ -73,6 +85,15 @@ var TimeBlock = React.createClass({
   },
 
   render() {
+    if (this.state.activities !== undefined) {
+      var activitiesList = this.state.activities.map(function(activity, i) {
+        return(
+          <Picker.Item key={i} label={activity} value={activity} />
+        )
+      })
+    } else {
+      var activitiesList = []
+    }
     return (
     <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
       <View style={styles.container}>
@@ -141,14 +162,7 @@ var TimeBlock = React.createClass({
           style={styles.picker}
           selectedValue={this.state.breakActivity}
           onValueChange={this.updateBreakActivity}>
-          <Picker.Item label='Run' value='Go for a run' />
-          <Picker.Item label='Walk' value='Go for a walk' />
-          <Picker.Item label='Bike' value='Ride a bike' />
-          <Picker.Item label='Yoga' value='Do yoga' />
-          <Picker.Item label='Snack break' value='Have a snack' />
-          <Picker.Item label='Coffee break' value='Coffee break' />
-          <Picker.Item label='Play music' value='Play music' />
-          <Picker.Item label='Sashay away' value='Sashay away' />
+          {activitiesList}
         </Picker>
         </View>
         </Swiper>

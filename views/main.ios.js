@@ -1,5 +1,6 @@
 import React, {
   Alert,
+  AsyncStorage,
   AppRegistry,
   Component,
   StyleSheet,
@@ -19,8 +20,21 @@ var setTimeBlockPage = require('./timeBlock.ios');
 var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
 
+var store = require('react-native-simple-store')
+
 
 class Main extends Component {
+
+  componentDidMount() {
+    store.get('activities').then((data) => {
+      if (Object.keys(data).length > 0 || data.length > 0 ){
+        this.setState({activities: data})
+      } else {
+        this.setState({activities: ["Run", "Sashay Away"]});
+        store.save('activities', ["Run", "Sashay Away"])
+      }
+    })
+  }
 
   GoToAboutApp() {
     this.props.navigator.push({

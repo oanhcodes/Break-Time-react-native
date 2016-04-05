@@ -15,15 +15,13 @@ var store = require('react-native-simple-store');
 
 
 var Settings = React.createClass ({
+
 	componentDidMount() {
-		store.get('activities').then((data) => {
-			if (Object.keys(data).length > 0 || data.length > 0 ){
-				this.setState({activities: data})
-			} else {
-				this.setState({activities: []})
-			}
-		})
-	},
+    store.get('activities').then((data) => {
+      this.setState({activities: data})
+      activityData = data;
+    })
+  },
 
 	getInitialState() {
 		return {
