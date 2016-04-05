@@ -10,6 +10,7 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
+var moment = require('moment');
 var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
@@ -26,16 +27,6 @@ var TimeBlock = React.createClass({
         worktime: parseInt(this.state.worktime),
         breaktime: parseInt(this.state.breaktime),
         breakActivity: this.state.breakActivity
-      }
-    })
-  },
-
-  GoToTimerLogicPage() {
-    this.props.navigator.push({
-      title: "Timer Logic",
-      component: TimerLogicPage,
-      passProps: {
-      breakActivity: this.state.breakActivity
       }
     })
   },

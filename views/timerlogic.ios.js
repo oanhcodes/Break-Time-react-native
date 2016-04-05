@@ -47,20 +47,73 @@ var CountDown = React.createClass({
       }
     })
   },
+
+  checkTimer(workExpireTime, breakExpireTime) {
+      // how to we test seconds? imports number as minutes. where?
+      // do alerts happen while out of application?
+
+    switch (onBreak) {
+      case true:
+        if (moment().format() == breakExpireTime.format()) {
+          onBreak = false;
+          Vibration.vibrate();
+          AudioPlayer.play('crabhorn.mp3');
+          Alert.alert(
+            'You look so refreshed!',
+            alertWorkMessage,
+            [
+              {text: 'Run another timeblock', onPress: () => this.forceUpdate()},
+              {text: 'Finished', onPress: () => this.GoToStatsPage()}
+            ]
+          );
+          clearInterval();
+        } else {
+          this.forceUpdate();
+        }
+        break;
+      case false:
+        if (moment().format() == workExpireTime.format()) {
+          cycles++;
+          onBreak = true;
+          Vibration.vibrate();
+          AudioPlayer.play('crabhorn.mp3');
+          Alert.alert(
+            'Great job staying on task!',
+            alertBreakMessage,
+            [
+              {text: 'Take Break', onPress: () => this.forceUpdate()}
+            ]
+          );
+         clearInterval();
+        } else {
+          this.forceUpdate();
+        }
+        break;
+    }
+  },
+
   componentDidMount() {
     var workMin = this.props.workTime,
         breakMin = this.props.breakTime,
-        currentTime = moment();
-        workExpiry = moment().add(workMin, 'minutes'),
-        breakExpiry = moment().add(breakMin, 'minutes');
+        currentTime = moment(),
+        breakExpiry = moment().add(breakMin, 'minutes'),
+        workExpiry = moment().add(workMin, 'minutes');
+       
+    // if (onBreak) {
+    //   breakExpiry = moment().add(breakMin, 'minutes')  // moments are the same.
+    // } else {
+    //   workExpiry = moment().add(workMin, 'minutes')
+    // };
 
+       
     this.setState({
       workExpiry: workExpiry,
       breakExpiry: breakExpiry
     })
 
     this._update = function() {
-      this.forceUpdate();
+      this.checkTimer(workExpiry, breakExpiry)
+      // this.forceUpdate();
     }.bind(this);
 
     setInterval(this._update, 1000);
@@ -126,46 +179,46 @@ var CountDown = React.createClass({
       )
     }
   },
-  _countdown(){
-    var timer = function () {
-      var time = this.state.time - 1;
-      this.setState({time: time});
-      if (time > 0) {
-        this.setTimeout(timer, 1000);
-      } else {
-        if (onBreak) {
-          // on break going to work time
-          this.setState({time: this.props.workTime});
-          onBreak = false;
-          Vibration.vibrate();
-          AudioPlayer.play('crabhorn.mp3');
-          Alert.alert(
-            'You look refreshed!',
-            alertWorkMessage,
-            [
-              {text: 'Run another timeblock', onPress: () => this._countdown()},
-              {text: 'Finished', onPress: () => this.GoToStatsPage()}
-            ]
-          );
-        } else {
-          // working, time for a break!
-          this.setState({time: this.props.breakTime});
-          onBreak = true;
-          cycles++;
-          Vibration.vibrate();
-          AudioPlayer.play('crabhorn.mp3');
-          Alert.alert(
-            'Great job staying on task!',
-            alertBreakMessage,
-            [
-              {text: 'Take break', onPress: () => this._countdown()}
-            ]
-          );
-        }
-      }
-    };
-    this.setTimeout(timer, 1000);
-  }
+  // _countdown(){
+  //   var timer = function () {
+  //     var time = this.state.time - 1;
+  //     this.setState({time: time});
+  //     if (time > 0) {
+  //       this.setTimeout(timer, 1000);
+  //     } else {
+  //       if (onBreak) {
+  //         // on break going to work time
+  //         this.setState({time: this.props.workTime});
+  //         onBreak = false;
+  //         Vibration.vibrate();
+  //         AudioPlayer.play('crabhorn.mp3');
+  //         Alert.alert(
+  //           'You look refreshed!',
+  //           alertWorkMessage,
+  //           [
+  //             {text: 'Run another timeblock', onPress: () => this._countdown()},
+  //             {text: 'Finished', onPress: () => this.GoToStatsPage()}
+  //           ]
+  //         );
+  //       } else {
+  //         // working, time for a break!
+  //         this.setState({time: this.props.breakTime});
+  //         onBreak = true;
+  //         cycles++;
+  //         Vibration.vibrate();
+  //         AudioPlayer.play('crabhorn.mp3');
+  //         Alert.alert(
+  //           'Great job staying on task!',
+  //           alertBreakMessage,
+  //           [
+  //             {text: 'Take break', onPress: () => this._countdown()}
+  //           ]
+  //         );
+  //       }
+  //     }
+  //   };
+  //   this.setTimeout(timer, 1000);
+  // }
 });
 
 var styles = StyleSheet.create({
