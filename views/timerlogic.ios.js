@@ -17,6 +17,7 @@ var StatsPage = require('./stats.ios');
 
 var alertBreakMessage = 'BREAK TIME !';
 var alertWorkMessage = 'get to work!!!!';
+var alertMessage = 'Confirm exit'
 var onBreak = false;
 var cycles = 0;
 
@@ -26,6 +27,9 @@ var CountDown = React.createClass({
     return {
       time: this.props.workTime,
     };
+  },
+  GoToMainPage() {
+    this.props.navigator.popToTop()
   },
   GoToStatsPage() {
     this.props.navigator.push({
@@ -42,7 +46,31 @@ var CountDown = React.createClass({
   componentDidMount(){
     this._countdown();
   },
+  exit() {
+    onBreak = false;
+    this.GoToMainPage();
+  },
+  renderStop() {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        underlayColor="#9BE8FF"
+        onPress={() => Alert.alert(
+          'Exit',
+          alertMessage,
+          [
+            {text: 'Yes', onPress: () => this.exit()},
+            {text: 'No', onPress: () => console.log('no')}
+          ]
+          )}>
+        <Text style={styles.buttonText}>
+          Stop
+        </Text>
+      </TouchableHighlight>
+    ) 
+  },
   render(){
+    <TouchableHighlight><Text> hello</Text></TouchableHighlight>
     if (onBreak) {
       return (
         <View>
@@ -52,6 +80,7 @@ var CountDown = React.createClass({
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
           </View>
+          {this.renderStop()} 
         </View>
       )
     } else {
@@ -62,6 +91,7 @@ var CountDown = React.createClass({
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
           </View>
+          {this.renderStop()}
         </View>
       )
     }
@@ -128,6 +158,17 @@ var styles = StyleSheet.create({
     padding:20,
     backgroundColor: '#05B3DD',
     borderRadius: 8
+  },
+  button: {
+    backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45
+  },
+  buttonText: {
+    textAlign: 'center',
+    margin: 15
   }
 });
 

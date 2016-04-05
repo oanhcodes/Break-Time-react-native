@@ -1,5 +1,6 @@
 import React, {
   Alert,
+  AppStateIOS,
   AppRegistry,
   Component,
   StyleSheet,
@@ -12,14 +13,27 @@ import React, {
 
 var CountDown = require('./timerlogic.ios');
 var TimeBlock = require('./timeBlock.ios');
-var alertMessage = 'Confirm exit'
+
+var exitTime;
 class Timer extends Component {
 
-  GoToMainPage() {
-    this.props.navigator.popToTop()
+  componentDidMount() {
+    AppStateIOS.addEventListener('change', this.SaveTime);
+  }
+  
+
+
+  // ListenForStatusChange() {
+  //   AppStateIOS.addEventListener('change', SaveTime());
+  // }
+
+  SaveTime() {
+    exitTime = Date.now();
   }
 
   render(){
+    console.log(this.componentDidMount());
+    console.log(exitTime);
     return(
       <View style={styles.container}>
         <CountDown
@@ -29,21 +43,6 @@ class Timer extends Component {
           workTime={this.props.worktime}
           navigator = {this.props.navigator}
         />
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor="#9BE8FF"
-          onPress={() => Alert.alert(
-            'Exit',
-            alertMessage,
-            [
-              {text: 'Yes', onPress: () => this.GoToMainPage()},
-              {text: 'No', onPress: () => console.log('no')}
-            ]
-            )}>
-          <Text style={styles.buttonText}>
-            Stop
-          </Text>
-        </TouchableHighlight>
       </View>
     )
   }
