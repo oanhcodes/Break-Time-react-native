@@ -43,8 +43,11 @@ var CountDown = React.createClass({
       }
     })
   },
-  componentDidMount(){
+  componentDidMount() {
     this._countdown();
+  },
+  componentWillUnmount() {
+    onBreak = false;
   },
   exit() {
     onBreak = false;
