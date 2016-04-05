@@ -13,10 +13,15 @@ import React, {
 
 var store = require('react-native-simple-store');
 
+
 var Settings = React.createClass ({
 	componentDidMount() {
 		store.get('activities').then((data) => {
-			this.setState({activities: data})
+			if (Object.keys(data).length > 0 || data.length > 0 ){
+				this.setState({activities: data})
+			} else {
+				this.setState({activities: []})
+			}
 		})
 	},
 
@@ -28,23 +33,37 @@ var Settings = React.createClass ({
 	},
 
 	saveData(value) {
-		if (this.state.activities === null) {
-			this.setState({activities: [value]})
-		} else {
-			this.state.activities.push(value);
-			this.setState({activities: this.state.activities});
-		}
+		this.state.activities.push(value);
+		this.setState({activities: this.state.activities});
 		store.save('activities', this.state.activities)
+	},
+
+	deleteData(index) {
+		this.state.activities.splice(index, 1);
+		store.save('activities', this.state.activities);
+		store.get('activities').then((data) => {
+			console.log("updated data:" + data)
+		})
+		this.setState({activities: this.state.activities});
 	},
 
 	render(){
 		var that = this;
-		var activities = that.state.activities.map(function(activity){
+		var activities = this.state.activities.map(function(activity, i){
 			return(
-				<Text style={styles.saved}>{activity}</Text>
+				<View key={i} style={styles.activityListWrapper}>
+					<Text style={styles.saved}>{activity}</Text>
+					<TouchableHighlight 
+						style={styles.deleteActivity} 
+						underlayColor={'#9BE8FF'}
+						onPress={() => that.deleteData(i)}>
+						<Text style={styles.deleteButtonText}>
+							Delete
+						</Text>
+					</TouchableHighlight>
+				</View>
 			)
 		});
-		console.log(activities);
 		return(
 			<View style={styles.container}>
 				<Text style={styles.title}>
@@ -89,7 +108,7 @@ const styles = StyleSheet.create({
 	activityListWrapper: {
 		alignSelf: 'stretch',
 		height: 200,
-		backgroundColor: 'red'
+		backgroundColor: 'pink'
 	},
 	addActivityTitle: {
 
@@ -119,6 +138,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
   	textAlign: 'center'
+  },
+  deleteActivity: {
+  	backgroundColor: 'red',
+  	width: 50,
+  	height: 50
   }
 })
 
