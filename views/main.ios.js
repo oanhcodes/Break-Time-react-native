@@ -8,6 +8,7 @@ import React, {
   Image,
   View,
   NavigatorIOS,
+  ScrollView,
 } from 'react-native';
 
 
@@ -21,19 +22,19 @@ var Swiper = require('react-native-swiper');
 
 class Main extends Component {
 
-	GoToAboutApp() {
-		this.props.navigator.push({
-			title: 'About',
-			component: aboutAppPage
-		})
-	}
+  GoToAboutApp() {
+    this.props.navigator.push({
+      title: 'About',
+      component: aboutAppPage
+    })
+  }
 
-	GoToSetTimeBlock() {
-		this.props.navigator.push({
-			title: 'Set Time Block',
-			component: setTimeBlockPage
-		})
-	}
+  GoToSetTimeBlock() {
+    this.props.navigator.push({
+      title: 'Set Time Block',
+      component: setTimeBlockPage
+    })
+  }
 
 	GoToSettings() {
 		this.props.navigator.push({
@@ -42,15 +43,16 @@ class Main extends Component {
 		})
 	}
 
-	render() {
+  render() {
     return (
-			<View style={styles.container}>
-				<Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
-						<Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
-		  			<Text style={styles.mainTitle}>
-		    			Break Time
-		  			</Text>
-		  			</Image>
+      <View style={styles.container}>
+        <View style={styles.header}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
+            <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
+            <Text style={styles.mainTitle}>
+              Break Time
+            </Text>
+            </Image>
 
             <Image source={require('../imgs/bikeride.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
@@ -58,42 +60,45 @@ class Main extends Component {
             </Text>
             </Image>
 
-            <Image source={require('../imgs/focus.jpeg')} style={styles.backgroundImage} >
+            <Image source={require('../imgs/productivity.jpg')} style={styles.backgroundImage} >
             <Text style={styles.whiteText}>
-              Increase your producivity.
+              Increase productivity.
             </Text>
             </Image>
-		  	</Swiper>
-			  <View style={styles.buttonsContainer}>
-			    <TouchableHighlight 
-            style={styles.button} 
-            underlayColor={'#9BE8FF'} 
-            onPress={() => this.GoToSetTimeBlock()}>
-			      <Text style={styles.buttonText}>
-			        Set Time Block
-			      </Text>
-			    </TouchableHighlight>
-			    <TouchableHighlight
-			    	style={styles.button}
-			    	underlayColor={'#9BE8FF'}
-			    	onPress={() => this.GoToSettings()}>
-			      <Text style={styles.buttonText}>
-			        Settings
-			      </Text>
-			    </TouchableHighlight>
+        </Swiper>
         </View>
+          <View style={styles.buttonsContainer}>
+            <TouchableHighlight
+              style={styles.aboutButton}
+              underlayColor={'transparent'}
+              onPress={() =>
+              this.GoToAboutApp()}>
+              <Text style={styles.aboutButtonText} >
+                Learn More
+              </Text>
+            </TouchableHighlight>
+          </View>
+        <View style={styles.buttonsContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor={'#9BE8FF'}
+            onPress={() => this.GoToSetTimeBlock()}>
+            <Text style={styles.buttonText}>
+              Set Time Block
+            </Text>
+          </TouchableHighlight>
 
-			  <TouchableHighlight
-			  	style={styles.aboutButton}
-          underlayColor={'transparent'}
-			    onPress={() =>
-			   	this.GoToAboutApp()}>
-			    <Text style={styles.aboutLink} >
-			    	Learn More
-			    </Text>
-			  </TouchableHighlight>
-			</View>
-		);
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor={'#9BE8FF'}
+            onPress={() => this.GoToSettings()}>
+            <Text style={styles.buttonText}>
+              Settings
+            </Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
   }
 }
 
@@ -104,24 +109,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
   },
+   header: {
+    marginTop: 5,
+  },
   mainTitle: {
     fontSize: 20,
     textAlign: 'center',
     margin: 15,
+    fontWeight: 'bold',
   },
   whiteText: {
-    paddingLeft: 10,
+    textAlign: 'center',
     fontSize: 20,
     color: 'white',
+    fontWeight: 'bold',
   },
   buttonText: {
     textAlign: 'center',
     margin: 15
-  },
-  aboutButton: {
-  	position: 'absolute',
-  	bottom: 30,
-  	right: 30
   },
   aboutLink: {
     textAlign: 'center',
@@ -141,32 +146,16 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  wrapper: {
-  	// flex: 1,
-  	// justifyContent: 'center',
-  },
   backgroundImage: {
-  	// width: 300,
-  	width: null,
-  	height: null,
-  	flex: 1,
-  	resizeMode: 'cover',
-  	justifyContent: 'center'
-  },
-  slide1: {
-  	alignItems: 'center',
-  	flex: 1,
-  	justifyContent: 'center',
-  },
-  slide2: {
-  	flex: 1,
-  	justifyContent: 'center',
-  	backgroundColor: '#29D9C2',
-  },
-  slide3: {
+    width: null,
+    height: null,
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#BDF271',
+    resizeMode: 'cover',
+    justifyContent: 'center'
+  },
+  aboutButtonText: {
+    fontSize: 15,
+    textDecorationLine: 'underline',
   },
 });
 

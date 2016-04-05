@@ -4,7 +4,7 @@ import React, {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight, 
+  TouchableHighlight,
   Picker,
   Image,
   NavigatorIOS
@@ -90,69 +90,74 @@ var TimeBlock = React.createClass({
               </Text>
             </Image>
 
-            <Image source={require('../imgs/weights.jpg')} style={styles.backgroundImage} >
-              <Text style={styles.whiteText}>
-                lift weights.
-              </Text>
+            <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
+            <Text style={styles.whiteText}>
+              play music.
+            </Text>
+            </Image>
+
+            <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
+            <Text style={styles.whiteText}>
+              eat snacks.
+            </Text>
             </Image>
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} buttonWrapperStyle={styles.buttonWrapper} height={300} horizontal={true} index={this.state.index} loop={false} showsButtons={true}>
-          <View style={styles.container}>
-            <Text style={styles.description}>
-              Set Work Time Block
-            </Text>
-            <Picker
-              style={styles.picker}
-              selectedValue={this.state.worktime}
-              onValueChange={this.updateWorktime}>
-              <Picker.Item label='15 Minutes' value='900' />
-              <Picker.Item label='30 Minutes' value='1800' />
-              <Picker.Item label='45 Minutes' value='2700' />
-              <Picker.Item label='60 Minutes' value='3600' />
-            </Picker>
-          </View>
-          <View style={styles.container}>
-            <Text style={styles.description}>
-              Set Break Time Block
-            </Text>
-            <Picker
-              style={styles.picker}
-              selectedValue={this.state.breaktime}
-              onValueChange={this.updateBreaktime}>
-              <Picker.Item label='5 Minutes' value='300' />
-              <Picker.Item label='10 Minutes' value='600' />
-              <Picker.Item label='15 Minutes' value='900' />
-              <Picker.Item label='20 Minutes' value='1200' />
-            </Picker>
-          </View>
-          <View style={styles.container}>
+        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
+        <View style={styles.container}>
           <Text style={styles.description}>
-              Choose a break activity.
-            </Text>
-            <Picker
-              style={styles.picker}
-              selectedValue={this.state.breakActivity}
-              onValueChange={this.updateBreakActivity}>
-              <Picker.Item label='run' value='run' />
-              <Picker.Item label='walk' value='walk' />
-              <Picker.Item label='bike' value='bike' />
-              <Picker.Item label='yoga' value='yoga' />
-              <Picker.Item label='weights' value='liftWeights' />
-              <Picker.Item label='push ups' value='pushUps' />
-              <Picker.Item label='sashay away' value='sashayAway' />
-            </Picker>
-          </View>
+            Set Work Time Block
+          </Text>
+        <Picker
+          style={styles.picker}
+          selectedValue={this.state.worktime}
+          onValueChange={this.updateWorktime}>
+          <Picker.Item label='15 Minutes' value='900' />
+          <Picker.Item label='25 Minutes' value='1500' />
+          <Picker.Item label='30 Minutes' value='1800' />
+          <Picker.Item label='45 Minutes' value='2700' />
+          <Picker.Item label='60 Minutes' value='3600' />
+        </Picker>
+        </View>
+        <View style={styles.container}>
+        <Text style={styles.description}>
+          Set Break Time Block
+        </Text>
+        <Picker
+          style={styles.picker}
+          selectedValue={this.state.breaktime}
+          onValueChange={this.updateBreaktime}>
+          <Picker.Item label='5 Minutes' value='300' />
+          <Picker.Item label='10 Minutes' value='600' />
+          <Picker.Item label='15 Minutes' value='900' />
+          <Picker.Item label='20 Minutes' value='1200' />
+        </Picker>
+        </View>
+        <View style={styles.container}>
+        <Text style={styles.description}>
+          Choose a break activity.
+        </Text>
+        <Picker
+          style={styles.picker}
+          selectedValue={this.state.breakActivity}
+          onValueChange={this.updateBreakActivity}>
+          <Picker.Item label='Run' value='Go for a run' />
+          <Picker.Item label='Walk' value='Go for a walk' />
+          <Picker.Item label='Bike' value='Ride a bike' />
+          <Picker.Item label='Yoga' value='Do yoga' />
+          <Picker.Item label='Snack break' value='Have a snack' />
+          <Picker.Item label='Coffee break' value='Coffee break' />
+          <Picker.Item label='Play music' value='Play music' />
+          <Picker.Item label='Sashay away' value='Sashay away' />
+        </Picker>
+        </View>
         </Swiper>
       </View>
       <View style={styles.container}>
-        <Text style={styles.swipeText}>
-          Swipe left for more options
-        </Text>
-        <TouchableHighlight 
-          style={styles.button} 
-          underlayColor='#9BE8FF' 
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
           <Text style={styles.buttonText}>
             Start
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'center',
-    fontSize: 20 
+    fontSize: 20
   },
   button: {
     backgroundColor: '#05B3DD',
@@ -200,6 +205,7 @@ const styles = StyleSheet.create({
   whiteText: {
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
   },
   swipeText: {
