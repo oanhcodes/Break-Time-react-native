@@ -21,15 +21,9 @@ class Timer extends Component {
     AppStateIOS.addEventListener('change', this.SaveTime);
   }
   
-
-
   // ListenForStatusChange() {
   //   AppStateIOS.addEventListener('change', SaveTime());
   // }
-
-  SaveTime() {
-    exitTime = Date.now();
-  }
 
   render(){
     console.log(this.componentDidMount());
@@ -48,8 +42,6 @@ class Timer extends Component {
   }
 }
 
-
-
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -57,19 +49,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF'
-  },
-  button: {
-    backgroundColor: '#05B3DD',
-    margin: 15,
-    borderRadius: 8.150,
-    width: 300,
-    height: 45
-  },
-  buttonText: {
-    textAlign: 'center',
-    margin: 15
   }
 });
-
 
 module.exports = Timer;

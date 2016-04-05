@@ -49,10 +49,6 @@ var CountDown = React.createClass({
   componentWillUnmount() {
     onBreak = false;
   },
-  exit() {
-    onBreak = false;
-    this.GoToMainPage();
-  },
   renderStop() {
     return (
       <TouchableHighlight
@@ -62,7 +58,7 @@ var CountDown = React.createClass({
           'Exit',
           alertMessage,
           [
-            {text: 'Yes', onPress: () => this.exit()},
+            {text: 'Yes', onPress: () => this.GoToMainPage()},
             {text: 'No', onPress: () => console.log('no')}
           ]
           )}>
