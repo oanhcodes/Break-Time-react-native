@@ -7,12 +7,14 @@ import React, {
   Text,
   Image,
   View,
+  ListView,
   NavigatorIOS,
-  TextInput
+  TextInput,
+  ScrollView,
 } from 'react-native';
 
 var store = require('react-native-simple-store');
-
+var Swipeout = require('react-native-swipeout');
 
 var Settings = React.createClass ({
 
@@ -25,7 +27,7 @@ var Settings = React.createClass ({
 	getInitialState() {
 		return {
 			activities: [],
-			text: "Enter an activity"
+			text: "Enter an activity here"
 		};
 	},
 
@@ -41,34 +43,39 @@ var Settings = React.createClass ({
 		this.setState({activities: this.state.activities});
 	},
 
+
+
 	render(){
 		var that = this;
 		var activities = this.state.activities.map(function(activity, i){
-			return(
-				<View key={i} style={styles.activityListWrapper}>
-					<Text style={styles.saved}>{activity}</Text>
-					<TouchableHighlight 
-						style={styles.deleteActivity} 
-						underlayColor={'#9BE8FF'}
-						onPress={() => that.deleteData(i)}>
-						<Text style={styles.deleteButtonText}>
-							Delete
-						</Text>
-					</TouchableHighlight>
-				</View>
-			)
+      {var swipeoutBtns = [
+      {
+        backgroundColor: 'red',
+        underlayColor: 'orange',
+        text: 'Delete',
+        onPress: ()=>that.deleteData(i),
+      }
+    ]};
+		return(
+			<View key={i} style={styles.liContainer} >
+        <Swipeout right={swipeoutBtns} height={50}>
+          <View style={styles.li}>
+				   <Text style={styles.liText}>{activity}</Text>
+          </View>
+        </Swipeout>
+			</View>
+		)
 		});
 		return(
 			<View style={styles.container}>
+        <View style={styles.header}>
 				<Text style={styles.title}>
-					Edit Your Activities
+					Customize Your Breaks
 				</Text>
+        </View>
 				<View style={styles.activityListWrapper}>
 					{activities}
 				</View>
-				<Text style={styles.addActivityTitle}>
-					Add a new activity to your activities list:
-				</Text>
 				<View style={styles.textInputWrapper}>
 					<TextInput 
 						style={styles.textInput} 
@@ -99,10 +106,11 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 30
 	},
+  wrapper: {
+    alignSelf: 'stretch',
+  },
 	activityListWrapper: {
 		alignSelf: 'stretch',
-		height: 200,
-		backgroundColor: 'pink'
 	},
 	addActivityTitle: {
 
@@ -123,21 +131,44 @@ const styles = StyleSheet.create({
 		paddingLeft: 10
 	},
 	button: {
-		backgroundColor: '#05B3DD',
+    backgroundColor: '#05B3DD',
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 50,
-    justifyContent: 'center'
+    height: 45
   },
   buttonText: {
-  	textAlign: 'center'
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
   deleteActivity: {
   	backgroundColor: 'red',
   	width: 50,
   	height: 50
-  }
+  },
+  listItem: {
+    backgroundColor: 'pink',
+  },
+ li: {
+  backgroundColor: '#fff',
+  borderBottomColor: '#eee',
+  borderColor: 'transparent',
+  borderWidth: 1,
+  paddingLeft: 16,
+  paddingTop: 14,
+  paddingBottom: 16,
+},
+liContainer: {
+  flex: 2,
+},
+liText: {
+  textAlign: 'center',
+  color: 'black',
+  fontSize: 20,
+},
 })
 
 module.exports = Settings;
