@@ -42,8 +42,8 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '60',
-      breaktime: '60',
+      worktime: '5',
+      breaktime: '5',
       breakActivity: 'Go for a run',
       index: 0
     };
