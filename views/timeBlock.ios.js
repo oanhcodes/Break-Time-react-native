@@ -14,7 +14,9 @@ var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
 var TimerPage = require('./timer.ios');
-var TimerLogicPage = require('./timerlogic.ios')
+var TimerLogicPage = require('./timerlogic.ios');
+
+var indexContainer = [];
 
 var TimeBlock = React.createClass({
 
@@ -76,15 +78,15 @@ var TimeBlock = React.createClass({
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              run.
-            </Text>
+              <Text style={styles.whiteText}>
+                run.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/yoga.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              do yoga.
-            </Text>
+              <Text style={styles.whiteText}>
+                do yoga.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
@@ -150,15 +152,13 @@ var TimeBlock = React.createClass({
         </Picker>
         </View>
         </Swiper>
-
       </View>
       <View style={styles.buttonContainer}>
         <TouchableHighlight
           style={styles.button}
           underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
-          <Text
-            style={styles.buttonText}>
+          <Text style={styles.buttonText}>
             Start
           </Text>
         </TouchableHighlight>
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center'
   },
-   whiteText: {
+  whiteText: {
     textAlign: 'center',
     fontSize: 30,
     fontWeight: 'bold',
