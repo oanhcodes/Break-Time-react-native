@@ -1,5 +1,6 @@
 import React, {
   Alert,
+  AsyncStorage,
   AppRegistry,
   Component,
   StyleSheet,
@@ -11,16 +12,47 @@ import React, {
   ScrollView,
 } from 'react-native';
 
-
-var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
-var setTimeBlockPage = require('./timeBlock.ios');
-var profilePage = require('./profilePage.ios');
+var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
+var statsPage = require('./profilePage.ios')
 
+var store = require('react-native-simple-store')
 
 class Main extends Component {
+
+  componentDidMount() {
+    store.get('activities').then((data) => {
+      if (Object.keys(data).length > 0 || data.length > 0 ){
+        this.setState({activities: data})
+      } else {
+        this.setState({activities: ["Run", "Sashay Away"]});
+        store.save('activities', ["Run", "Sashay Away"])
+      }
+    });
+    store.get('totalTimeWorked').then((data) => {
+      console.log(data)
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalTimeWorked', 0)
+      }
+    });
+    store.get('totalBreakTime').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalBreakTime', 0)
+      }
+    });
+    store.get('activitiesAmount').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('activitiesAmount', [])
+      }
+    });
+    store.get('totalCycles').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalCycles', 0)
+      }
+    })
+  }
 
   GoToAboutApp() {
     this.props.navigator.push({
@@ -36,10 +68,17 @@ class Main extends Component {
     })
   }
 
-  GoToProfile() {
+	GoToSettings() {
+		this.props.navigator.push({
+			title: 'Settings',
+			component: settingsPage
+		})
+	}
+
+  GoToStats() {
     this.props.navigator.push({
-      title: 'Profile',
-      component: profilePage
+      title: 'Statistics',
+      component: statsPage
     })
   }
 
@@ -47,7 +86,7 @@ class Main extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -67,17 +106,6 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableHighlight
-              style={styles.aboutButton}
-              underlayColor={'transparent'}
-              onPress={() =>
-              this.GoToAboutApp()}>
-              <Text style={styles.aboutButtonText} >
-                Learn More
-              </Text>
-            </TouchableHighlight>
-          </View>
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
@@ -91,12 +119,32 @@ class Main extends Component {
           <TouchableHighlight
             style={styles.button}
             underlayColor={'#9BE8FF'}
-            onPress={() => this.GoToProfile()}>
+            onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              View Profile
+              All Time Stats
+            </Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor={'#9BE8FF'}
+            onPress={() => this.GoToSettings()}>
+            <Text style={styles.buttonText}>
+              Activity Settings
             </Text>
           </TouchableHighlight>
         </View>
+         <View style={styles.buttonsContainer}>
+            <TouchableHighlight
+              style={styles.aboutButton}
+              underlayColor={'transparent'}
+              onPress={() =>
+              this.GoToAboutApp()}>
+              <Text style={styles.aboutButtonText} >
+                Learn More
+              </Text>
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }
@@ -113,20 +161,23 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   mainTitle: {
-    fontSize: 20,
+    fontSize: 30,
     textAlign: 'center',
     margin: 15,
     fontWeight: 'bold',
   },
   whiteText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     color: 'white',
     fontWeight: 'bold',
   },
   buttonText: {
     textAlign: 'center',
-    margin: 15
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
   aboutLink: {
     textAlign: 'center',
@@ -147,7 +198,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   backgroundImage: {
-    // width: 300,
     width: null,
     height: null,
     flex: 1,
@@ -155,7 +205,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   aboutButtonText: {
-    fontSize: 15,
+    fontSize: 20,
     textDecorationLine: 'underline',
   },
 });

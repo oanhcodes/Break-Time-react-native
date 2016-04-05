@@ -41,6 +41,7 @@ var CountDown = React.createClass({
     this.props.navigator.push({
       title: "Stats",
       component: StatsPage,
+      navigationBarHidden: true,
       passProps: {
         worktime: this.props.workTime,
         breaktime: this.props.breakTime,
@@ -155,6 +156,7 @@ var CountDown = React.createClass({
   },
   renderStop() {
     return (
+      <View style={styles.stopContainer}>
       <TouchableHighlight
         style={styles.button}
         underlayColor="#9BE8FF"
@@ -170,6 +172,7 @@ var CountDown = React.createClass({
           Stop
         </Text>
       </TouchableHighlight>
+      </View>
     ) 
   },
   render(){
@@ -184,7 +187,7 @@ var CountDown = React.createClass({
             <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asMinutes())} minutes </Text>
             <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asSeconds() % 60)} seconds</Text>
           </View>
-          {this.renderStop()} 
+          {this.renderStop()}
         </View>
       )
     } else {
@@ -253,11 +256,10 @@ var styles = StyleSheet.create({
   },
    textStyle2: {
     color:'black',
-    fontSize: 14,
+    fontSize: 18,
   },
   wrapper: {
     padding: 10,
-    marginRight:10,
     width: 350,
     backgroundColor: '#e5e5e5',
   },
@@ -276,8 +278,14 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    margin: 15
-  }
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  stopContainer: {
+    marginLeft: 10,
+  },
 });
 
 module.exports = CountDown;

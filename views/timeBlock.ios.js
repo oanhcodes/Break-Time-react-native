@@ -1,5 +1,6 @@
 import React, {
   ScrollView,
+  AsyncStorage,
   Component,
   StyleSheet,
   Text,
@@ -10,14 +11,29 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
+<<<<<<< HEAD
 var moment = require('moment');
+=======
+var store = require('react-native-simple-store');
+
+>>>>>>> master
 var TimePicker = require('./components/timePicker.ios');
 var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
 var TimerPage = require('./timer.ios');
-var TimerLogicPage = require('./timerlogic.ios')
+var TimerLogicPage = require('./timerlogic.ios');
+
+var indexContainer = [];
+var activityData;
 
 var TimeBlock = React.createClass({
+
+  componentDidMount() {
+    store.get('activities').then((data) => {
+      this.setState({activities: data})
+      activityData = data;
+    })
+  },
 
   GoToTimerPage() {
     this.props.navigator.push({
@@ -33,9 +49,10 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '1',
-      breaktime: '1',
-      breakActivity: 'run',
+      worktime: '5',
+      breaktime: '5',
+      breakActivity: 'Go for a run',
+      activities: activityData,
       index: 0
     };
   },
@@ -62,21 +79,29 @@ var TimeBlock = React.createClass({
   },
 
   render() {
+    if (this.state.activities !== undefined) {
+      var activitiesList = this.state.activities.map(function(activity, i) {
+        return(
+          <Picker.Item key={i} label={activity} value={activity} />
+        )
+      })
+    } else {
+      var activitiesList = []
+    }
     return (
-
-    <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
+    <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              run.
-            </Text>
+              <Text style={styles.whiteText}>
+                run.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/yoga.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              do yoga.
-            </Text>
+              <Text style={styles.whiteText}>
+                do yoga.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
@@ -92,11 +117,11 @@ var TimeBlock = React.createClass({
             </Image>
         </Swiper>
       </View>
-      <View style={styles.container}>
+      <View style={styles.timeContainer}>
         <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
-            Set Work Time Block
+            1. Set Work Time Block
           </Text>
         <Picker
           style={styles.picker}
@@ -111,7 +136,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          Set Break Time Block
+          2. Set Break Time Block
         </Text>
         <Picker
           style={styles.picker}
@@ -125,38 +150,30 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          Choose a break activity.
+          3. Choose a break activity.
         </Text>
         <Picker
           style={styles.picker}
           selectedValue={this.state.breakActivity}
           onValueChange={this.updateBreakActivity}>
-          <Picker.Item label='Run' value='Go for a run' />
-          <Picker.Item label='Walk' value='Go for a walk' />
-          <Picker.Item label='Bike' value='Ride a bike' />
-          <Picker.Item label='Yoga' value='Do yoga' />
-          <Picker.Item label='Snack break' value='Have a snack' />
-          <Picker.Item label='Coffee break' value='Coffee break' />
-          <Picker.Item label='Play music' value='Play music' />
-          <Picker.Item label='Sashay away' value='Sashay away' />
+          {activitiesList}
         </Picker>
         </View>
         </Swiper>
-
       </View>
-      <View style={styles.container}>
+
+      <View style={styles.buttonContainer}>
         <TouchableHighlight
           style={styles.button}
           underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
-          <Text
-            style={styles.buttonText}>
+          <Text style={styles.buttonText}>
             Start
           </Text>
         </TouchableHighlight>
       </View>
-    </ScrollView>
 
+    </ScrollView>
     );
   }
 })
@@ -168,21 +185,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  timeContainer: {
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+
   description: {
     textAlign: 'center',
     fontSize: 20
   },
   button: {
-     backgroundColor: '#05B3DD',
-      margin: 15,
-      borderRadius: 8.150,
-      width: 300,
-      height: 45
+    backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45
     },
-      buttonText: {
-        textAlign: 'center',
-        margin: 15
-    },
+  buttonText: {
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   picker: {
     width: 300
   },
@@ -193,12 +227,18 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     justifyContent: 'center'
   },
-   whiteText: {
+  whiteText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-  }
+  }, 
+  background: {
+    backgroundColor: '#F5FCFF',
+  },
+  customOptions: {
+    marginTop: 30,
+  },
 });
 
 

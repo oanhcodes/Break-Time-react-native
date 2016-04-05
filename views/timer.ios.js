@@ -61,6 +61,20 @@ var styles = StyleSheet.create({
     marginTop:60,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45
+  },
+  buttonText: {
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   }
 });
 
