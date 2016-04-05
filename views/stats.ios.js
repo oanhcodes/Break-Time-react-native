@@ -1,5 +1,6 @@
 import React, {
   AppRegistry,
+  AsyncStorage,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -9,10 +10,26 @@ import React, {
   Image,
 } from 'react-native';
 
+var profilePage = require('./profilePage.ios');
+var mainPage = require('./main.ios');
+var store = require('react-native-simple-store');
+
 var timeworked;
 var breakedtime;
 
 class Stats extends Component {
+
+  GoToProfile() {
+    this.props.navigator.push({
+      title: 'Profile',
+      component: profilePage
+    })
+  }
+
+  GoToMain() {
+    this.props.navigator.popToTop()
+  }
+
   timeworked = Math.floor((this.props.worktime * this.props.cycles) / 60);
   breakedtime = Math.floor((this.props.breaktime * this.props.cycles) / 60);
   render(){
@@ -27,6 +44,27 @@ class Stats extends Component {
           <Text style={styles.statText}>You breaked for {this.breakedtime} minutes!</Text>
           <Text style={styles.statText}>Your break activity was:</Text>
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
+        </View>
+        <Text style={styles.infoText}>
+          Go to profile page to see full stats.
+        </Text>
+        <View style={styles.buttonsContainer}>
+          <TouchableHighlight
+            onPress={() => this.GoToProfile()}
+            style={styles.button}
+            underlayColor='#9BE8FF'>
+            <Text style={styles.buttonText}>
+              Profile
+            </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => this.GoToMain()}
+            style={styles.button}
+            underlayColor='#9BE8FF'>
+            <Text style={styles.buttonText}>
+              Main
+            </Text>
+          </TouchableHighlight>
         </View>
       </View>
     </Image>
@@ -73,6 +111,23 @@ var styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     paddingTop: 7,
+  },
+  buttonsContainer: {
+
+  },
+  button: {
+    backgroundColor: '#05B3DD',
+    margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45,
+  },
+  buttonText: {
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   }
 });
 

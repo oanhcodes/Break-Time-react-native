@@ -37,6 +37,7 @@ var CountDown = React.createClass({
     this.props.navigator.push({
       title: "Stats",
       component: StatsPage,
+      navigationBarHidden: true,
       passProps: {
         worktime: this.props.workTime,
         breaktime: this.props.breakTime,

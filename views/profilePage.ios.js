@@ -1,5 +1,6 @@
 import React, {
   ScrollView,
+  AsyncStorage,
   AppRegistry,
   Component,
   StyleSheet,
@@ -9,8 +10,45 @@ import React, {
 } from 'react-native';
 
 var Swiper = require('react-native-swiper');
+var store = require('react-native-simple-store');
 
-class ProfilePage extends Component {
+var totalTimeWorked;
+var totalBreakTime;
+var activitiesAmount;
+var totalCycles;
+
+var ProfilePage = React.createClass ({
+
+  componentDidMount() {
+    // this.setState({})
+    store.get('totalTimeWorked').then((data) => {
+      // this.setState({totalTimeWorked: data})
+      totalTimeWorked = data;
+      console.log(data)
+    });
+    store.get('totalBreakTime').then((data) => {
+      // this.setState({})
+      totalBreakTime = data;
+    });
+    store.get('activitiesAmount').then((data) => {
+      // this.setState({})
+      activitiesAmount = data;
+    });store.get('totalCycles').then((data) => {
+      // this.setState({})
+      totalCycles = data;
+    });
+    this.setState({})
+  },
+
+  // getInitialState() {
+  //   return {
+  //     totalTimeWorked: totalTimeWorked,
+  //     totalBreakTime: totalBreakTime,
+  //     activitiesAmount: activitiesAmount,
+  //     totalCycles: totalCycles
+  //   }
+  // },
+
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +63,19 @@ class ProfilePage extends Component {
             Name: Mister Crab
           </Text>
           <Text styles={styles.content}>
-            Breaks Taken:
+            Breaks Taken: 
+          </Text>
+          <Text>
+            Total Time Worked: {totalTimeWorked} minutes.
+          </Text>
+          <Text>
+            Total Break Time: {totalBreakTime} minutes.
+          </Text>
+          <Text>
+            Amount of Times You've Chosen Each Activity, Regardless of Which Activity You May Have Previously Been Considering: {activitiesAmount}
+          </Text>
+          <Text>
+            Total Complete Cycles: {totalCycles}.
           </Text>
         </View>
       </ScrollView>
@@ -33,7 +83,7 @@ class ProfilePage extends Component {
     );
   
   }
-}
+})
 
 const styles = StyleSheet.create({
   container: {

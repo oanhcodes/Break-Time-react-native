@@ -21,7 +21,6 @@ var Settings = React.createClass ({
 	componentDidMount() {
     store.get('activities').then((data) => {
       this.setState({activities: data})
-      activityData = data;
     })
   },
 
@@ -41,9 +40,6 @@ var Settings = React.createClass ({
 	deleteData(index) {
 		this.state.activities.splice(index, 1);
 		store.save('activities', this.state.activities);
-		store.get('activities').then((data) => {
-			console.log("updated data:" + data)
-		})
 		this.setState({activities: this.state.activities});
 	},
 

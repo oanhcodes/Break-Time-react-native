@@ -12,16 +12,13 @@ import React, {
   ScrollView,
 } from 'react-native';
 
-
-var TimeBlockSet = require('./timeBlockSetSuccessPage.ios');
 var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
-var setTimeBlockPage = require('./timeBlock.ios');
 var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
+var statsPage = require('./profilePage.ios')
 
 var store = require('react-native-simple-store')
-
 
 class Main extends Component {
 
@@ -32,6 +29,27 @@ class Main extends Component {
       } else {
         this.setState({activities: ["Run", "Sashay Away"]});
         store.save('activities', ["Run", "Sashay Away"])
+      }
+    });
+    store.get('totalTimeWorked').then((data) => {
+      console.log(data)
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalTimeWorked', 0)
+      }
+    });
+    store.get('totalBreakTime').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalBreakTime', 0)
+      }
+    });
+    store.get('activitiesAmount').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('activitiesAmount', [])
+      }
+    });
+    store.get('totalCycles').then((data) => {
+      if (Object.keys(data).length === 0 || data === null){
+        store.save('totalCycles', 0)
       }
     })
   }
@@ -56,6 +74,13 @@ class Main extends Component {
 			component: settingsPage
 		})
 	}
+
+  GoToStats() {
+    this.props.navigator.push({
+      title: 'Statistics',
+      component: statsPage
+    })
+  }
 
   render() {
     return (
@@ -94,9 +119,18 @@ class Main extends Component {
           <TouchableHighlight
             style={styles.button}
             underlayColor={'#9BE8FF'}
+            onPress={() => this.GoToStats()}>
+            <Text style={styles.buttonText}>
+              All Time Stats
+            </Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor={'#9BE8FF'}
             onPress={() => this.GoToSettings()}>
             <Text style={styles.buttonText}>
-              Settings
+              Activity Settings
             </Text>
           </TouchableHighlight>
         </View>
