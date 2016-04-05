@@ -61,7 +61,6 @@ var styles = StyleSheet.create({
     marginTop:60,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
   }
 });
 
