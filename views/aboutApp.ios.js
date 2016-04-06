@@ -6,11 +6,31 @@ import React, {
   Text,
   View,
   Image,
+  LayoutAnimation,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 var Swiper = require('react-native-swiper');
 
 class AboutApp extends Component {
+  constructor(){
+    super();
+    this.state = {
+      viewStyle: {
+        height: 10
+      }
+    }
+  }
+
+  easterEgg() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    this.setState({
+      viewStyle: {
+        height: this.state.viewStyle.height > 10 ? 10 : 900,
+        width: this.state.viewStyle.width > 10 ? 10 : 500
+      }
+    })
+  }
 	render() {
 		return (
       <View style={styles.container}>
@@ -32,6 +52,9 @@ class AboutApp extends Component {
           </Text>
         </View>
       </ScrollView>
+      <TouchableWithoutFeedback onPress={() => this.easterEgg()}>
+        <Image source={require('../imgs/unicorn.jpg')} style={[styles.easterEgg, this.state.viewStyle]}></Image>
+      </TouchableWithoutFeedback>
 			</View>
 		);
   
@@ -80,6 +103,12 @@ const styles = StyleSheet.create({
     padding: 10,
     resizeMode: 'contain',
   },
+  easterEgg: {
+    alignSelf: 'flex-end',
+    height: 5,
+    width: 5, 
+    resizeMode: 'contain'
+  }
 });
 
 module.exports = AboutApp;

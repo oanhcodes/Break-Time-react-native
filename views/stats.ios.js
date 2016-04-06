@@ -20,8 +20,8 @@ var breakedtime;
 
 class Stats extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
       this.state = {
       fadeAnim: new Animated.Value(0),
     };

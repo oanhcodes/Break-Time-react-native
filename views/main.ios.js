@@ -23,8 +23,8 @@ var store = require('react-native-simple-store');
 
 class Main extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
       this.state = {
       fadeAnim: new Animated.Value(0),
     };
