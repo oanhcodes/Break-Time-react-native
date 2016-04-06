@@ -37,11 +37,13 @@ var Settings = React.createClass ({
   },
 
 	saveData(value) {
-		this.state.activities.push(value);
-		this.setState({activities: this.state.activities});
-		store.save('activities', this.state.activities);
-    this.refs['textInput'].setNativeProps({text: ''});
-    this.setState({text: "Enter an activity here"});
+    if (value !== "Enter an activity here") {
+	  	this.state.activities.push(value);
+	 	  this.setState({activities: this.state.activities});
+	 	  store.save('activities', this.state.activities);
+      this.refs['textInput'].setNativeProps({text: ''});
+      this.setState({text: "Enter an activity here"});
+    }
 	},
 
 	deleteData(index) {
