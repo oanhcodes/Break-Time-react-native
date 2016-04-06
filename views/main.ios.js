@@ -89,7 +89,7 @@ class Main extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -124,7 +124,7 @@ class Main extends Component {
             underlayColor={'#9BE8FF'}
             onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              All Time Stats
+              View Stats
             </Text>
           </TouchableHighlight>
 
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F2',
   },
    header: {
-    marginTop: 5,
+    marginTop: 25,
   },
   mainTitle: {
     fontSize: 30,
@@ -191,6 +191,10 @@ const styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonsContainer: {
     position: 'relative',

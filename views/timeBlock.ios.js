@@ -97,7 +97,7 @@ var TimeBlock = React.createClass({
     return (
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -129,54 +129,55 @@ var TimeBlock = React.createClass({
           <Text style={styles.description}>
             1. Set Work Time Block
           </Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={this.state.worktime}
-          onValueChange={this.updateWorktime}>
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='25 Minutes' value='1500' />
-          <Picker.Item label='30 Minutes' value='1800' />
-          <Picker.Item label='45 Minutes' value='2700' />
-          <Picker.Item label='60 Minutes' value='3600' />
-        </Picker>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.worktime}
+            onValueChange={this.updateWorktime}>
+            <Picker.Item label='15 Minutes' value='900' />
+            <Picker.Item label='25 Minutes' value='1500' />
+            <Picker.Item label='30 Minutes' value='1800' />
+            <Picker.Item label='45 Minutes' value='2700' />
+            <Picker.Item label='60 Minutes' value='3600' />
+          </Picker>
         </View>
         <View style={styles.container}>
-        <Text style={styles.description}>
-          2. Set Break Time Block
-        </Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={this.state.breaktime}
-          onValueChange={this.updateBreaktime}>
-          <Picker.Item label='5 Minutes' value='300' />
-          <Picker.Item label='10 Minutes' value='600' />
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='20 Minutes' value='1200' />
-        </Picker>
-        </View>
-        <View style={styles.container}>
-        <Text style={styles.description}>
-          3. Choose a break activity.
-        </Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={this.state.breakActivity}
-          onValueChange={this.updateBreakActivity}>
-          {activitiesList}
-        </Picker>
-        </View>
-        </Swiper>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor='#9BE8FF'
-          onPress={() => this.GoToTimerPage()}>
-          <Text style={styles.buttonText}>
-            Start
+          <Text style={styles.description}>
+            2. Set Break Time Block
           </Text>
-        </TouchableHighlight>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.breaktime}
+            onValueChange={this.updateBreaktime}>
+            <Picker.Item label='5 Minutes' value='300' />
+            <Picker.Item label='10 Minutes' value='600' />
+            <Picker.Item label='15 Minutes' value='900' />
+            <Picker.Item label='20 Minutes' value='1200' />
+          </Picker>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.description}>
+            3. Choose a break activity.
+          </Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.breakActivity}
+            onValueChange={this.updateBreakActivity}>
+            {activitiesList}
+          </Picker>
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9BE8FF'
+            onPress={() => this.GoToTimerPage()}>
+            <Text style={styles.buttonText}>
+              Start
+            </Text>
+          </TouchableHighlight>
+        </View>
+
+        </Swiper>
       </View>
 
     </ScrollView>
@@ -214,7 +215,11 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
     },
   buttonText: {
     textAlign: 'center',

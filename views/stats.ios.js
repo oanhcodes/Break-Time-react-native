@@ -70,16 +70,13 @@ class Stats extends Component {
           <Text style={styles.statText}>Your break activity was:</Text>
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
         </View>
-        <Text style={styles.infoText}>
-          Go to profile page to see full stats.
-        </Text>
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             onPress={() => this.GoToProfile()}
             style={styles.button}
             underlayColor='#9BE8FF'>
             <Text style={styles.buttonText}>
-              Profile
+              View Stats
             </Text>
           </TouchableHighlight>
           <TouchableHighlight
@@ -87,7 +84,7 @@ class Stats extends Component {
             style={styles.button}
             underlayColor='#9BE8FF'>
             <Text style={styles.buttonText}>
-              Main
+              Main Page
             </Text>
           </TouchableHighlight>
         </View>
@@ -146,6 +143,10 @@ var styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonText: {
     textAlign: 'center',
