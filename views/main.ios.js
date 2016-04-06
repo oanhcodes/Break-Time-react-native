@@ -106,7 +106,7 @@ class Main extends Component {
     return (
       <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} showsPagination={false}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -154,17 +154,6 @@ class Main extends Component {
             </Text>
           </TouchableHighlight>
           </View>
-         <View style={styles.buttonsContainer}>
-            <TouchableHighlight
-              style={styles.aboutButton}
-              underlayColor={'transparent'}
-              onPress={() =>
-              this.GoToAboutApp()}>
-              <Text style={styles.aboutButtonText} >
-                Learn More
-              </Text>
-            </TouchableHighlight>
-          </View>
       </Animated.View>
     );
   }
@@ -176,9 +165,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
-  },
-   header: {
-    marginTop: 25,
   },
   mainTitle: {
     fontSize: 30,
@@ -214,7 +200,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   buttonsContainer: {
-    position: 'relative',
+    marginBottom: 30,
   },
   instructions: {
     textAlign: 'center',
