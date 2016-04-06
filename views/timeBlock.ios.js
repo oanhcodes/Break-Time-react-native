@@ -64,9 +64,8 @@ var TimeBlock = React.createClass({
   getInitialState() {
     return {
       fadeAnim: new Animated.Value(0),
-      worktime: '5',
-      breaktime: '5',
-      breakActivity: 'Go for a run',
+      worktime: '900',
+      breaktime: '300',
       activities: activityData,
       index: 0
     };
@@ -107,7 +106,7 @@ var TimeBlock = React.createClass({
     
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -134,55 +133,62 @@ var TimeBlock = React.createClass({
         </Swiper>
       </View>
 
-      <ScrollableTabView 
-        style={styles.tabViewContainer} 
-        tabBarUnderlineColor='#05B3DD'
-        tabBarActiveTextColor='#05B3DD'
-        tabBarBackgroundColor='#E1F6F7'>
-        <Picker
-          index={1}
-          tabLabel="WORK TIME"
-          style={styles.picker}
-          selectedValue={this.state.worktime}
-          onValueChange={this.updateWorktime}>
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='25 Minutes' value='1500' />
-          <Picker.Item label='30 Minutes' value='1800' />
-          <Picker.Item label='45 Minutes' value='2700' />
-          <Picker.Item label='60 Minutes' value='3600' />
-        </Picker>
-        <Picker
-          tabLabel="BREAK TIME"
-          style={styles.picker}
-          selectedValue={this.state.breaktime}
-          onValueChange={this.updateBreaktime}>
-          <Picker.Item label='5 Minutes' value='300' />
-          <Picker.Item label='10 Minutes' value='600' />
-          <Picker.Item label='15 Minutes' value='900' />
-          <Picker.Item label='20 Minutes' value='1200' />
-        </Picker>
-        <Picker
-          tabLabel="ACTIVITY"
-          style={styles.picker}
-          selectedValue={this.state.breakActivity}
-          onValueChange={this.updateBreakActivity}>
-          {activitiesList}
-        </Picker>
-        
-        <TouchableHighlight
-          tabLabel="START"
-          style={styles.button}
-          underlayColor='#9BE8FF'
-          onPress={() => this.GoToTimerPage()}>
-          <Text style={styles.buttonText}>
-            Start
+      <View style={styles.timeContainer}>
+        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
+        <View style={styles.container}>
+          <Text style={styles.description}>
+            1. Set Work Time Block
           </Text>
-        </TouchableHighlight>
-      
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.worktime}
+            onValueChange={this.updateWorktime}>
+            <Picker.Item label='15 Minutes' value='900' />
+            <Picker.Item label='25 Minutes' value='1500' />
+            <Picker.Item label='30 Minutes' value='1800' />
+            <Picker.Item label='45 Minutes' value='2700' />
+            <Picker.Item label='60 Minutes' value='3600' />
+          </Picker>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.description}>
+            2. Set Break Time Block
+          </Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.breaktime}
+            onValueChange={this.updateBreaktime}>
+            <Picker.Item label='5 Minutes' value='300' />
+            <Picker.Item label='10 Minutes' value='600' />
+            <Picker.Item label='15 Minutes' value='900' />
+            <Picker.Item label='20 Minutes' value='1200' />
+          </Picker>
+        </View>
+        <View style={styles.container}>
+          <Text style={styles.description}>
+            3. Choose a break activity.
+          </Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.breakActivity}
+            onValueChange={this.updateBreakActivity}>
+            {activitiesList}
+          </Picker>
+        </View>
 
-      </ScrollableTabView>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9BE8FF'
+            onPress={() => this.GoToTimerPage()}>
+            <Text style={styles.buttonText}>
+              Start
+            </Text>
+          </TouchableHighlight>
+        </View>
 
-      
+        </Swiper>
+      </View>  
     </ScrollView>
   
     );
@@ -221,7 +227,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
     },
@@ -251,7 +257,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-  }, 
+  },
   background: {
     backgroundColor: '#F5FCFF',
   },

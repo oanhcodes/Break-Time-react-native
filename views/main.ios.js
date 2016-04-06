@@ -19,7 +19,11 @@ var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
 var statsPage = require('./profilePage.ios');
 
-var store = require('react-native-simple-store');
+var store = require('react-native-simple-store')
+// store.delete('activitiesAmount')
+// store.delete('totalTimeWorked')
+// store.delete('totalBreakTime')
+// store.delete('totalCycles')
 
 class Main extends Component {
 
@@ -58,8 +62,8 @@ class Main extends Component {
       }
     });
     store.get('activitiesAmount').then((data) => {
-      if (data === null){
-        store.save('activitiesAmount', ["LOL", "HAHA"])
+      if (data === null || Object.keys(data).length === 0){
+        store.save('activitiesAmount', [{}] )
       }
     });
     store.get('totalCycles').then((data) => {
@@ -102,7 +106,7 @@ class Main extends Component {
     return (
       <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -137,7 +141,7 @@ class Main extends Component {
             underlayColor={'#9BE8FF'}
             onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              All Time Stats
+              View Stats
             </Text>
           </TouchableHighlight>
 
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },

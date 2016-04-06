@@ -26,8 +26,8 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      // time: this.props.workTime,
-      time: 1,
+      time: this.props.workTime,
+      // time: 10,
     };
   },
   GoToMainPage() {
@@ -71,7 +71,7 @@ var CountDown = React.createClass({
         </Text>
       </TouchableHighlight>
       </View>
-    ) 
+    )
   },
   render(){
     <TouchableHighlight><Text> hello</Text></TouchableHighlight>
@@ -79,7 +79,7 @@ var CountDown = React.createClass({
       return (
         <View>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text> 
+            <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text>
             <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
             <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
           </View>
@@ -172,7 +172,7 @@ var styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },
