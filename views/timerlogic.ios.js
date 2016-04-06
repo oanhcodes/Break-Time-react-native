@@ -88,7 +88,7 @@ var CountDown = React.createClass({
     console.log('bexp1:' + this.state.breakExpiry.format())
     switch (onBreak) {
       case true:
-        if (moment().format() == this.state.breakExpiry.format()) {
+        if (moment().format() >= this.state.breakExpiry.format()) {
           this.stopTimer();
           onBreak = false;
           Vibration.vibrate();
@@ -106,7 +106,7 @@ var CountDown = React.createClass({
         }
         break;
       case false:
-        if (moment().format() == this.state.workExpiry.format()) {
+        if (moment().format() >= this.state.workExpiry.format()) {
           this.state.cycles++;
           onBreak = true;
           Vibration.vibrate();
