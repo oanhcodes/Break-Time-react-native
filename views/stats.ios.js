@@ -1,6 +1,7 @@
 import React, {
   AppRegistry,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -19,7 +20,22 @@ var breakedtime;
 
 class Stats extends Component {
 
+  constructor(props) {
+    super(props);
+      this.state = {
+      fadeAnim: new Animated.Value(0),
+    };
+  }
+
   componentDidMount(){
+    // Fade-in animation
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        delay: 1500,
+        duration: 900},           
+     ).start();
+
     var that = this
     store.get('totalTimeWorked').then((data) => {
       var newTotal = data += Math.floor((this.props.worktime * this.props.cycles) / 60)
@@ -44,6 +60,7 @@ class Stats extends Component {
       store.save('totalCycles', newTotal)
     })
   }
+
   GoToProfile() {
     this.props.navigator.push({
       title: 'Profile',
@@ -70,6 +87,11 @@ class Stats extends Component {
           <Text style={styles.statText}>Your break activity was:</Text>
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
         </View>
+
+        <Animated.Text style={[styles.infoText, {opacity: this.state.fadeAnim}]}>
+          Go to profile page to see full stats.
+        </Animated.Text>
+
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             onPress={() => this.GoToProfile()}

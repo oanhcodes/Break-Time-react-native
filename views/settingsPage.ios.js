@@ -4,6 +4,7 @@ import React, {
   Component,
   StyleSheet,
   TouchableHighlight,
+  TouchableOpacity,
   Text,
   Image,
   View,
@@ -43,7 +44,9 @@ var Settings = React.createClass ({
 		this.setState({activities: this.state.activities});
 	},
 
-
+	clearText() {
+		this.setState({text: ''})
+	},
 
 	render(){
 		var that = this;
@@ -80,7 +83,9 @@ var Settings = React.createClass ({
         </ScrollView>
 
 				<View style={styles.textInputWrapper}>
-					<TextInput 
+					<TextInput
+						clearButtonMode='always'
+						onFocus= {() => this.setState({text : ''})} 
 						style={styles.textInput} 
 						onChangeText={(text) => this.setState({text})} 
 						placeholder={this.state.text}/>

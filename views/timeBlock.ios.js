@@ -1,6 +1,7 @@
 import React, {
   ScrollView,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   Text,
@@ -18,6 +19,7 @@ var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
 var TimerPage = require('./timer.ios');
 var TimerLogicPage = require('./timerlogic.ios');
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 var indexContainer = [];
 var activityData;
@@ -28,7 +30,13 @@ var TimeBlock = React.createClass({
     store.get('activities').then((data) => {
       this.setState({activities: data})
       activityData = data;
-    })
+    });
+
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        duration: 3000},           
+     ).start()
   },
 
   GoToTimerPage() {
@@ -55,9 +63,9 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
+      fadeAnim: new Animated.Value(0),
       worktime: '900',
       breaktime: '300',
-      // breakActivity: 'run',
       activities: activityData,
       index: 0
     };
@@ -95,6 +103,7 @@ var TimeBlock = React.createClass({
       var activitiesList = []
     }
     return (
+    
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
@@ -111,18 +120,19 @@ var TimeBlock = React.createClass({
             </Image>
 
             <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              play music.
-            </Text>
+              <Text style={styles.whiteText}>
+                play music.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              eat snacks.
-            </Text>
+              <Text style={styles.whiteText}>
+                eat snacks.
+              </Text>
             </Image>
         </Swiper>
       </View>
+
       <View style={styles.timeContainer}>
         <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
@@ -178,9 +188,9 @@ var TimeBlock = React.createClass({
         </View>
 
         </Swiper>
-      </View>
-
+      </View>  
     </ScrollView>
+  
     );
   }
 })
@@ -198,14 +208,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  timeContainer: {
-    padding: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  tabViewContainer: {
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
+    // marginTop: 10
   },
-
+  wrapper1: {
+    backgroundColor: '#F5FCFF'
+  },
   description: {
     textAlign: 'center',
     fontSize: 20
@@ -229,7 +239,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   picker: {
-    width: 300
+    margin: 30,
+    alignSelf: 'stretch'
+  },
+  title: {
+    marginTop: 30
   },
   backgroundImage: {
     width: null,

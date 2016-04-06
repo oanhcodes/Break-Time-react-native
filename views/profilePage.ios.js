@@ -18,7 +18,6 @@ var activitiesAmount;
 var totalCycles;
 
 var ProfilePage = React.createClass ({
-
   componentDidMount() {
     store.get('totalTimeWorked').then((data) => {
       totalTimeWorked = data;
@@ -60,7 +59,7 @@ var ProfilePage = React.createClass ({
           <Text>
             Total Time Worked: {totalTimeWorked} minutes.
           </Text>
-          <Text>
+          <Text styles={styles.content}>
             Total Break Time: {totalBreakTime} minutes.
           </Text>
           <Text>
