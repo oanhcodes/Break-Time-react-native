@@ -28,7 +28,7 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      cycles: 0
+      cycles: 0,
       time: this.props.workTime,
       workExpiry: moment(),
       breakExpiry: moment()
@@ -98,7 +98,7 @@ var CountDown = React.createClass({
         break;
       case false:
         if (moment().format() == this.state.workExpiry.format()) {
-          cycles++;
+          this.state.cycles++;
           onBreak = true;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
@@ -124,8 +124,8 @@ var CountDown = React.createClass({
     this.checkTimer()
   },
   componentDidMount() {
-    var workMin = 5,
-        breakMin = 3;
+    var workMin = 1,
+        breakMin = 1;
 
     this.setState({
       workMin: workMin,
