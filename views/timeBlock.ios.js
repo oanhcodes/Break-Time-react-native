@@ -57,7 +57,7 @@ var TimeBlock = React.createClass({
     return {
       worktime: '5',
       breaktime: '5',
-      breakActivity: 'Go for a run',
+      breakActivity: 'Go for a walk',
       activities: activityData,
       index: 0
     };
@@ -97,7 +97,7 @@ var TimeBlock = React.createClass({
     return (
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -127,7 +127,7 @@ var TimeBlock = React.createClass({
         <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
           <Text style={styles.description}>
-            1. Set Work Time Block
+            Set Work Time Block
           </Text>
         <Picker
           style={styles.picker}
@@ -142,7 +142,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          2. Set Break Time Block
+          Set Break Time Block
         </Text>
         <Picker
           style={styles.picker}
@@ -156,7 +156,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
         <Text style={styles.description}>
-          3. Choose a break activity.
+          Choose a break activity.
         </Text>
         <Picker
           style={styles.picker}
