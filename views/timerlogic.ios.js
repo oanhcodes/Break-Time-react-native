@@ -54,14 +54,28 @@ var CountDown = React.createClass({
 
   setNewBlockCycle() {
 
-    var workMin = 5,
+    // TESTING TIMES
+
+     var workMin = 5,
         breakMin = 3;
 
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'minutes')
+      workExpiry: moment().add(workMin, 'seconds')
     })
+
+    // NORMAL CODE
+
+    // var workMin = this.props.workTime,
+    //     breakMin = this.props.breakTime;
+
+    // this.setState({
+    //   workMin: workMin,
+    //   breakMin: breakMin,
+    //   workExpiry: moment().add(workMin, 'minutes')
+    // })
+
     this.startTimer()
 
     console.log('wexp2:' + this.state.workExpiry.format())
@@ -69,19 +83,14 @@ var CountDown = React.createClass({
     this.checkTimer();
   },
 
-  // Check when moved away from timer page within application
-  // check about alerts out of application
-
   checkTimer() {
-      // how to we test seconds? imports number as minutes. where?
-      // do alerts happen while out of application?
     console.log('wexp1:' + this.state.workExpiry.format())
     console.log('bexp1:' + this.state.breakExpiry.format())
     switch (onBreak) {
       case true:
         if (moment().format() == this.state.breakExpiry.format()) {
+          this.stopTimer();
           onBreak = false;
-          this.stopTimer()
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
@@ -89,7 +98,7 @@ var CountDown = React.createClass({
             alertWorkMessage,
             [
               {text: 'Run another timeblock', onPress: () => this.setNewBlockCycle()},
-              {text: 'Finished', onPress: () => this.GoToStatsPage()}
+              {text: 'Finished', onPress: () => this.finished()}
             ]
           );
         } else {
@@ -116,30 +125,51 @@ var CountDown = React.createClass({
         break;
     }
   },
-  setBreak(){
+  finished(){
+    var workMin = 1,
+        breakMin = 1;
+
     this.setState({
-      breakExpiry: moment().add(this.state.breakMin, 'minutes')
+      workExpiry: moment().add(workMin, 'seconds'),
+      breakExpiry: moment().add(breakMin, 'seconds')
+    })
+    this.GoToStatsPage();
+  },
+  setBreak(){
+
+    this.setState({
+      // TESTING
+      breakExpiry: moment().add(this.state.breakMin, 'seconds')
+      // NORMAL
+      // breakExpiry: moment().add(this.state.breakMin, 'minutes')
     }),
     this.startTimer(),
     this.checkTimer()
   },
   componentDidMount() {
-    var workMin = 1,
-        breakMin = 1;
+    
+    // TESTING TIMES
+    var workMin = 5,
+        breakMin = 3;
+
+    // // NORMAL TIMES
+    // var workMin = this.props.workTime,
+    // breakMin = this.props.breakTime;
 
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'minutes')
+      // TESTING
+      workExpiry: moment().add(workMin, 'seconds')
+      // NORMAL
+      // workExpiry: moment().add(workMin, 'minutes')
     })
 
     this.startTimer();
-
   },
   _update(){
     this.checkTimer();
   },
-
   startTimer(){
     timeOn = setInterval(this._update, 1000);
   },
