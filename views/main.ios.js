@@ -19,6 +19,10 @@ var Swiper = require('react-native-swiper');
 var statsPage = require('./profilePage.ios')
 
 var store = require('react-native-simple-store')
+// store.delete('activitiesAmount')
+// store.delete('totalTimeWorked')
+// store.delete('totalBreakTime')
+// store.delete('totalCycles')
 
 class Main extends Component {
 
@@ -32,23 +36,22 @@ class Main extends Component {
       }
     });
     store.get('totalTimeWorked').then((data) => {
-      console.log(data)
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalTimeWorked', 0)
       }
     });
     store.get('totalBreakTime').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalBreakTime', 0)
       }
     });
     store.get('activitiesAmount').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
-        store.save('activitiesAmount', [])
+      if (data === null || Object.keys(data).length === 0){
+        store.save('activitiesAmount', [{}] )
       }
     });
     store.get('totalCycles').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalCycles', 0)
       }
     })

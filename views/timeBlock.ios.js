@@ -55,9 +55,9 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '5',
-      breaktime: '5',
-      breakActivity: 'Go for a walk',
+      worktime: '900',
+      breaktime: '300',
+      // breakActivity: 'run',
       activities: activityData,
       index: 0
     };
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-  }, 
+  },
   background: {
     backgroundColor: '#F5FCFF',
   },
