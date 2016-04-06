@@ -11,26 +11,30 @@ import React, {
     Vibration
 } from 'react-native';
 
-var TimerMixin = require('react-timer-mixin');
-var AudioPlayer = require('react-native-audioplayer');
-var StatsPage = require('./stats.ios');
+var moment = require('moment'),
+    TimerMixin = require('react-timer-mixin'),
+    AudioPlayer = require('react-native-audioplayer'),
+    StatsPage = require('./stats.ios');
 
-var alertBreakMessage = 'Now take a well deserved break.';
-var alertWorkMessage = 'Want to start another timeblock?';
-var alertMessage = 'Confirm exit'
+var alertBreakMessage = 'Now take a well deserved break.',
+    alertWorkMessage = 'Want to start another timeblock?',
+    alertMessage = 'Confirm exit';
 
-var onBreak = false;
-var cycles = 0;
+var onBreak = false,
+    cycles = 0,
+    timeOn;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
       time: this.props.workTime,
-      // time: 10,
+      workExpiry: moment(),
+      breakExpiry: moment()
     };
   },
   GoToMainPage() {
+    this.stopTimer()
     this.props.navigator.popToTop()
   },
   GoToStatsPage() {
@@ -46,11 +50,114 @@ var CountDown = React.createClass({
       }
     })
   },
+
+  setNewBlockCycle() {
+
+    var workMin = 5,
+        breakMin = 3;
+
+    this.setState({
+      workMin: workMin,
+      breakMin: breakMin,
+      workExpiry: moment().add(workMin, 'minutes')
+    })
+    this.startTimer()
+
+    console.log('wexp2:' + this.state.workExpiry.format())
+    console.log('bexp2:' + this.state.breakExpiry.format())
+    this.checkTimer();
+  },
+
+  // Check when moved away from timer page within application
+  // check about alerts out of application
+
+  checkTimer() {
+      // how to we test seconds? imports number as minutes. where?
+      // do alerts happen while out of application?
+    console.log('wexp1:' + this.state.workExpiry.format())
+    console.log('bexp1:' + this.state.breakExpiry.format())
+    switch (onBreak) {
+      case true:
+        if (moment().format() == this.state.breakExpiry.format()) {
+          onBreak = false;
+          this.stopTimer()
+          Vibration.vibrate();
+          AudioPlayer.play('crabhorn.mp3');
+          Alert.alert(
+            'You look so refreshed!',
+            alertWorkMessage,
+            [
+              {text: 'Run another timeblock', onPress: () => this.setNewBlockCycle()},
+              {text: 'Finished', onPress: () => this.GoToStatsPage()}
+            ]
+          );
+        } else {
+          this.forceUpdate();
+        }
+        break;
+      case false:
+        if (moment().format() == this.state.workExpiry.format()) {
+          cycles++;
+          onBreak = true;
+          Vibration.vibrate();
+          AudioPlayer.play('crabhorn.mp3');
+          this.stopTimer()
+          Alert.alert(
+            'Great job staying on task!',
+            alertBreakMessage,
+            [
+              {text: 'Take Break', onPress: () => this.setBreak()}
+            ]
+          );
+        } else {
+          this.forceUpdate();
+        }
+        break;
+    }
+  },
+  setBreak(){
+    this.setState({
+      breakExpiry: moment().add(this.state.breakMin, 'minutes')
+    }),
+    this.startTimer(),
+    this.checkTimer()
+  },
   componentDidMount() {
-    this._countdown();
+    var workMin = 5,
+        breakMin = 3;
+
+    this.setState({
+      workMin: workMin,
+      breakMin: breakMin,
+      workExpiry: moment().add(workMin, 'minutes')
+    })
+
+    this.startTimer();
+
+  },
+  _update(){
+    this.checkTimer();
+  },
+
+  startTimer(){
+    timeOn = setInterval(this._update, 1000);
+  },
+  stopTimer(){
+    clearInterval(timeOn);
   },
   componentWillUnmount() {
+    this.stopTimer();
     onBreak = false;
+  },
+  getTimeLeft: function(expiry) {
+    var milliseconds = expiry.diff(moment())
+    return moment.duration(milliseconds);
+  },
+  getTimeToWorkExpiry: function() {
+    return this.getTimeLeft(this.state.workExpiry);
+  },
+  getTimeToBreakExpiry: function() {
+    return this.getTimeLeft(this.state.breakExpiry);
   },
   renderStop() {
     return (
@@ -74,14 +181,16 @@ var CountDown = React.createClass({
     )
   },
   render(){
-    <TouchableHighlight><Text> hello</Text></TouchableHighlight>
+
+    console.log(Math.floor(this.getTimeToBreakExpiry().asSeconds() % 60));
+
     if (onBreak) {
       return (
         <View>
           <View style={[styles.wrapper,styles.buttonStyle]}>
             <Text style={styles.textStyle2}>Your break activity is: {this.props.breakActivity}</Text>
-            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
-            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asMinutes())} minutes </Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToBreakExpiry().asSeconds() % 60)} seconds</Text>
           </View>
           {this.renderStop()}
         </View>
@@ -90,54 +199,54 @@ var CountDown = React.createClass({
       return (
         <View>
           <View style={[styles.wrapper,styles.buttonStyle]}>
-            <Text style={styles.textStyle}>{Math.floor(this.state.time/60)} minutes </Text>
-            <Text style={styles.textStyle}>{this.state.time%60} seconds</Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToWorkExpiry().asMinutes())} minutes </Text>
+            <Text style={styles.textStyle}>{Math.floor(this.getTimeToWorkExpiry().asSeconds() % 60)} seconds</Text>
           </View>
           {this.renderStop()}
         </View>
       )
     }
   },
-  _countdown(){
-    var timer = function () {
-      var time = this.state.time - 1;
-      this.setState({time: time});
-      if (time > 0) {
-        this.setTimeout(timer, 1000);
-      } else {
-        if (onBreak) {
-          // on break going to work time
-          this.setState({time: this.props.workTime});
-          onBreak = false;
-          Vibration.vibrate();
-          AudioPlayer.play('crabhorn.mp3');
-          Alert.alert(
-            'You look refreshed!',
-            alertWorkMessage,
-            [
-              {text: 'Run another timeblock', onPress: () => this._countdown()},
-              {text: 'Finished', onPress: () => this.GoToStatsPage()}
-            ]
-          );
-        } else {
-          // working, time for a break!
-          this.setState({time: this.props.breakTime});
-          onBreak = true;
-          cycles++;
-          Vibration.vibrate();
-          AudioPlayer.play('crabhorn.mp3');
-          Alert.alert(
-            'Great job staying on task!',
-            alertBreakMessage,
-            [
-              {text: 'Take break', onPress: () => this._countdown()}
-            ]
-          );
-        }
-      }
-    };
-    this.setTimeout(timer, 1000);
-  }
+  // _countdown(){
+  //   var timer = function () {
+  //     var time = this.state.time - 1;
+  //     this.setState({time: time});
+  //     if (time > 0) {
+  //       this.setTimeout(timer, 1000);
+  //     } else {
+  //       if (onBreak) {
+  //         // on break going to work time
+  //         this.setState({time: this.props.workTime});
+  //         onBreak = false;
+  //         Vibration.vibrate();
+  //         AudioPlayer.play('crabhorn.mp3');
+  //         Alert.alert(
+  //           'You look refreshed!',
+  //           alertWorkMessage,
+  //           [
+  //             {text: 'Run another timeblock', onPress: () => this._countdown()},
+  //             {text: 'Finished', onPress: () => this.GoToStatsPage()}
+  //           ]
+  //         );
+  //       } else {
+  //         // working, time for a break!
+  //         this.setState({time: this.props.breakTime});
+  //         onBreak = true;
+  //         cycles++;
+  //         Vibration.vibrate();
+  //         AudioPlayer.play('crabhorn.mp3');
+  //         Alert.alert(
+  //           'Great job staying on task!',
+  //           alertBreakMessage,
+  //           [
+  //             {text: 'Take break', onPress: () => this._countdown()}
+  //           ]
+  //         );
+  //       }
+  //     }
+  //   };
+  //   this.setTimeout(timer, 1000);
+  // }
 });
 
 var styles = StyleSheet.create({
