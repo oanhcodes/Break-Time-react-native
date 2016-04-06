@@ -19,9 +19,9 @@ var exitTime;
 class Timer extends Component {
 
   componentDidMount() {
-    AppStateIOS.addEventListener('change', this.SaveTime);
+    // AppStateIOS.addEventListener('change', this.SaveTime);
   }
-  
+
   // ListenForStatusChange() {
   //   AppStateIOS.addEventListener('change', SaveTime());
   // }

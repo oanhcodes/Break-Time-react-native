@@ -34,6 +34,7 @@ var CountDown = React.createClass({
     };
   },
   GoToMainPage() {
+    this.stopTimer()
     this.props.navigator.popToTop()
   },
   GoToStatsPage() {
@@ -58,7 +59,7 @@ var CountDown = React.createClass({
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'seconds')
+      workExpiry: moment().add(workMin, 'minutes')
     })
     this.startTimer()
 
@@ -66,6 +67,9 @@ var CountDown = React.createClass({
     console.log('bexp2:' + this.state.breakExpiry.format())
     this.checkTimer();
   },
+
+  // Check when moved away from timer page within application
+  // check about alerts out of application
 
   checkTimer() {
       // how to we test seconds? imports number as minutes. where?
@@ -113,7 +117,7 @@ var CountDown = React.createClass({
   },
   setBreak(){
     this.setState({
-      breakExpiry: moment().add(this.state.breakMin, 'seconds')
+      breakExpiry: moment().add(this.state.breakMin, 'minutes')
     }),
     this.startTimer(),
     this.checkTimer()
@@ -125,7 +129,7 @@ var CountDown = React.createClass({
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'seconds')
+      workExpiry: moment().add(workMin, 'minutes')
     })
 
     this.startTimer();
@@ -142,7 +146,7 @@ var CountDown = React.createClass({
     clearInterval(timeOn);
   },
   componentWillUnmount() {
-    clearInterval(this._update);
+    this.stopTimer();
     onBreak = false;
   },
   getTimeLeft: function(expiry) {
