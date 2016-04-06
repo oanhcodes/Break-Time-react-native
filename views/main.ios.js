@@ -44,7 +44,7 @@ class Main extends Component {
 
     // Async Storage
     store.get('activities').then((data) => {
-      if (data.length > 0 ){
+      if (data !== null){
         this.setState({activities: data})
       } else {
         this.setState({activities: ["Run", "Sashay Away"]});
