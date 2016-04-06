@@ -20,21 +20,27 @@ var breakedtime;
 
 class Stats extends Component {
 
-  constructor(props) {
-    super(props);
-      this.state = {
-      fadeAnim: new Animated.Value(0),
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //     this.state = {
+  //     fadeAnim: new Animated.Value(0),
+  //   };
+  // }
+
+  // getInitialState() {
+  //   return {
+  //     fadeAnim: new Animated.Value(0),
+  //   };
+  // }
 
   componentDidMount(){
     // Fade-in animation
-    Animated.timing(          
-       this.state.fadeAnim,   
-       {toValue: 1,
-        delay: 1500,
-        duration: 900},           
-     ).start();
+    // Animated.timing(          
+    //    this.state.fadeAnim,   
+    //    {toValue: 1,
+    //     delay: 1500,
+    //     duration: 900},           
+    //  ).start();
 
     var that = this
     store.get('totalTimeWorked').then((data) => {
@@ -88,9 +94,7 @@ class Stats extends Component {
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
         </View>
 
-        <Animated.Text style={[styles.infoText, {opacity: this.state.fadeAnim}]}>
-          Go to profile page to see full stats.
-        </Animated.Text>
+        
 
         <View style={styles.buttonsContainer}>
           <TouchableHighlight

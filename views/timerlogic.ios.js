@@ -20,14 +20,14 @@ var alertWorkMessage = 'Want to start another timeblock?';
 var alertMessage = 'Confirm exit'
 
 var onBreak = false;
-var cycles = 0;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.workTime,
-      // time: 10,
+      // time: this.props.workTime,
+      time: 1,
+      cycles: 0
     };
   },
   GoToMainPage() {
@@ -42,7 +42,7 @@ var CountDown = React.createClass({
         worktime: this.props.workTime,
         breaktime: this.props.breakTime,
         breakActivity: this.props.breakActivity,
-        cycles: cycles
+        cycles: this.state.cycles,
       }
     })
   },
@@ -123,7 +123,7 @@ var CountDown = React.createClass({
           // working, time for a break!
           this.setState({time: this.props.breakTime});
           onBreak = true;
-          cycles++;
+          this.state.cycles++;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
