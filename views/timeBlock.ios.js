@@ -1,6 +1,7 @@
 import React, {
   ScrollView,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   Text,
@@ -29,7 +30,13 @@ var TimeBlock = React.createClass({
     store.get('activities').then((data) => {
       this.setState({activities: data})
       activityData = data;
-    })
+    });
+
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        duration: 3000},           
+     ).start()
   },
 
   GoToTimerPage() {
@@ -56,6 +63,7 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
+      fadeAnim: new Animated.Value(0),
       worktime: '5',
       breaktime: '5',
       breakActivity: 'Go for a run',
@@ -96,6 +104,7 @@ var TimeBlock = React.createClass({
       var activitiesList = []
     }
     return (
+    
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
@@ -160,7 +169,7 @@ var TimeBlock = React.createClass({
         </Picker>
       </ScrollableTabView>
 
-      <View style={styles.buttonContainer}>
+      <Animated.View style={[styles.buttonContainer, {opacity: this.state.fadeAnim}]}>
         <TouchableHighlight
           style={styles.button}
           underlayColor='#9BE8FF'
@@ -169,8 +178,9 @@ var TimeBlock = React.createClass({
             Start
           </Text>
         </TouchableHighlight>
-      </View>
+      </Animated.View>
     </ScrollView>
+  
     );
   }
 })
@@ -205,7 +215,11 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.8,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
     },
   buttonText: {
     textAlign: 'center',

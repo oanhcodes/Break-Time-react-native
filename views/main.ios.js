@@ -2,6 +2,7 @@ import React, {
   Alert,
   AsyncStorage,
   AppRegistry,
+  Animated,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -16,13 +17,28 @@ var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
 var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
-var statsPage = require('./profilePage.ios')
+var statsPage = require('./profilePage.ios');
 
-var store = require('react-native-simple-store')
+var store = require('react-native-simple-store');
 
 class Main extends Component {
 
+  constructor(props) {
+    super(props);
+      this.state = {
+      fadeAnim: new Animated.Value(0),
+    };
+  }
+
   componentDidMount() {
+    // Fade-in animation
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        duration: 900},           
+     ).start()
+
+    // Async Storage
     store.get('activities').then((data) => {
       if (data.length > 0 ){
         this.setState({activities: data})
@@ -32,7 +48,6 @@ class Main extends Component {
       }
     });
     store.get('totalTimeWorked').then((data) => {
-      // console.log(data)
       if (data === null){
         store.save('totalTimeWorked', 0)
       }
@@ -51,7 +66,8 @@ class Main extends Component {
       if (data === null){
         store.save('totalCycles', 0)
       }
-    })
+    });
+
   }
 
   GoToAboutApp() {
@@ -84,7 +100,7 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
         <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
@@ -106,7 +122,8 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-        <View style={styles.buttonsContainer}>
+          
+        
           <TouchableHighlight
             style={styles.button}
             underlayColor={'#9BE8FF'}
@@ -133,7 +150,6 @@ class Main extends Component {
               Activity Settings
             </Text>
           </TouchableHighlight>
-        </View>
          <View style={styles.buttonsContainer}>
             <TouchableHighlight
               style={styles.aboutButton}
@@ -145,7 +161,7 @@ class Main extends Component {
               </Text>
             </TouchableHighlight>
           </View>
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -188,6 +204,10 @@ const styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.8,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonsContainer: {
     position: 'relative',
@@ -207,7 +227,7 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     fontSize: 20,
     textDecorationLine: 'underline',
-  },
+  }
 });
 
 module.exports = Main;

@@ -1,6 +1,7 @@
 import React, {
   AppRegistry,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -18,6 +19,23 @@ var timeworked;
 var breakedtime;
 
 class Stats extends Component {
+
+  constructor(props) {
+    super(props);
+      this.state = {
+      fadeAnim: new Animated.Value(0),
+    };
+  }
+
+  componentDidMount() {
+    // Fade-in animation
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        delay: 1500,
+        duration: 900},           
+     ).start()
+  }
 
   GoToProfile() {
     this.props.navigator.push({
@@ -45,9 +63,9 @@ class Stats extends Component {
           <Text style={styles.statText}>Your break activity was:</Text>
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
         </View>
-        <Text style={styles.infoText}>
+        <Animated.Text style={[styles.infoText, {opacity: this.state.fadeAnim}]}>
           Go to profile page to see full stats.
-        </Text>
+        </Animated.Text>
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             onPress={() => this.GoToProfile()}
@@ -121,6 +139,10 @@ var styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.8,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonText: {
     textAlign: 'center',
