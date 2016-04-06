@@ -19,6 +19,31 @@ var breakedtime;
 
 class Stats extends Component {
 
+  componentDidMount(){
+    var that = this
+    store.get('totalTimeWorked').then((data) => {
+      var newTotal = data += Math.floor((this.props.worktime * this.props.cycles) / 60)
+      store.save('totalTimeWorked', newTotal)
+    });
+    store.get('totalBreakTime').then((data) => {
+      var newTotal = data += Math.floor((this.props.breaktime * this.props.cycles) / 60)
+      store.save('totalBreakTime', newTotal)
+    });
+    store.get('activitiesAmount').then((data) => {
+      var activities = data[0]
+      var activityNames = Object.keys(activities);
+      if (activityNames.includes(that.props.breakActivity)){
+        activities[that.props.breakActivity]++
+      }else {
+        activities[that.props.breakActivity] = 1
+      }
+      store.save('activitiesAmount', [activities])
+    });
+    store.get('totalCycles').then((data) => {
+      var newTotal = data += this.props.cycles
+      store.save('totalCycles', newTotal)
+    })
+  }
   GoToProfile() {
     this.props.navigator.push({
       title: 'Profile',
