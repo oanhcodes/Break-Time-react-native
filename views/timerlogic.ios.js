@@ -60,7 +60,8 @@ var CountDown = React.createClass({
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'minutes')
+        // CHANGE ME BACK TO MINUTES
+      workExpiry: moment().add(workMin, 'seconds')
     })
     this.startTimer()
 
@@ -118,7 +119,8 @@ var CountDown = React.createClass({
   },
   setBreak(){
     this.setState({
-      breakExpiry: moment().add(this.state.breakMin, 'minutes')
+      // CHANGE ME BACK TO MINUTES
+      breakExpiry: moment().add(this.state.breakMin, 'seconds')
     }),
     this.startTimer(),
     this.checkTimer()
@@ -130,7 +132,8 @@ var CountDown = React.createClass({
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'minutes')
+      // CHANGE ME BACK TO MINUTES
+      workExpiry: moment().add(workMin, 'seconds')
     })
 
     this.startTimer();

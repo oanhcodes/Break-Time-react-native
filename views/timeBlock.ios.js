@@ -97,7 +97,7 @@ var TimeBlock = React.createClass({
 
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
+        <Swiper style={styles.wrapper} height={275} horizontal={true} autoplay={false} showsPagination={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -199,17 +199,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  tabViewContainer: {
-    alignItems: 'stretch',
+  timeContainer: {
+    padding: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    // marginTop: 10
   },
-  wrapper1: {
-    backgroundColor: '#F5FCFF'
-  },
+
   description: {
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 25
   },
   button: {
     backgroundColor: '#05B3DD',
@@ -229,12 +229,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  buttonOff: {
+    backgroundColor: '#BCC1C5',
+    margin:15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
+    },
   picker: {
-    margin: 30,
-    alignSelf: 'stretch'
-  },
-  title: {
-    marginTop: 30
+    width: 300
   },
   backgroundImage: {
     width: null,
@@ -255,7 +262,12 @@ const styles = StyleSheet.create({
   customOptions: {
     marginTop: 30,
   },
+  footer: {
+    flex: 1,
+    fontSize: 25,
+    textAlign: 'center',
+    backgroundColor: '#BCC1C5',
+  },
 });
-
 
 module.exports = TimeBlock;
