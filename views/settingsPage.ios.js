@@ -4,6 +4,7 @@ import React, {
   Component,
   StyleSheet,
   TouchableHighlight,
+  TouchableOpacity,
   Text,
   Image,
   View,
@@ -43,7 +44,9 @@ var Settings = React.createClass ({
 		this.setState({activities: this.state.activities});
 	},
 
-
+	clearText() {
+		this.setState({text: ''})
+	},
 
 	render(){
 		var that = this;
@@ -77,19 +80,23 @@ var Settings = React.createClass ({
 					{activities}
 				</View>
 				<View style={styles.textInputWrapper}>
-					<TextInput 
+					<TextInput
+						clearButtonMode='always'
+						onFocus= {() => this.setState({text : ''})} 
 						style={styles.textInput} 
 						onChangeText={(text) => this.setState({text})} 
 						placeholder={this.state.text}/>
 				</View>
+			
 				<TouchableHighlight 
             style={styles.button} 
             underlayColor={'#9BE8FF'} 
-            onPress={() => this.saveData(this.state.text)}>
+            onPress={() => this.clearText}>
 			      <Text style={styles.buttonText}>
 			        Add Activity
 			      </Text>
 			    </TouchableHighlight>
+			   
 			</View>
 		)
 	}
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.5,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },

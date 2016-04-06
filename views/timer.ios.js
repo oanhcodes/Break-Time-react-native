@@ -69,7 +69,7 @@ var styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.5,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },

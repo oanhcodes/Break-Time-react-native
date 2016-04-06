@@ -122,8 +122,7 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-          
-        
+          <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
             underlayColor={'#9BE8FF'}
@@ -150,6 +149,7 @@ class Main extends Component {
               Activity Settings
             </Text>
           </TouchableHighlight>
+          </View>
          <View style={styles.buttonsContainer}>
             <TouchableHighlight
               style={styles.aboutButton}
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F2',
   },
    header: {
-    marginTop: 5,
+    marginTop: 25,
   },
   mainTitle: {
     fontSize: 30,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.5,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },

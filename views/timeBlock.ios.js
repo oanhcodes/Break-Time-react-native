@@ -121,15 +121,15 @@ var TimeBlock = React.createClass({
             </Image>
 
             <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              play music.
-            </Text>
+              <Text style={styles.whiteText}>
+                play music.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              eat snacks.
-            </Text>
+              <Text style={styles.whiteText}>
+                eat snacks.
+              </Text>
             </Image>
         </Swiper>
       </View>
@@ -140,6 +140,7 @@ var TimeBlock = React.createClass({
         tabBarActiveTextColor='#05B3DD'
         tabBarBackgroundColor='#E1F6F7'>
         <Picker
+          index={1}
           tabLabel="WORK TIME"
           style={styles.picker}
           selectedValue={this.state.worktime}
@@ -167,10 +168,9 @@ var TimeBlock = React.createClass({
           onValueChange={this.updateBreakActivity}>
           {activitiesList}
         </Picker>
-      </ScrollableTabView>
-
-      <Animated.View style={[styles.buttonContainer, {opacity: this.state.fadeAnim}]}>
+        
         <TouchableHighlight
+          tabLabel="START"
           style={styles.button}
           underlayColor='#9BE8FF'
           onPress={() => this.GoToTimerPage()}>
@@ -178,7 +178,11 @@ var TimeBlock = React.createClass({
             Start
           </Text>
         </TouchableHighlight>
-      </Animated.View>
+      
+
+      </ScrollableTabView>
+
+      
     </ScrollView>
   
     );
@@ -201,7 +205,7 @@ const styles = StyleSheet.create({
   tabViewContainer: {
     alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
-    marginTop: 10
+    // marginTop: 10
   },
   wrapper1: {
     backgroundColor: '#F5FCFF'
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     shadowColor: 'black',
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.5,
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
     },
@@ -231,6 +235,9 @@ const styles = StyleSheet.create({
   picker: {
     margin: 30,
     alignSelf: 'stretch'
+  },
+  title: {
+    marginTop: 30
   },
   backgroundImage: {
     width: null,
