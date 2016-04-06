@@ -28,24 +28,26 @@ var Settings = React.createClass ({
 	getInitialState() {
 		return {
 			activities: [],
-			text: "Enter an activity here"
+			text: "Enter an activity here",
 		};
 	},
+
+  popToTop() {
+    this.props.navigator.popToTop();
+  },
 
 	saveData(value) {
 		this.state.activities.push(value);
 		this.setState({activities: this.state.activities});
-		store.save('activities', this.state.activities)
+		store.save('activities', this.state.activities);
+    this.refs['textInput'].setNativeProps({text: ''});
+    this.setState({text: "Enter an activity here"});
 	},
 
 	deleteData(index) {
 		this.state.activities.splice(index, 1);
 		store.save('activities', this.state.activities);
 		this.setState({activities: this.state.activities});
-	},
-
-	clearText() {
-		this.setState({text: ''})
 	},
 
 	render(){
@@ -71,33 +73,42 @@ var Settings = React.createClass ({
 		});
 		return(
 			<View style={styles.container}>
-        <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
+        
           <View style={styles.header}>
     				<Text style={styles.title}>
     					Customize Your Breaks
     				</Text>
+            <View style={styles.textInputWrapper}>
+              <TextInput
+                ref={'textInput'}
+                style={styles.textInput} 
+                onChangeText={(text) => this.setState({text})} 
+                placeholder={this.state.text}/>
+              <TouchableHighlight 
+                style={styles.addButton} 
+                underlayColor={'#9BE8FF'} 
+                onPress={() => this.saveData(this.state.text)}>
+                <Text style={styles.buttonText}>
+                  +
+                </Text>
+              </TouchableHighlight>
+            </View>
+          
           </View>
+          <ScrollView style={styles.wrapper} bounces={false} horizontal={false}>
   				<View style={styles.activityListWrapper}>
   					{activities}
-				</View>
-        </ScrollView>
-
-				<View style={styles.textInputWrapper}>
-					<TextInput
-						clearButtonMode='always'
-						onFocus= {() => this.setState({text : ''})} 
-						style={styles.textInput} 
-						onChangeText={(text) => this.setState({text})} 
-						placeholder={this.state.text}/>
-				</View>
-			  <TouchableHighlight 
-          style={styles.button} 
-          underlayColor={'#9BE8FF'} 
-          onPress={() => this.saveData(this.state.text)}>
-		      <Text style={styles.buttonText}>
-		        Add Activity
-		      </Text>
-		    </TouchableHighlight>
+				  </View>
+          </ScrollView>
+          <TouchableHighlight 
+                style={styles.button} 
+                underlayColor={'#9BE8FF'} 
+                onPress={() => this.popToTop()}>
+                <Text style={styles.buttonText}>
+                  Home
+                </Text>
+              </TouchableHighlight>
+        
 			</View>
 		  )
   	}
@@ -108,8 +119,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F2F2F2'
+		backgroundColor: '#9BE8FF'
 	},
+  header: {
+    marginTop: 50,
+    backgroundColor: '#9BE8FF',
+    alignItems: 'center'
+  },
 	title: {
 		fontWeight: 'bold',
 		fontSize: 30,
@@ -120,37 +136,52 @@ const styles = StyleSheet.create({
 	},
   wrapper: {
     alignSelf: 'stretch',
-    backgroundColor: '#29D9C2'
+    backgroundColor: '#9BE8FF'
   },
   activityListWrapper: {
     alignSelf: 'stretch',
     flex: 1,
   },
 	textInputWrapper: {
-		backgroundColor: '#2E6BFF',
+    flex: 1,
+		backgroundColor: '#05B3DD',
 		height: 100,
 		justifyContent: 'center',
 		alignItems: 'center',
 		alignSelf: 'stretch',
-		marginBottom: 10
+    flexDirection: 'row',
+    paddingRight: 30
 	},
 	textInput: {
 		backgroundColor: 'white',
 		height: 50,
-		width: 335,
-		marginLeft: 30,
+		width: 300,
+		margin: 25,
 		paddingLeft: 10
 	},
-	button: {
+	addButton: {
+    backgroundColor: '#3dd83d',
+    // margin: 15,
+    borderRadius: 8.150,
+    width: 45,
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
+  },
+  button: {
     backgroundColor: '#05B3DD',
-    margin: 15,
+    // margin: 15,
     borderRadius: 8.150,
     width: 300,
     height: 45,
     shadowColor: 'black',
     shadowOpacity: 0.3,
     shadowOffset: {width: 0, height: 3},
-    shadowRadius: 2
+    shadowRadius: 2,
+    alignSelf: 'center',
+    margin: 45
   },
   buttonText: {
     textAlign: 'center',
