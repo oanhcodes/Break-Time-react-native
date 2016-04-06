@@ -18,6 +18,7 @@ var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
 var TimerPage = require('./timer.ios');
 var TimerLogicPage = require('./timerlogic.ios');
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 var indexContainer = [];
 var activityData;
@@ -123,13 +124,14 @@ var TimeBlock = React.createClass({
             </Image>
         </Swiper>
       </View>
-      <View style={styles.timeContainer}>
-        <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
-        <View style={styles.container}>
-          <Text style={styles.description}>
-            1. Set Work Time Block
-          </Text>
+
+      <ScrollableTabView 
+        style={styles.tabViewContainer} 
+        tabBarUnderlineColor='#05B3DD'
+        tabBarActiveTextColor='#05B3DD'
+        tabBarBackgroundColor='#E1F6F7'>
         <Picker
+          tabLabel="WORK TIME"
           style={styles.picker}
           selectedValue={this.state.worktime}
           onValueChange={this.updateWorktime}>
@@ -139,12 +141,8 @@ var TimeBlock = React.createClass({
           <Picker.Item label='45 Minutes' value='2700' />
           <Picker.Item label='60 Minutes' value='3600' />
         </Picker>
-        </View>
-        <View style={styles.container}>
-        <Text style={styles.description}>
-          2. Set Break Time Block
-        </Text>
         <Picker
+          tabLabel="BREAK TIME"
           style={styles.picker}
           selectedValue={this.state.breaktime}
           onValueChange={this.updateBreaktime}>
@@ -153,20 +151,14 @@ var TimeBlock = React.createClass({
           <Picker.Item label='15 Minutes' value='900' />
           <Picker.Item label='20 Minutes' value='1200' />
         </Picker>
-        </View>
-        <View style={styles.container}>
-        <Text style={styles.description}>
-          3. Choose a break activity.
-        </Text>
         <Picker
+          tabLabel="ACTIVITY"
           style={styles.picker}
           selectedValue={this.state.breakActivity}
           onValueChange={this.updateBreakActivity}>
           {activitiesList}
         </Picker>
-        </View>
-        </Swiper>
-      </View>
+      </ScrollableTabView>
 
       <View style={styles.buttonContainer}>
         <TouchableHighlight
@@ -178,7 +170,6 @@ var TimeBlock = React.createClass({
           </Text>
         </TouchableHighlight>
       </View>
-
     </ScrollView>
     );
   }
@@ -197,14 +188,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  timeContainer: {
-    padding: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  tabViewContainer: {
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
+    marginTop: 10
   },
-
+  wrapper1: {
+    backgroundColor: '#F5FCFF'
+  },
   description: {
     textAlign: 'center',
     fontSize: 20
@@ -224,7 +215,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   picker: {
-    width: 300
+    margin: 30,
+    alignSelf: 'stretch'
   },
   backgroundImage: {
     width: null,
