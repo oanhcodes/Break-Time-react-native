@@ -26,7 +26,8 @@ var ProfilePage = React.createClass ({
       totalBreakTime = data;
     });
     store.get('activitiesAmount').then((data) => {
-      activitiesAmount = data;
+      console.log(data)
+      activitiesAmount = data[0];
     });
     store.get('totalCycles').then((data) => {
       totalCycles = data;
