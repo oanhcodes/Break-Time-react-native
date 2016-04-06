@@ -24,7 +24,7 @@ class Main extends Component {
 
   componentDidMount() {
     store.get('activities').then((data) => {
-      if (Object.keys(data).length > 0 || data.length > 0 ){
+      if (data.length > 0 ){
         this.setState({activities: data})
       } else {
         this.setState({activities: ["Run", "Sashay Away"]});
@@ -32,23 +32,23 @@ class Main extends Component {
       }
     });
     store.get('totalTimeWorked').then((data) => {
-      console.log(data)
-      if (Object.keys(data).length === 0 || data === null){
+      // console.log(data)
+      if (data === null){
         store.save('totalTimeWorked', 0)
       }
     });
     store.get('totalBreakTime').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalBreakTime', 0)
       }
     });
     store.get('activitiesAmount').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
-        store.save('activitiesAmount', [])
+      if (data === null){
+        store.save('activitiesAmount', ["LOL", "HAHA"])
       }
     });
     store.get('totalCycles').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalCycles', 0)
       }
     })

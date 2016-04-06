@@ -18,63 +18,62 @@ var activitiesAmount;
 var totalCycles;
 
 var ProfilePage = React.createClass ({
-
   componentDidMount() {
-    // this.setState({})
     store.get('totalTimeWorked').then((data) => {
-      // this.setState({totalTimeWorked: data})
       totalTimeWorked = data;
-      console.log(data)
+      // this.setState({})
     });
     store.get('totalBreakTime').then((data) => {
-      // this.setState({})
       totalBreakTime = data;
+      // this.setState({})
     });
     store.get('activitiesAmount').then((data) => {
-      // this.setState({})
       activitiesAmount = data;
-    });store.get('totalCycles').then((data) => {
       // this.setState({})
-      totalCycles = data;
     });
-    this.setState({})
+    store.get('totalCycles').then((data) => {
+      totalCycles = data;
+      this.setState({})
+    });
   },
 
-  // getInitialState() {
-  //   return {
-  //     totalTimeWorked: totalTimeWorked,
-  //     totalBreakTime: totalBreakTime,
-  //     activitiesAmount: activitiesAmount,
-  //     totalCycles: totalCycles
-  //   }
-  // },
+  getInitialState() {
+    return {
+      totalTimeWorked: totalTimeWorked,
+      totalBreakTime: totalBreakTime,
+      activitiesAmount: activitiesAmount,
+      totalCycles: totalCycles
+    }
+  },
 
   render() {
+    // var activities = console.log(activitiesAmount)
+    if (activitiesAmount !== undefined) {
+      var activities = activitiesAmount.map(function(activity, i) {
+        return (
+          <Text key={i} style={styles.activityList}>
+            {activity}: 
+          </Text>
+        )
+      })
+    }
     return (
       <View style={styles.container}>
       <ScrollView style={styles.wrapper} bounces={true} horizontal={false} autoplay={false}>
         <View style={styles.body}>
           <Text style={styles.title}>
-            Profile
-          </Text>
-          <Image source={require('../imgs/run.jpeg')} style={styles.image}>
-          </Image>
-          <Text styles={styles.content}>
-            Name: Mister Crab
+            Stats
           </Text>
           <Text styles={styles.content}>
-            Breaks Taken: 
-          </Text>
-          <Text>
             Total Time Worked: {totalTimeWorked} minutes.
           </Text>
-          <Text>
+          <Text styles={styles.content}>
             Total Break Time: {totalBreakTime} minutes.
           </Text>
-          <Text>
-            Amount of Times You've Chosen Each Activity, Regardless of Which Activity You May Have Previously Been Considering: {activitiesAmount}
+          <Text styles={styles.content}>
+            Number of Times You've Chosen Each Activity: {activities}
           </Text>
-          <Text>
+          <Text styles={styles.content}>
             Total Complete Cycles: {totalCycles}.
           </Text>
         </View>
