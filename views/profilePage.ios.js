@@ -25,13 +25,13 @@ var ProfilePage = React.createClass ({
     store.get('totalBreakTime').then((data) => {
       totalBreakTime = data;
     });
-    store.get('activitiesAmount').then((data) => {
-      activitiesAmount = data;
-    });
-    store.get('totalCycles').then((data) => {
-      totalCycles = data;
-      this.setState({});
-    });
+    // store.get('activitiesAmount').then((data) => {
+    //   activitiesAmount = data;
+    // });
+    // store.get('totalCycles').then((data) => {
+    //   totalCycles = data;
+    //   this.setState({});
+    // });
   },
 
   render() {
@@ -47,57 +47,76 @@ var ProfilePage = React.createClass ({
     } else {
       var activitiesList = []
     }
-    return (
+   return (
+    <View style={styles.profileBackground}>
+    <Image source={require('../imgs/flowers.jpg')} style={styles.backgroundImage}>
       <View style={styles.container}>
-      <ScrollView style={styles.wrapper} bounces={true} horizontal={false} autoplay={false}>
-        <View style={styles.body}>
-          <Text style={styles.title}>
+        <View style={[styles.wrapper,styles.profileContainer]}>  
+          <Text style={styles.profileText1}>
             Profile
           </Text>
-          <Text>
-            Total Time Worked: {totalTimeWorked} minutes.
+        <View style={styles.body}>
+          <Text style={styles.profileText}>
+            Total Time Worked: {totalTimeWorked} minutes
           </Text>
-          <Text styles={styles.content}>
-            Total Break Time: {totalBreakTime} minutes.
-          </Text>
-          <Text>
-            Amount of Times You have Chosen Each Activity:
-          </Text>
-          <View>
-            {activitiesList}
-          </View>
-          <Text>
-            Total Complete Cycles: {totalCycles}.
+          <Text style={styles.profileText}>
+            Total Break Time: {totalBreakTime} minutes
           </Text>
         </View>
-      </ScrollView>
+        </View>
       </View>
+    </Image>
+    </View>
     );
 
   }
 })
 
 const styles = StyleSheet.create({
+  profileBackground: {
+  flex: 1,
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'contain',
+  },
   container: {
     flex: 1,
+    marginTop:60,
     justifyContent: 'center',
-    padding: 0,
-    backgroundColor: '#F5FCFF',
-  },
-  body: {
-    padding: 50,
     alignItems: 'center',
+  },
+  wrapper: {
+    padding: 10,
+    marginRight:10,
+    width: 350,
+    backgroundColor: '#e5e5e5',
+    },
+  profileContainer: {
+    padding:20,
+    backgroundColor: 'white',
+    opacity: 0.75,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  profileText1: {
+  fontSize: 25,
+  fontWeight: 'bold',
+  marginBottom: 15,
+  textAlign: 'center',
+  },
+  profileText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingTop: 7,
   },
   title: {
     textAlign: 'center',
     marginTop: 30,
     marginBottom: 25,
     fontSize: 20
-  },
-  image: {
-    height: 100,
-    borderRadius: 50,
-    width: 100
   },
 });
 
