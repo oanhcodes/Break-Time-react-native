@@ -22,8 +22,7 @@ var alertBreakMessage = 'Now take a well deserved break.',
 
 var onBreak = false,
     cycles = 0,
-    done = false,
-    first = true;
+    timeOn;
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
@@ -52,30 +51,39 @@ var CountDown = React.createClass({
   },
 
   setNewBlockCycle() {
-    workExpiry = moment().add(this.state.workMin, 'minutes');
-    breakExpiry = moment().add(this.state.workMin, 'minutes').add(this.state.breakMin, 'minutes');
-    console.log(workExpiry);
-    console.log(breakExpiry);
-    this.checkTimer(workExpiry, breakExpiry);
+
+    var workMin = 5,
+        breakMin = 3;
+
+    this.setState({
+      workMin: workMin,
+      breakMin: breakMin,
+      workExpiry: moment().add(workMin, 'seconds')
+    })
+    this.startTimer()
+
+    console.log('wexp2:' + this.state.workExpiry.format())
+    console.log('bexp2:' + this.state.breakExpiry.format())
+    this.checkTimer();
   },
 
-  checkTimer(workExpireTime, breakExpireTime) {
+  checkTimer() {
       // how to we test seconds? imports number as minutes. where?
       // do alerts happen while out of application?
-
+    console.log('wexp1:' + this.state.workExpiry.format())
+    console.log('bexp1:' + this.state.breakExpiry.format())
     switch (onBreak) {
       case true:
-        if (moment().format() == breakExpireTime.format()) {
+        if (moment().format() == this.state.breakExpiry.format()) {
           onBreak = false;
-          // done = true;
-          first = false;
+          this.stopTimer()
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
           Alert.alert(
             'You look so refreshed!',
             alertWorkMessage,
             [
-              {text: 'Run another timeblock', onPress: () => this.forceUpdate()},
+              {text: 'Run another timeblock', onPress: () => this.setNewBlockCycle()},
               {text: 'Finished', onPress: () => this.GoToStatsPage()}
             ]
           );
@@ -84,17 +92,17 @@ var CountDown = React.createClass({
         }
         break;
       case false:
-        if (moment().format() == workExpireTime.format()) {
+        if (moment().format() == this.state.workExpiry.format()) {
           cycles++;
           onBreak = true;
-          // done = true;
           Vibration.vibrate();
           AudioPlayer.play('crabhorn.mp3');
+          this.stopTimer()
           Alert.alert(
             'Great job staying on task!',
             alertBreakMessage,
             [
-              {text: 'Take Break', onPress: () => this.forceUpdate()}
+              {text: 'Take Break', onPress: () => this.setBreak()}
             ]
           );
         } else {
@@ -103,42 +111,35 @@ var CountDown = React.createClass({
         break;
     }
   },
-
+  setBreak(){
+    this.setState({
+      breakExpiry: moment().add(this.state.breakMin, 'seconds')
+    }),
+    this.startTimer(),
+    this.checkTimer()
+  },
   componentDidMount() {
-    var workMin = this.props.workTime,
-        breakMin = this.props.breakTime,
-        workExpiry = moment().add(workMin, 'minutes'),
-        breakExpiry = moment().add(workMin, 'minutes').add(breakMin, 'minutes'),
-        toggleTimer;
-       
-    console.log(workExpiry);
-    console.log(breakExpiry);
+    var workMin = 5,
+        breakMin = 3;
 
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
-      workExpiry: workExpiry,
-      breakExpiry: breakExpiry
+      workExpiry: moment().add(workMin, 'seconds')
     })
 
-    this._update = function() {
-      if (first) {
-        this.checkTimer(workExpiry, breakExpiry);
-      } else {
-        this.setNewBlockCycle();
-      }
-      
-      // if (done) {
-      //   clearInterval(toggleTimer);
-      //   done = false;
-      //   this.setNewBlockCycle();
-      //   setInterval(this._update, 1000);
-      // }
-      // this.forceUpdate();
-    }.bind(this);
+    this.startTimer();
 
-    toggleTimer = setInterval(this._update, 1000);
-    // this._countdown();
+  },
+  _update(){
+    this.checkTimer();
+  },
+
+  startTimer(){
+    timeOn = setInterval(this._update, 1000);
+  },
+  stopTimer(){
+    clearInterval(timeOn);
   },
   componentWillUnmount() {
     clearInterval(this._update);
@@ -173,7 +174,7 @@ var CountDown = React.createClass({
         </Text>
       </TouchableHighlight>
       </View>
-    ) 
+    )
   },
   render(){
 
