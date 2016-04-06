@@ -20,36 +20,34 @@ var totalCycles;
 var ProfilePage = React.createClass ({
 
   componentDidMount() {
-    // this.setState({})
     store.get('totalTimeWorked').then((data) => {
-      // this.setState({totalTimeWorked: data})
       totalTimeWorked = data;
-      console.log(data)
     });
     store.get('totalBreakTime').then((data) => {
-      // this.setState({})
       totalBreakTime = data;
     });
     store.get('activitiesAmount').then((data) => {
-      // this.setState({})
-      activitiesAmount = data;
-    });store.get('totalCycles').then((data) => {
-      // this.setState({})
-      totalCycles = data;
+      activitiesAmount = data[0];
     });
-    this.setState({})
+    store.get('totalCycles').then((data) => {
+      totalCycles = data;
+      this.setState({});
+    });
   },
 
-  // getInitialState() {
-  //   return {
-  //     totalTimeWorked: totalTimeWorked,
-  //     totalBreakTime: totalBreakTime,
-  //     activitiesAmount: activitiesAmount,
-  //     totalCycles: totalCycles
-  //   }
-  // },
-
   render() {
+    if (activitiesAmount !== undefined) {
+      var activitiesNames = Object.keys(activitiesAmount)
+      var activitiesList = activitiesNames.map(function(activity, i) {
+        return(
+          <View key={i}>
+            <Text key={i}> {activity}:{activitiesAmount[activity]} </Text>
+          </View>
+        )
+      })
+    } else {
+      var activitiesList = []
+    }
     return (
       <View style={styles.container}>
       <ScrollView style={styles.wrapper} bounces={true} horizontal={false} autoplay={false}>
@@ -57,14 +55,8 @@ var ProfilePage = React.createClass ({
           <Text style={styles.title}>
             Profile
           </Text>
-          <Image source={require('../imgs/run.jpeg')} style={styles.image}>
-          </Image>
-          <Text styles={styles.content}>
-            Name: Mister Crab
-          </Text>
-          <Text styles={styles.content}>
-            Breaks Taken: 
-          </Text>
+          
+
           <Text>
             Total Time Worked: {totalTimeWorked} minutes.
           </Text>
@@ -72,8 +64,11 @@ var ProfilePage = React.createClass ({
             Total Break Time: {totalBreakTime} minutes.
           </Text>
           <Text>
-            Amount of Times You've Chosen Each Activity, Regardless of Which Activity You May Have Previously Been Considering: {activitiesAmount}
+            Amount of Times You have Chosen Each Activity:
           </Text>
+          <View>
+            {activitiesList}
+          </View>
           <Text>
             Total Complete Cycles: {totalCycles}.
           </Text>
@@ -81,7 +76,7 @@ var ProfilePage = React.createClass ({
       </ScrollView>
       </View>
     );
-  
+
   }
 })
 
@@ -101,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 25,
     fontSize: 20
-  }, 
+  },
   image: {
     height: 100,
     borderRadius: 50,
