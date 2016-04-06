@@ -2,6 +2,7 @@ import React, {
   Alert,
   AsyncStorage,
   AppRegistry,
+  Animated,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -16,15 +17,34 @@ var setTimeBlockPage = require('./timeBlock.ios');
 var aboutAppPage = require('./aboutApp.ios');
 var settingsPage = require('./settingsPage.ios');
 var Swiper = require('react-native-swiper');
-var statsPage = require('./profilePage.ios')
+var statsPage = require('./profilePage.ios');
 
 var store = require('react-native-simple-store')
+// store.delete('activitiesAmount')
+// store.delete('totalTimeWorked')
+// store.delete('totalBreakTime')
+// store.delete('totalCycles')
 
 class Main extends Component {
 
+  constructor() {
+    super();
+      this.state = {
+      fadeAnim: new Animated.Value(0),
+    };
+  }
+
   componentDidMount() {
+    // Fade-in animation
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        duration: 900},           
+     ).start()
+
+    // Async Storage
     store.get('activities').then((data) => {
-      if (Object.keys(data).length > 0 || data.length > 0 ){
+      if (data.length > 0 ){
         this.setState({activities: data})
       } else {
         this.setState({activities: ["Run", "Sashay Away"]});
@@ -32,26 +52,26 @@ class Main extends Component {
       }
     });
     store.get('totalTimeWorked').then((data) => {
-      console.log(data)
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalTimeWorked', 0)
       }
     });
     store.get('totalBreakTime').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalBreakTime', 0)
       }
     });
     store.get('activitiesAmount').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
-        store.save('activitiesAmount', [])
+      if (data === null || Object.keys(data).length === 0){
+        store.save('activitiesAmount', [{}] )
       }
     });
     store.get('totalCycles').then((data) => {
-      if (Object.keys(data).length === 0 || data === null){
+      if (data === null){
         store.save('totalCycles', 0)
       }
-    })
+    });
+
   }
 
   GoToAboutApp() {
@@ -84,9 +104,9 @@ class Main extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -106,7 +126,7 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
             underlayColor={'#9BE8FF'}
@@ -121,7 +141,7 @@ class Main extends Component {
             underlayColor={'#9BE8FF'}
             onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              All Time Stats
+              View Stats
             </Text>
           </TouchableHighlight>
 
@@ -133,7 +153,7 @@ class Main extends Component {
               Activity Settings
             </Text>
           </TouchableHighlight>
-        </View>
+          </View>
          <View style={styles.buttonsContainer}>
             <TouchableHighlight
               style={styles.aboutButton}
@@ -145,7 +165,7 @@ class Main extends Component {
               </Text>
             </TouchableHighlight>
           </View>
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -158,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F2',
   },
    header: {
-    marginTop: 5,
+    marginTop: 25,
   },
   mainTitle: {
     fontSize: 30,
@@ -188,6 +208,10 @@ const styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonsContainer: {
     position: 'relative',
@@ -207,7 +231,7 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     fontSize: 20,
     textDecorationLine: 'underline',
-  },
+  }
 });
 
 module.exports = Main;

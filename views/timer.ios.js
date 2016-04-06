@@ -27,8 +27,8 @@ class Timer extends Component {
   // }
 
   render(){
-    console.log(this.componentDidMount());
-    console.log(exitTime);
+    // console.log(this.componentDidMount());
+    // console.log(exitTime);
     return(
       <View style={styles.timerBackground}>
         <Image source={require('../imgs/coffeebreak.jpg')} style={styles.backgroundImage}>
@@ -67,7 +67,11 @@ var styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonText: {
     textAlign: 'center',

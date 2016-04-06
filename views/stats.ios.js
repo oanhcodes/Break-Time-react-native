@@ -1,6 +1,7 @@
 import React, {
   AppRegistry,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   TouchableHighlight,
@@ -18,6 +19,47 @@ var timeworked;
 var breakedtime;
 
 class Stats extends Component {
+
+  constructor(props) {
+    super(props);
+      this.state = {
+      fadeAnim: new Animated.Value(0),
+    };
+  }
+
+  componentDidMount(){
+    // Fade-in animation
+    Animated.timing(          
+       this.state.fadeAnim,   
+       {toValue: 1,
+        delay: 1500,
+        duration: 900},           
+     ).start();
+
+    var that = this
+    store.get('totalTimeWorked').then((data) => {
+      var newTotal = data += Math.floor((this.props.worktime * this.props.cycles) / 60)
+      store.save('totalTimeWorked', newTotal)
+    });
+    store.get('totalBreakTime').then((data) => {
+      var newTotal = data += Math.floor((this.props.breaktime * this.props.cycles) / 60)
+      store.save('totalBreakTime', newTotal)
+    });
+    store.get('activitiesAmount').then((data) => {
+      var activities = data[0]
+      var activityNames = Object.keys(activities);
+      if (activityNames.includes(that.props.breakActivity)){
+        activities[that.props.breakActivity]++
+      }else {
+        activities[that.props.breakActivity] = 1
+      }
+      store.save('activitiesAmount', [activities])
+    });
+    store.get('totalCycles').then((data) => {
+      var newTotal = data += this.props.cycles
+      store.save('totalCycles', newTotal)
+    })
+  }
 
   GoToProfile() {
     this.props.navigator.push({
@@ -45,16 +87,18 @@ class Stats extends Component {
           <Text style={styles.statText}>Your break activity was:</Text>
           <Text style={styles.statText}>{this.props.breakActivity}</Text>
         </View>
-        <Text style={styles.infoText}>
+
+        <Animated.Text style={[styles.infoText, {opacity: this.state.fadeAnim}]}>
           Go to profile page to see full stats.
-        </Text>
+        </Animated.Text>
+
         <View style={styles.buttonsContainer}>
           <TouchableHighlight
             onPress={() => this.GoToProfile()}
             style={styles.button}
             underlayColor='#9BE8FF'>
             <Text style={styles.buttonText}>
-              Profile
+              View Stats
             </Text>
           </TouchableHighlight>
           <TouchableHighlight
@@ -62,7 +106,7 @@ class Stats extends Component {
             style={styles.button}
             underlayColor='#9BE8FF'>
             <Text style={styles.buttonText}>
-              Main
+              Main Page
             </Text>
           </TouchableHighlight>
         </View>
@@ -121,6 +165,10 @@ var styles = StyleSheet.create({
     borderRadius: 8.150,
     width: 300,
     height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonText: {
     textAlign: 'center',

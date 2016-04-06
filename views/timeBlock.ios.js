@@ -1,6 +1,7 @@
 import React, {
   ScrollView,
   AsyncStorage,
+  Animated,
   Component,
   StyleSheet,
   Text,
@@ -19,6 +20,7 @@ var Button = require('./components/button.ios');
 var Swiper = require('react-native-swiper');
 var TimerPage = require('./timer.ios');
 var TimerLogicPage = require('./timerlogic.ios');
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 var indexContainer = [];
 var activityData;
@@ -29,7 +31,13 @@ var TimeBlock = React.createClass({
     store.get('activities').then((data) => {
       this.setState({activities: data})
       activityData = data;
-    })
+    });
+
+    Animated.timing(
+       this.state.fadeAnim,
+       {toValue: 1,
+        duration: 3000},
+     ).start()
   },
 
   GoToTimerPage() {
@@ -46,9 +54,9 @@ var TimeBlock = React.createClass({
 
   getInitialState() {
     return {
-      worktime: '5',
-      breaktime: '5',
-      breakActivity: 'Go for a run',
+      fadeAnim: new Animated.Value(0),
+      worktime: '900',
+      breaktime: '300',
       activities: activityData,
       index: 0
     };
@@ -86,9 +94,10 @@ var TimeBlock = React.createClass({
       var activitiesList = []
     }
     return (
+
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} >
+        <Swiper style={styles.wrapper} height={215} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.
@@ -102,18 +111,19 @@ var TimeBlock = React.createClass({
             </Image>
 
             <Image source={require('../imgs/music.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              play music.
-            </Text>
+              <Text style={styles.whiteText}>
+                play music.
+              </Text>
             </Image>
 
             <Image source={require('../imgs/snackbreak.jpg')} style={styles.backgroundImage} >
-            <Text style={styles.whiteText}>
-              eat snacks.
-            </Text>
+              <Text style={styles.whiteText}>
+                eat snacks.
+              </Text>
             </Image>
         </Swiper>
       </View>
+
       <View style={styles.timeContainer}>
         <Swiper style={styles.wrapper} showsButtons={true} height={300} horizontal={true} index={this.state.index} loop={false}>
         <View style={styles.container}>
@@ -146,31 +156,32 @@ var TimeBlock = React.createClass({
         </Picker>
         </View>
         <View style={styles.container}>
-        <Text style={styles.description}>
-          3. Choose a break activity.
-        </Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={this.state.breakActivity}
-          onValueChange={this.updateBreakActivity}>
-          {activitiesList}
-        </Picker>
+          <Text style={styles.description}>
+            3. Choose a break activity.
+          </Text>
+          <Picker
+            style={styles.picker}
+            selectedValue={this.state.breakActivity}
+            onValueChange={this.updateBreakActivity}>
+            {activitiesList}
+          </Picker>
         </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor='#9BE8FF'
+            onPress={() => this.GoToTimerPage()}>
+            <Text style={styles.buttonText}>
+              Start
+            </Text>
+          </TouchableHighlight>
+        </View>
+
         </Swiper>
       </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor='#9BE8FF'
-          onPress={() => this.GoToTimerPage()}>
-          <Text style={styles.buttonText}>
-            Start
-          </Text>
-        </TouchableHighlight>
-      </View>
-
     </ScrollView>
+
     );
   }
 })
@@ -188,14 +199,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  timeContainer: {
-    padding: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  tabViewContainer: {
+    alignItems: 'stretch',
     backgroundColor: '#F5FCFF',
+    // marginTop: 10
   },
-
+  wrapper1: {
+    backgroundColor: '#F5FCFF'
+  },
   description: {
     textAlign: 'center',
     fontSize: 20
@@ -205,7 +216,11 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
     },
   buttonText: {
     textAlign: 'center',
@@ -215,7 +230,11 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   picker: {
-    width: 300
+    margin: 30,
+    alignSelf: 'stretch'
+  },
+  title: {
+    marginTop: 30
   },
   backgroundImage: {
     width: null,
@@ -229,7 +248,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-  }, 
+  },
   background: {
     backgroundColor: '#F5FCFF',
   },

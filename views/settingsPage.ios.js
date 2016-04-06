@@ -4,6 +4,7 @@ import React, {
   Component,
   StyleSheet,
   TouchableHighlight,
+  TouchableOpacity,
   Text,
   Image,
   View,
@@ -43,7 +44,9 @@ var Settings = React.createClass ({
 		this.setState({activities: this.state.activities});
 	},
 
-
+	clearText() {
+		this.setState({text: ''})
+	},
 
 	render(){
 		var that = this;
@@ -58,7 +61,7 @@ var Settings = React.createClass ({
     ]};
 		return(
 			<View key={i} style={styles.liContainer} >
-        <Swipeout right={swipeoutBtns} height={50}>
+        <Swipeout right={swipeoutBtns} height={50} autoClose={true}>
           <View style={styles.li}>
 				   <Text style={styles.liText}>{activity}</Text>
           </View>
@@ -68,32 +71,37 @@ var Settings = React.createClass ({
 		});
 		return(
 			<View style={styles.container}>
-        <View style={styles.header}>
-				<Text style={styles.title}>
-					Customize Your Breaks
-				</Text>
-        </View>
-				<View style={styles.activityListWrapper}>
-					{activities}
+        <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
+          <View style={styles.header}>
+    				<Text style={styles.title}>
+    					Customize Your Breaks
+    				</Text>
+          </View>
+  				<View style={styles.activityListWrapper}>
+  					{activities}
 				</View>
+        </ScrollView>
+
 				<View style={styles.textInputWrapper}>
-					<TextInput 
+					<TextInput
+						clearButtonMode='always'
+						onFocus= {() => this.setState({text : ''})} 
 						style={styles.textInput} 
 						onChangeText={(text) => this.setState({text})} 
 						placeholder={this.state.text}/>
 				</View>
-				<TouchableHighlight 
-            style={styles.button} 
-            underlayColor={'#9BE8FF'} 
-            onPress={() => this.saveData(this.state.text)}>
-			      <Text style={styles.buttonText}>
-			        Add Activity
-			      </Text>
-			    </TouchableHighlight>
+			  <TouchableHighlight 
+          style={styles.button} 
+          underlayColor={'#9BE8FF'} 
+          onPress={() => this.saveData(this.state.text)}>
+		      <Text style={styles.buttonText}>
+		        Add Activity
+		      </Text>
+		    </TouchableHighlight>
 			</View>
-		)
-	}
-});
+		  )
+  	}
+  });
 
 const styles = StyleSheet.create({
 	container: {
@@ -104,17 +112,20 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontWeight: 'bold',
-		fontSize: 30
+		fontSize: 30,
+    marginTop: 30,
+    marginBottom: 30,
+    textAlign: 'center',
+    color: 'white',
 	},
   wrapper: {
     alignSelf: 'stretch',
+    backgroundColor: '#29D9C2'
   },
-	activityListWrapper: {
-		alignSelf: 'stretch',
-	},
-	addActivityTitle: {
-
-	},
+  activityListWrapper: {
+    alignSelf: 'stretch',
+    flex: 1,
+  },
 	textInputWrapper: {
 		backgroundColor: '#2E6BFF',
 		height: 100,
@@ -135,7 +146,11 @@ const styles = StyleSheet.create({
     margin: 15,
     borderRadius: 8.150,
     width: 300,
-    height: 45
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2
   },
   buttonText: {
     textAlign: 'center',
@@ -144,31 +159,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  deleteActivity: {
-  	backgroundColor: 'red',
-  	width: 50,
-  	height: 50
+  li: {
+    backgroundColor: '#fff',
+    borderBottomColor: '#eee',
+    borderColor: 'transparent',
+    borderWidth: 1,
+    paddingLeft: 16,
+    paddingTop: 14,
+    paddingBottom: 16,
   },
-  listItem: {
-    backgroundColor: 'pink',
+  liContainer: {
+    flex: 2,
   },
- li: {
-  backgroundColor: '#fff',
-  borderBottomColor: '#eee',
-  borderColor: 'transparent',
-  borderWidth: 1,
-  paddingLeft: 16,
-  paddingTop: 14,
-  paddingBottom: 16,
-},
-liContainer: {
-  flex: 2,
-},
-liText: {
-  textAlign: 'center',
-  color: 'black',
-  fontSize: 20,
-},
+  liText: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 20,
+  },
 })
 
 module.exports = Settings;
