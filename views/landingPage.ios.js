@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   	fontSize: 60,
   	fontWeight: 'bold',
   	backgroundColor: 'transparent',
-  	// fontFamily: 'courier',
   	color: 'white'
   }
 })
