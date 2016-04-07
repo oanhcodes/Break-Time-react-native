@@ -57,7 +57,7 @@ var Settings = React.createClass ({
 		var activities = this.state.activities.map(function(activity, i){
       {var swipeoutBtns = [
       {
-        backgroundColor: 'red',
+        backgroundColor: '#FF5347',
         underlayColor: 'white',
         text: 'Delete',
         onPress: ()=>that.deleteData(i),
@@ -74,8 +74,7 @@ var Settings = React.createClass ({
 		)
 		});
 		return(
-			<View style={styles.container}>
-         
+      <View style={styles.container}>
   				<Text style={styles.title}>
   					Customize Your Breaks
   				</Text>
@@ -86,11 +85,12 @@ var Settings = React.createClass ({
               onChangeText={(text) => this.setState({text})} 
               placeholder={this.state.text}/>
             <TouchableHighlight style={styles.addButton} 
-              underlayColor={'#9BE8FF'} 
+              underlayColor={'#C0C0C0'} 
               onPress={() => this.saveData(this.state.text)}>
               <Text style={styles.buttonText2}>+</Text>
             </TouchableHighlight>
           </View>
+          <Text style={styles.delete}>Swipe left to delete</Text>
           <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
     				<View style={styles.activityListWrapper}>
     					{activities}
@@ -110,18 +110,28 @@ var Settings = React.createClass ({
   });
 
 const styles = StyleSheet.create({
+  settingsBackground: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 	container: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: '#9BE8FF'
 	},
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'contain',
+  },
 	title: {
     marginTop: 100,
 		fontWeight: 'bold',
 		fontSize: 30,
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
+    backgroundColor: 'transparent',
 	},
   wrapper: {
     alignSelf: 'stretch',
@@ -224,12 +234,14 @@ const styles = StyleSheet.create({
   delete: {
     textAlign: 'center',
     fontSize: 15,
-    marginTop: -50,
+    fontWeight: 'bold',
     marginBottom: 10,
     alignSelf:'stretch',
+    color: 'black',
+    backgroundColor: 'transparent'
   },
   activityListWrapper: {
-    opacity: .75,
+    opacity: 1,
     marginTop: -50,
     backgroundColor: 'gray',
   }
