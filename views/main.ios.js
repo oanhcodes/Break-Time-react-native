@@ -106,7 +106,7 @@ class Main extends Component {
     return (
       <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} showsPagination={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time
@@ -141,7 +141,7 @@ class Main extends Component {
             underlayColor={'#9BE8FF'}
             onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              View Stats
+              Timeboxing Stats
             </Text>
           </TouchableHighlight>
 
@@ -165,6 +165,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
+  },
+  header: {
+    top: 0
   },
   mainTitle: {
     fontSize: 30,
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   buttonsContainer: {
-    marginBottom: 30,
+    marginBottom: 25,
   },
   instructions: {
     textAlign: 'center',
@@ -217,6 +220,14 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     fontSize: 20,
     textDecorationLine: 'underline',
+  },
+  logo: {
+    height: 85,
+    width: 85,
+  },
+  logoContainer: {
+    marginTop: 10,
+    alignItems: 'center',
   }
 });
 

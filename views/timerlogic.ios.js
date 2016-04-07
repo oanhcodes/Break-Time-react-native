@@ -302,7 +302,7 @@ var styles = StyleSheet.create({
   buttonStyle: {
     padding:20,
     backgroundColor: 'white',
-    opacity: 0.75,
+    opacity: 0.85,
     borderRadius: 8
   },
   button: {
