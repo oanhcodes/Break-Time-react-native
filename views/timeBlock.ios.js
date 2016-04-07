@@ -29,7 +29,7 @@ var TimeBlock = React.createClass({
 
   componentDidMount() {
     store.get('activities').then((data) => {
-      this.setState({activities: data})
+      this.setState({activities: data, breakActivity: data[0]});
       activityData = data;
     });
 
