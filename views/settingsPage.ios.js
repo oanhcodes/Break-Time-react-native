@@ -19,42 +19,42 @@ var Swipeout = require('react-native-swipeout');
 
 var Settings = React.createClass ({
 
-	componentDidMount() {
+  componentDidMount() {
     store.get('activities').then((data) => {
       this.setState({activities: data})
     })
   },
 
-	getInitialState() {
-		return {
-			activities: [],
-			text: "Enter an activity here",
-		};
-	},
+  getInitialState() {
+    return {
+      activities: [],
+      text: "Enter an activity here",
+    };
+  },
 
   popToTop() {
     this.props.navigator.popToTop();
   },
 
-	saveData(value) {
+  saveData(value) {
     if (value !== "Enter an activity here") {
-	  	this.state.activities.unshift(value);
-	 	  this.setState({activities: this.state.activities});
-	 	  store.save('activities', this.state.activities);
+      this.state.activities.unshift(value);
+      this.setState({activities: this.state.activities});
+      store.save('activities', this.state.activities);
       this.refs['textInput'].setNativeProps({text: ''});
       this.setState({text: "Enter an activity here"});
     }
-	},
+  },
 
-	deleteData(index) {
-		this.state.activities.splice(index, 1);
-		store.save('activities', this.state.activities);
-		this.setState({activities: this.state.activities});
-	},
+  deleteData(index) {
+    this.state.activities.splice(index, 1);
+    store.save('activities', this.state.activities);
+    this.setState({activities: this.state.activities});
+  },
 
-	render(){
-		var that = this;
-		var activities = this.state.activities.map(function(activity, i){
+  render(){
+    var that = this;
+    var activities = this.state.activities.map(function(activity, i){
       {var swipeoutBtns = [
       {
         backgroundColor: '#FF5347',
@@ -63,21 +63,21 @@ var Settings = React.createClass ({
         onPress: ()=>that.deleteData(i),
       }
     ]};
-		return(
-			<View key={i} style={styles.liContainer} >
+    return(
+      <View key={i} style={styles.liContainer} >
         <Swipeout right={swipeoutBtns} height={50} autoClose={true}>
           <View style={styles.li}>
-				   <Text style={styles.liText}>{activity}</Text>
+           <Text style={styles.liText}>{activity}</Text>
           </View>
         </Swipeout>
-			</View>
-		)
-		});
-		return(
+      </View>
+    )
+    });
+    return(
       <View style={styles.container}>
-  				<Text style={styles.title}>
-  					Customize Your Breaks
-  				</Text>
+          <Text style={styles.title}>
+            Customize Your Breaks
+          </Text>
           <View style={styles.flowRight}>
             <TextInput
               ref={'textInput'}
@@ -92,9 +92,9 @@ var Settings = React.createClass ({
           </View>
           <Text style={styles.delete}>Swipe left to delete</Text>
           <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
-    				<View style={styles.activityListWrapper}>
-    					{activities}
-  				  </View>
+            <View style={styles.activityListWrapper}>
+              {activities}
+            </View>
           </ScrollView>
           <TouchableHighlight 
             style={styles.button2} 
@@ -104,9 +104,9 @@ var Settings = React.createClass ({
               Main Page
             </Text>
           </TouchableHighlight>
-			</View>
-		  )
-  	}
+      </View>
+      )
+    }
   });
 
 const styles = StyleSheet.create({
@@ -115,24 +115,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#F2F2F2'
-	},
+  },
   backgroundImage: {
     flex: 1,
     resizeMode: 'contain',
   },
-	title: {
+  title: {
     marginTop: 100,
-		fontWeight: 'bold',
-		fontSize: 30,
+    fontWeight: 'bold',
+    fontSize: 30,
     textAlign: 'center',
     color: 'black',
     backgroundColor: 'transparent',
-	},
+  },
   wrapper: {
     alignSelf: 'stretch',
     backgroundColor: 'transparent',
@@ -174,18 +174,18 @@ const styles = StyleSheet.create({
     textAlign:'left',
     backgroundColor: 'white'
   },
-	// textInputWrapper: {
+  // textInputWrapper: {
  //    flex: 1,
-	// 	backgroundColor: '#05B3DD',
-	// 	height: 100,
-	// 	justifyContent: 'center',
-	// 	alignItems: 'center',
-	// 	alignSelf: 'stretch',
+  //  backgroundColor: '#05B3DD',
+  //  height: 100,
+  //  justifyContent: 'center',
+  //  alignItems: 'center',
+  //  alignSelf: 'stretch',
  //    flexDirection: 'row',
  //    paddingRight: 30
-	// },
+  // },
   addButton: {
-    backgroundColor: 'gray',
+    backgroundColor: '#05B3DD',
     borderRadius: 8.150,
     width: 45,
     height: 45,

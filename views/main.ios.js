@@ -24,7 +24,7 @@ var store = require('react-native-simple-store')
 // store.delete('totalTimeWorked')
 // store.delete('totalBreakTime')
 // store.delete('totalCycles')
-
+// store.delete('activities')
 class Main extends Component {
 
   constructor() {
