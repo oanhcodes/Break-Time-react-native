@@ -58,7 +58,7 @@ var Settings = React.createClass ({
       {var swipeoutBtns = [
       {
         backgroundColor: 'red',
-        underlayColor: 'orange',
+        underlayColor: 'white',
         text: 'Delete',
         onPress: ()=>that.deleteData(i),
       }
@@ -75,42 +75,35 @@ var Settings = React.createClass ({
 		});
 		return(
 			<View style={styles.container}>
-        
-          <View style={styles.header}>
-    				<Text style={styles.title}>
-    					Customize Your Breaks
-    				</Text>
-            <View style={styles.textInputWrapper}>
-              <TextInput
-                ref={'textInput'}
-                style={styles.textInput} 
-                onChangeText={(text) => this.setState({text})} 
-                placeholder={this.state.text}/>
-              <TouchableHighlight 
-                style={styles.addButton} 
-                underlayColor={'#9BE8FF'} 
-                onPress={() => this.saveData(this.state.text)}>
-                <Text style={styles.buttonText}>
-                  +
-                </Text>
-              </TouchableHighlight>
-            </View>
-          
+         
+  				<Text style={styles.title}>
+  					Customize Your Breaks
+  				</Text>
+          <View style={styles.flowRight}>
+            <TextInput
+              ref={'textInput'}
+              style={styles.searchInput}
+              onChangeText={(text) => this.setState({text})} 
+              placeholder={this.state.text}/>
+            <TouchableHighlight style={styles.addButton} 
+              underlayColor={'#9BE8FF'} 
+              onPress={() => this.saveData(this.state.text)}>
+              <Text style={styles.buttonText2}>+</Text>
+            </TouchableHighlight>
           </View>
-          <ScrollView style={styles.wrapper} bounces={false} horizontal={false}>
-  				<View style={styles.activityListWrapper}>
-  					{activities}
-				  </View>
+          <ScrollView style={styles.wrapper} bounces={true} horizontal={false}>
+    				<View style={styles.activityListWrapper}>
+    					{activities}
+  				  </View>
           </ScrollView>
           <TouchableHighlight 
-                style={styles.button} 
-                underlayColor={'#9BE8FF'} 
-                onPress={() => this.popToTop()}>
-                <Text style={styles.buttonText}>
-                  Main Page
-                </Text>
-              </TouchableHighlight>
-        
+            style={styles.button2} 
+            underlayColor={'#9BE8FF'} 
+            onPress={() => this.popToTop()}>
+            <Text style={styles.buttonText2}>
+              Main Page
+            </Text>
+          </TouchableHighlight>
 			</View>
 		  )
   	}
@@ -121,49 +114,68 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#9BE8FF'
+    backgroundColor: 'red',
 	},
-  header: {
-    marginTop: 50,
-    backgroundColor: '#9BE8FF',
-    alignItems: 'center'
-  },
 	title: {
+    marginTop: 100,
 		fontWeight: 'bold',
 		fontSize: 30,
-    marginTop: 30,
-    marginBottom: 30,
     textAlign: 'center',
     color: 'white',
 	},
   wrapper: {
     alignSelf: 'stretch',
-    backgroundColor: '#9BE8FF'
+    backgroundColor: 'transparent',
+    marginTop: -10,
   },
-  activityListWrapper: {
-    alignSelf: 'stretch',
-    flex: 1,
-  },
-	textInputWrapper: {
-    flex: 1,
-		backgroundColor: '#05B3DD',
-		height: 100,
-		justifyContent: 'center',
-		alignItems: 'center',
-		alignSelf: 'stretch',
+   flowRight: {
     flexDirection: 'row',
-    paddingRight: 30
-	},
-	textInput: {
-		backgroundColor: 'white',
-		height: 50,
-		width: 300,
-		margin: 25,
-		paddingLeft: 10
-	},
-	addButton: {
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    padding: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  searchInput: {
+    height: 45,
+    padding: 4,
+    marginRight: 5,
+    flex: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48BBEC',
+    borderRadius: 8,
+    color: '#48BBEC',
+    textAlign:'center',
+    backgroundColor: 'white'
+  },
+	// textInputWrapper: {
+ //    flex: 1,
+	// 	backgroundColor: '#05B3DD',
+	// 	height: 100,
+	// 	justifyContent: 'center',
+	// 	alignItems: 'center',
+	// 	alignSelf: 'stretch',
+ //    flexDirection: 'row',
+ //    paddingRight: 30
+	// },
+  addButton: {
     backgroundColor: 'gray',
-    // margin: 15,
     borderRadius: 8.150,
     width: 45,
     height: 45,
@@ -172,7 +184,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 3},
     shadowRadius: 2
   },
-  button: {
+  button2: {
     backgroundColor: '#05B3DD',
     // margin: 15,
     borderRadius: 8.150,
@@ -185,7 +197,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 45
   },
-  buttonText: {
+  buttonText2: {
     textAlign: 'center',
     margin: 10,
     fontSize: 20,
@@ -209,6 +221,18 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 20,
   },
+  delete: {
+    textAlign: 'center',
+    fontSize: 15,
+    marginTop: -50,
+    marginBottom: 10,
+    alignSelf:'stretch',
+  },
+  activityListWrapper: {
+    opacity: .75,
+    marginTop: -50,
+    backgroundColor: 'gray',
+  }
 })
 
 module.exports = Settings;

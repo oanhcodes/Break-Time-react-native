@@ -104,6 +104,11 @@ var TimeBlock = React.createClass({
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
         <Swiper style={styles.wrapper} height={275} horizontal={true} autoplay={true} showsPagination={false}>
+            <Image source={require('../imgs/notes.jpg')} style={styles.backgroundImage} >
+              <Text style={styles.whiteText}>
+                work.
+              </Text>
+            </Image>
             <Image source={require('../imgs/run.jpeg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 run.

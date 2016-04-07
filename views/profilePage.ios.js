@@ -29,10 +29,10 @@ var ProfilePage = React.createClass ({
     // store.get('activitiesAmount').then((data) => {
     //   activitiesAmount = data;
     // });
-    // store.get('totalCycles').then((data) => {
-    //   totalCycles = data;
-    //   this.setState({});
-    // });
+    store.get('totalCycles').then((data) => {
+      totalCycles = data;
+      this.setState({});
+    });
   },
 
   popToTop() {
@@ -72,6 +72,12 @@ var ProfilePage = React.createClass ({
           </Text>
            <Text style={styles.profileText}>
             {totalBreakTime} minutes
+          </Text>
+          <Text style={styles.profileText}>
+            Total Timebox Cycles:
+          </Text>
+           <Text style={styles.profileText}>
+            {totalCycles}
           </Text>
         </View>
         </View>
