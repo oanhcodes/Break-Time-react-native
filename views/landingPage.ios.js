@@ -22,16 +22,16 @@ class LandingPage extends Component {
 
   render() {
   	console.log("Hi unicorns")
-    return (
-    	<View style={styles.container}>      
-    		<TouchableWithoutFeedback onPress={() => this.GoToMain()}>
-        	<Image source={require('../imgs/clock.png')} style={styles.landing}>
-        		<Text style={styles.text}>
-        			Break Time
-        		</Text>
-        	</Image>
-      	</TouchableWithoutFeedback>
-      </View>
+    return (   
+  		<TouchableWithoutFeedback onPress={() => this.GoToMain()}>
+  			<View style={styles.container}>
+      		<Image source={require('../imgs/clock.png')} style={styles.landing}>
+      		</Image>
+      		<Text style={styles.text}>
+      			Break Time
+      		</Text>
+      	</View>
+    	</TouchableWithoutFeedback>
     );
   }
 }
@@ -39,22 +39,25 @@ class LandingPage extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#05B3DD',
+		alignItems: 'center'
 
 	},
   landing: {
-  	width: null,
-  	height: null,
+  	width: 150,
+  	height: 150,
     flex: 1,
+    marginTop: 200,
     resizeMode: 'contain',
-    backgroundColor: '#9BE8FF',
-    // justifyContent: 'center',
-		alignItems: 'center'
+    backgroundColor: '#05B3DD',
   },
   text: {
-  	marginTop: 90,
-  	fontSize: 45,
+  	marginBottom: 250,
+  	fontSize: 60,
+  	fontWeight: 'bold',
   	backgroundColor: 'transparent',
-  	fontFamily: 'courier'
+  	// fontFamily: 'courier',
+  	color: 'white'
   }
 })
 
