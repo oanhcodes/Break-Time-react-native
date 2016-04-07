@@ -47,8 +47,8 @@ class Main extends Component {
       if (data !== null){
         this.setState({activities: data})
       } else {
-        this.setState({activities: ["Run", "Sashay Away"]});
-        store.save('activities', ["Run", "Sashay Away"])
+        this.setState({activities: ["Go for a walk", "Go for a run", "Sashay away", "Have a snack", "Play music"]});
+        store.save('activities', ["Go for a walk", "Go for a run", "Sashay away", "Have a snack", "Play music"])
       }
     });
     store.get('totalTimeWorked').then((data) => {
