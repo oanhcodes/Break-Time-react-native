@@ -146,18 +146,18 @@ var styles = StyleSheet.create({
   statsContainer: {
     padding:20,
     backgroundColor: 'white',
-    opacity: 0.75,
+    opacity: 0.85,
     borderRadius: 8,
     alignItems: 'center',
   },
   statText1: {
-    fontSize: 25,
+    fontSize: 27,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   statText: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
     paddingTop: 7,
   },
   buttonsContainer: {
