@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
 
   description: {
     textAlign: 'center',
-    fontSize: 25
+    fontSize: 25,
   },
   button: {
     backgroundColor: '#05B3DD',

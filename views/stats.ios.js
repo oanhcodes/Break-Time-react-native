@@ -151,13 +151,13 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   statText1: {
-    fontSize: 25,
+    fontSize: 27,
     fontWeight: 'bold',
     marginBottom: 15,
   },
   statText: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 22,
     paddingTop: 7,
   },
   buttonsContainer: {
