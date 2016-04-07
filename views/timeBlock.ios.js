@@ -168,7 +168,7 @@ var TimeBlock = React.createClass({
         </View>
         <View style={styles.container}>
           <Text style={styles.description}>
-            3. Choose a break activity.
+            3. Choose a break activity
           </Text>
           <Picker
             style={styles.picker}
@@ -179,6 +179,9 @@ var TimeBlock = React.createClass({
         </View>
 
         <View style={styles.buttonContainer}>
+          <Text style={styles.description1}>
+            4. Start your timebox cycle
+          </Text>
           <TouchableHighlight
             style={styles.button}
             underlayColor='#9BE8FF'
@@ -222,16 +225,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
   },
+  description1: {
+    textAlign: 'center',
+    fontSize: 25,
+    position: 'absolute',
+    top: 27,
+    paddingLeft: 60,
+  },
   button: {
     backgroundColor: '#05B3DD',
-    margin: 15,
+    // margin: 15,
     borderRadius: 8.150,
     width: 300,
     height: 45,
     shadowColor: 'black',
     shadowOpacity: 0.3,
     shadowOffset: {width: 0, height: 3},
-    shadowRadius: 2
+    shadowRadius: 2,
     },
   buttonText: {
     textAlign: 'center',
