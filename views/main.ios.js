@@ -126,6 +126,9 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
+          <View style={styles.logoContainer}>
+            <Image source={require('../imgs/logo.png')} style={styles.logo} ></Image>
+          </View>
           <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
@@ -141,7 +144,7 @@ class Main extends Component {
             underlayColor={'#9BE8FF'}
             onPress={() => this.GoToStats()}>
             <Text style={styles.buttonText}>
-              Time Stats
+              Timeboxing Stats
             </Text>
           </TouchableHighlight>
 
@@ -165,6 +168,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
+  },
+  header: {
+    marginTop: 30,
   },
   mainTitle: {
     fontSize: 30,
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   buttonsContainer: {
-    marginBottom: 30,
+    marginBottom: 25,
   },
   instructions: {
     textAlign: 'center',
@@ -217,6 +223,14 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     fontSize: 20,
     textDecorationLine: 'underline',
+  },
+  logo: {
+    height: 85,
+    width: 85,
+  },
+  logoContainer: {
+    marginTop: 10,
+    alignItems: 'center',
   }
 });
 

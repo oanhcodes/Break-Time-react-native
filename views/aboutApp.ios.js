@@ -52,9 +52,6 @@ class AboutApp extends Component {
           </Text>
         </View>
       </ScrollView>
-      <TouchableWithoutFeedback onPress={() => this.easterEgg()}>
-        <Image source={require('../imgs/unicorn.jpg')} style={[styles.easterEgg, this.state.viewStyle]}></Image>
-      </TouchableWithoutFeedback>
 			</View>
 		);
   

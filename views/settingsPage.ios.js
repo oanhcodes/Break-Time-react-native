@@ -107,7 +107,7 @@ var Settings = React.createClass ({
                 underlayColor={'#9BE8FF'} 
                 onPress={() => this.popToTop()}>
                 <Text style={styles.buttonText}>
-                  Home
+                  Main Page
                 </Text>
               </TouchableHighlight>
         
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 10
 	},
 	addButton: {
-    backgroundColor: '#3dd83d',
+    backgroundColor: 'gray',
     // margin: 15,
     borderRadius: 8.150,
     width: 45,

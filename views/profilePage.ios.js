@@ -7,6 +7,7 @@ import React, {
   Text,
   View,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 var Swiper = require('react-native-swiper');
@@ -34,6 +35,10 @@ var ProfilePage = React.createClass ({
     // });
   },
 
+  popToTop() {
+    this.props.navigator.popToTop();
+  },
+
   render() {
     if (activitiesAmount !== undefined) {
       var activitiesNames = Object.keys(activitiesAmount)
@@ -49,21 +54,35 @@ var ProfilePage = React.createClass ({
     }
    return (
     <View style={styles.profileBackground}>
-    <Image source={require('../imgs/flowers.jpg')} style={styles.backgroundImage}>
+    <Image source={require('../imgs/desk.jpg')} style={styles.backgroundImage}>
       <View style={styles.container}>
         <View style={[styles.wrapper,styles.profileContainer]}>  
           <Text style={styles.profileText1}>
-            Profile
+            Timeboxing Stats
           </Text>
         <View style={styles.body}>
           <Text style={styles.profileText}>
-            Total Time Worked: {totalTimeWorked} minutes
+            Total Time Worked:
           </Text>
           <Text style={styles.profileText}>
-            Total Break Time: {totalBreakTime} minutes
+            {totalTimeWorked} minutes
+          </Text>
+          <Text style={styles.profileText}>
+            Total Break Time:
+          </Text>
+           <Text style={styles.profileText}>
+            {totalBreakTime} minutes
           </Text>
         </View>
         </View>
+      <TouchableHighlight
+        onPress={() => this.popToTop()}
+        style={styles.button}
+        underlayColor='#9BE8FF'>
+        <Text style={styles.buttonText}>
+          Main Page
+        </Text>
+      </TouchableHighlight>
       </View>
     </Image>
     </View>
@@ -95,28 +114,51 @@ const styles = StyleSheet.create({
     backgroundColor: '#e5e5e5',
     },
   profileContainer: {
-    padding:20,
+    padding:30,
     backgroundColor: 'white',
-    opacity: 0.75,
+    opacity: 0.85,
     borderRadius: 8,
     alignItems: 'center',
   },
+  body: {
+    alignItems: 'center',
+  },
   profileText1: {
-  fontSize: 25,
+  fontSize: 32,
   fontWeight: 'bold',
   marginBottom: 15,
   textAlign: 'center',
   },
   profileText: {
     fontWeight: 'bold',
-    fontSize: 20,
-    paddingTop: 7,
+    fontSize: 25,
+    paddingTop: 10,
   },
   title: {
     textAlign: 'center',
     marginTop: 30,
     marginBottom: 25,
     fontSize: 20
+  },
+  button: {
+    backgroundColor: '#05B3DD',
+    // margin: 15,
+    borderRadius: 8.150,
+    width: 300,
+    height: 45,
+    shadowColor: 'black',
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 2,
+    alignSelf: 'center',
+    margin: 45
+  },
+  buttonText: {
+    textAlign: 'center',
+    margin: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 
