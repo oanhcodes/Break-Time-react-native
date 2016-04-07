@@ -1,17 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
-
-
-// var TimeBlock = require('./views/timeBlock.ios')
-
-var Main = require('./views/main.ios');
-var Timer = require('./views/timer.ios')
-var Stats = require('./views/stats.ios')
-var Settings = require('./views/settingsPage.ios')
-var Profile = require('./views/profilePage.ios')
 import React, {
   AppRegistry,
   Component,
@@ -22,6 +8,12 @@ import React, {
   NavigatorIOS
 } from 'react-native';
 
+// var Main = require('./views/main.ios');
+var LandingPage = require('./views/landingPage.ios')
+// var Timer = require('./views/timer.ios')
+// var Stats = require('./views/stats.ios')
+// var Settings = require('./views/settingsPage.ios')
+
 class BreakTime extends Component {
   render() {
     return (
@@ -29,7 +21,8 @@ class BreakTime extends Component {
         style={styles.container}
         initialRoute={{
           title: 'Main',
-          component: Main
+          navigationBarHidden: true,
+          component: LandingPage
       }}/>
     );
   }
