@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     position: 'absolute',
     top: 27,
-    paddingLeft: 60,
+    paddingLeft: 40,
   },
   button: {
     backgroundColor: '#05B3DD',
