@@ -26,11 +26,11 @@ var ProfilePage = React.createClass ({
     store.get('totalBreakTime').then((data) => {
       totalBreakTime = data;
     });
-    // store.get('activitiesAmount').then((data) => {
-    //   activitiesAmount = data;
-    // });
     store.get('totalCycles').then((data) => {
       totalCycles = data;
+    });
+    store.get('activitiesAmount').then((data) => {
+      activitiesAmount = data[0];
       this.setState({});
     });
   },
@@ -45,7 +45,7 @@ var ProfilePage = React.createClass ({
       var activitiesList = activitiesNames.map(function(activity, i) {
         return(
           <View key={i}>
-            <Text key={i}> {activity}:{activitiesAmount[activity]} </Text>
+            <Text style={styles.activityText} key={i}> {activity}: {activitiesAmount[activity]} </Text>
           </View>
         )
       })
@@ -55,33 +55,42 @@ var ProfilePage = React.createClass ({
    return (
     <View style={styles.profileBackground}>
     <Image source={require('../imgs/desk.jpg')} style={styles.backgroundImage}>
+      <ScrollView style={styles.wrapper} bounces={true} horizontal={false} showsVerticalScrollIndicator={false} >
       <View style={styles.container}>
         <View style={[styles.wrapper,styles.profileContainer]}>  
           <Text style={styles.profileText1}>
             Timeboxing Stats
           </Text>
         <View style={styles.body}>
-          <Text style={styles.profileText}>
+          <Text style={styles.profileText2}>
             Total Time Worked:
           </Text>
-          <Text style={styles.profileText}>
+          <Text style={styles.profileText3}>
             {totalTimeWorked} minutes
           </Text>
-          <Text style={styles.profileText}>
+          <Text style={styles.profileText2}>
             Total Break Time:
           </Text>
-           <Text style={styles.profileText}>
+           <Text style={styles.profileText3}>
             {totalBreakTime} minutes
           </Text>
-          <Text style={styles.profileText}>
+          <Text style={styles.profileText2}>
             Total Timebox Cycles:
           </Text>
-           <Text style={styles.profileText}>
+           <Text style={styles.profileText3}>
             {totalCycles}
           </Text>
+           <Text style={styles.profileText2}>
+            Total Activities:
+          </Text>
+          <View style={styles.activityList}>
+            {activitiesList}
+          </View>
         </View>
         </View>
-      <TouchableHighlight
+      </View>
+      </ScrollView>
+       <TouchableHighlight
         onPress={() => this.popToTop()}
         style={styles.button}
         underlayColor='#9BE8FF'>
@@ -89,7 +98,6 @@ var ProfilePage = React.createClass ({
           Main Page
         </Text>
       </TouchableHighlight>
-      </View>
     </Image>
     </View>
     );
@@ -104,6 +112,7 @@ const styles = StyleSheet.create({
   alignItems: 'center',
   },
   backgroundImage: {
+    alignItems: 'center',
     flex: 1,
     resizeMode: 'contain',
   },
@@ -114,10 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   wrapper: {
-    padding: 10,
-    marginRight:10,
     width: 350,
-    backgroundColor: '#e5e5e5',
     },
   profileContainer: {
     padding:30,
@@ -135,10 +141,21 @@ const styles = StyleSheet.create({
   marginBottom: 15,
   textAlign: 'center',
   },
-  profileText: {
+  profileText2: {
     fontWeight: 'bold',
     fontSize: 25,
     paddingTop: 10,
+  },
+  profileText3: {
+    fontSize: 25,
+    paddingTop: 10,
+  },
+  activityText: {
+    fontSize: 25,
+    paddingTop: 10,
+  },
+  activityList: {
+    alignItems: 'center',
   },
   title: {
     textAlign: 'center',

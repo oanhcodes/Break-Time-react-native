@@ -38,7 +38,7 @@ var Settings = React.createClass ({
 
 	saveData(value) {
     if (value !== "Enter an activity here") {
-	  	this.state.activities.push(value);
+	  	this.state.activities.unshift(value);
 	 	  this.setState({activities: this.state.activities});
 	 	  store.save('activities', this.state.activities);
       this.refs['textInput'].setNativeProps({text: ''});
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    backgroundColor: '#9BE8FF'
+    backgroundColor: '#F2F2F2'
 	},
   backgroundImage: {
     flex: 1,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     borderColor: '#48BBEC',
     borderRadius: 8,
     color: '#48BBEC',
-    textAlign:'center',
+    textAlign:'left',
     backgroundColor: 'white'
   },
 	// textInputWrapper: {

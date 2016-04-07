@@ -126,9 +126,6 @@ class Main extends Component {
             </Image>
         </Swiper>
         </View>
-          <View style={styles.logoContainer}>
-            <Image source={require('../imgs/logo.png')} style={styles.logo} ></Image>
-          </View>
           <View style={styles.buttonsContainer}>
           <TouchableHighlight
             style={styles.button}
@@ -170,7 +167,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F2F2',
   },
   header: {
-    marginTop: 45,
+    top: 0
   },
   mainTitle: {
     fontSize: 30,
