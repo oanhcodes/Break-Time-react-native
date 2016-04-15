@@ -44,11 +44,11 @@ class Stats extends Component {
 
     var that = this
     store.get('totalTimeWorked').then((data) => {
-      var newTotal = data += Math.floor((this.props.worktime * this.props.cycles) / 60)
+      var newTotal = data += Math.floor((this.props.worktime * this.props.cycles))
       store.save('totalTimeWorked', newTotal)
     });
     store.get('totalBreakTime').then((data) => {
-      var newTotal = data += Math.floor((this.props.breaktime * this.props.cycles) / 60)
+      var newTotal = data += Math.floor((this.props.breaktime * this.props.cycles))
       store.save('totalBreakTime', newTotal)
     });
     store.get('activitiesAmount').then((data) => {
@@ -78,8 +78,8 @@ class Stats extends Component {
     this.props.navigator.popToTop()
   }
 
-  timeworked = Math.floor((this.props.worktime * this.props.cycles) / 60);
-  breakedtime = Math.floor((this.props.breaktime * this.props.cycles) / 60);
+  timeworked = Math.floor((this.props.worktime * this.props.cycles));
+  breakedtime = Math.floor((this.props.breaktime * this.props.cycles));
   render(){
     return(
     <View style={styles.statsBackground}>
