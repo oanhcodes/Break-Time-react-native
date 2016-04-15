@@ -57,12 +57,12 @@ var TimeBlock = React.createClass({
       fadeAnim: new Animated.Value(0),
 
       // TESTING TIMES
-      worktime: '5',
-      breaktime: '3',
+      // worktime: '5',
+      // breaktime: '3',
 
       // NORMAL TIMES
-      // worktime: '15',
-      // breaktime: '5',
+      worktime: '15',
+      breaktime: '5',
       activities: activityData,
       index: 0
     };
@@ -103,7 +103,7 @@ var TimeBlock = React.createClass({
 
     <ScrollView style={styles.wrapper1} bounces={true} horizontal={false}>
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} height={275} horizontal={true} autoplay={true} showsPagination={false}>
+        <Swiper style={styles.wrapper} height={275} horizontal={true} autoplay={false} showsPagination={true}>
             <Image source={require('../imgs/wide-workstation.jpg')} style={styles.backgroundImage} >
               <Text style={styles.whiteText}>
                 work.

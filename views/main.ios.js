@@ -106,7 +106,7 @@ class Main extends Component {
     return (
       <Animated.View style={[styles.container, {opacity: this.state.fadeAnim}]}>
         <View style={styles.header}>
-        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={true} showsPagination={false}>
+        <Swiper style={styles.wrapper} height={225} horizontal={true} autoplay={false} showsPagination={true}>
             <Image source={require('../imgs/BreakTime.jpeg')} style={styles.backgroundImage} >
             <Text style={styles.mainTitle}>
               Break Time

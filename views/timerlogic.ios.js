@@ -56,25 +56,25 @@ var CountDown = React.createClass({
 
     // TESTING TIMES
 
-     var workMin = 5,
-        breakMin = 3;
-
-    this.setState({
-      workMin: workMin,
-      breakMin: breakMin,
-      workExpiry: moment().add(workMin, 'seconds')
-    })
-
-    // NORMAL CODE
-
-    // var workMin = this.props.workTime,
-    //     breakMin = this.props.breakTime;
+    //  var workMin = 5,
+    //     breakMin = 3;
 
     // this.setState({
     //   workMin: workMin,
     //   breakMin: breakMin,
-    //   workExpiry: moment().add(workMin, 'minutes')
+    //   workExpiry: moment().add(workMin, 'seconds')
     // })
+
+    // NORMAL CODE
+
+    var workMin = this.props.workTime,
+        breakMin = this.props.breakTime;
+
+    this.setState({
+      workMin: workMin,
+      breakMin: breakMin,
+      workExpiry: moment().add(workMin, 'minutes')
+    })
 
     this.startTimer()
 
@@ -139,9 +139,9 @@ var CountDown = React.createClass({
 
     this.setState({
       // TESTING
-      breakExpiry: moment().add(this.state.breakMin, 'seconds')
+      // breakExpiry: moment().add(this.state.breakMin, 'seconds')
       // NORMAL
-      // breakExpiry: moment().add(this.state.breakMin, 'minutes')
+      breakExpiry: moment().add(this.state.breakMin, 'minutes')
     }),
     this.startTimer(),
     this.checkTimer()
@@ -149,20 +149,20 @@ var CountDown = React.createClass({
   componentDidMount() {
     
     // TESTING TIMES
-    var workMin = 5,
-        breakMin = 3;
+    // var workMin = 5,
+    //     breakMin = 3;
 
     // // NORMAL TIMES
-    // var workMin = this.props.workTime,
-    // breakMin = this.props.breakTime;
+    var workMin = this.props.workTime,
+        breakMin = this.props.breakTime;
 
     this.setState({
       workMin: workMin,
       breakMin: breakMin,
       // TESTING
-      workExpiry: moment().add(workMin, 'seconds')
+      // workExpiry: moment().add(workMin, 'seconds')
       // NORMAL
-      // workExpiry: moment().add(workMin, 'minutes')
+      workExpiry: moment().add(workMin, 'minutes')
     })
 
     this.startTimer();
